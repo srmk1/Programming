@@ -1,0 +1,94 @@
+Given n jobs with their start time and finish time and one machine, you need to schedule them so that we can maximize the number of jobs.
+
+Solution: We can make optimal choice based on different parameters:
+- Start time:
+    - Earliest start time
+- Execution time:
+    - Smallest execution time
+- Conflicts
+    - No of conflicts on scheduling this
+- Finish time:
+    - Earliest dead line algorithm
+    
+#include<stdio.h>
+#include<stdlib.h>
+
+int printMaxActivities(int s[], int f[], int n) {
+        int i = 0, j = 0;
+
+        printf("%d\t",i);
+
+        for(j=1; j<n; j++) {
+                if(s[j] >= f[i]) {
+                        printf("%d\t",j);
+                        i = j;
+                }
+        }
+return 0;
+}
+int main(int argc, char *argv[]) {
+        int s[] =  {1, 3, 0, 5, 8, 5};
+    int f[] =  {2, 4, 6, 7, 9, 9};
+    int n = sizeof(s)/sizeof(s[0]);
+    printMaxActivities(s, f, n);
+    return 0;
+}
+
+How to implement when given activities are not sorted?
+We create a structure/class for activities. We sort all activities by finish time (Refer sort in C++ STL). Once we have activities sorted, we apply same above algorithm.
+
+// C++ program for activity selection problem
+// when input activities may not be sorted.
+#include <bits/stdc++.h>
+using namespace std;
+ 
+// A job has start time, finish time and profit.
+struct Activitiy
+{
+    int start, finish;
+};
+ 
+// A utility function that is used for sorting
+// activities according to finish time
+bool activityCompare(Activitiy s1, Activitiy s2)
+{
+    return (s1.finish < s2.finish);
+}
+ 
+// Returns count of maximum set of activities that can
+// be done by a single person, one at a time.
+void printMaxActivities(Activitiy arr[], int n)
+{
+    // Sort jobs according to finish time
+    sort(arr, arr+n, activityCompare);
+ 
+    cout << "Following activities are selected \n";
+ 
+    // The first activity always gets selected
+    int i = 0;
+    cout << "(" << arr[i].start << ", " << arr[i].finish << "), ";
+ 
+    // Consider rest of the activities
+    for (int j = 1; j < n; j++)
+    {
+      // If this activity has start time greater than or
+      // equal to the finish time of previously selected
+      // activity, then select it
+      if (arr[j].start >= arr[i].finish)
+      {
+          cout << "(" << arr[j].start << ", "
+              << arr[j].finish << "), ";
+          i = j;
+      }
+    }
+}
+ 
+// Driver program
+int main()
+{
+    Activitiy arr[] = {{5, 9}, {1, 2}, {3, 4}, {0, 6},
+                                       {5, 7}, {8, 9}};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    printMaxActivities(arr, n);
+    return 0;
+}

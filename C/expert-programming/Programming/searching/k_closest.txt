@@ -1,0 +1,53 @@
+Given a sorted array arr[] and a value X, find the k closest elements to X in arr[]. 
+Examples:
+
+Input: K = 4, X = 35
+       arr[] = {12, 16, 22, 30, 35, 39, 42, 
+               45, 48, 50, 53, 55, 56}
+Output: 30 39 42 45
+Note that if the element is present in array, then it should not be in output, only the other closest elements are required.
+
+In the following solutions, it is assumed that all elements of array are distinct.
+
+A simple solution is to do linear search for k closest elements.
+1) Start from the first element and search for the crossover point (The point before which elements are smaller than or equal to X and after which elements are greater). This step takes O(n) time.
+2) Once we find the crossover point, we can compare elements on both sides of crossover point to print k closest elements. This step takes O(k) time.
+
+The time complexity of the above solution is O(n).
+
+An Optimized Solution is to find k elements in O(Logn + k) time. The idea is to use Binary Search to find the crossover point. Once we find index of crossover point, we can print k closest elements in O(k) time.
+
+#include<stdio.h>
+#include<stdlib.h>
+
+
+int main(int argc, char *argv[]) {
+        int a[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        int key, num, i, j, k;
+
+        printf("\nEnter the key to be searched: ");
+        scanf("%d",&key);
+        printf("\nEnter the how many closes elements: ");
+        scanf("%d",&num);
+
+        for(i=0; i<10; i++) {
+                if(a[i] >= key)
+                        break;
+        }
+
+        j = i-1;
+        k = i+1;
+
+        while(num != 0) {
+                if((a[i] - a[j]) < (a[k] - a[i])) {
+                        printf("%d\t",a[j]);
+                        j--;
+                } else {
+                        printf("%d\t",a[k]);
+                        k++;
+                }
+                num--;
+        }
+
+return 0;
+}

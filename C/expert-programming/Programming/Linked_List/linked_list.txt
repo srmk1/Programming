@@ -1,0 +1,607 @@
+Skip to content
+This repository
+Search
+Pull requests
+Issues
+Gist
+ @srmk1
+ Sign out
+ Watch 0
+  Star 0
+  Fork 0 srmk1/C
+ Code  Issues 0  Pull requests 0  Projects 0  Wiki  Pulse  Graphs  Settings
+Branch: master Find file Copy pathC/others/repository/linked_list.txt
+420ae4e  3 days ago
+@srmk1 srmk1 Update linked_list.txt
+1 contributor
+RawBlameHistory     
+588 lines (503 sloc)  29.7 KB
+Linked lists:
+
+Some common pattrens of solutions:
+1. Have 2 pointers, moving each at different speed
+2. Using recursion
+3. Can you reverse the list and do something
+4. Can you modify node to have visited flag
+5. Store the address of pointers in a hash table
+6. Can we go something using length of the linked list
+7. Can we sort the linked list
+8. Can i introduce a loop
+9. Create a hash table for addresses of nodes or data in the node(easily verify exsiting nodes)
+
+Test your program with the following inputs:
+1. If the linked list is empty or only one element or two nodes
+2. If the nodes are adjacent (reverse, loop)
+3. Node in question is head node, last node, last+1 node
+
+======================================================================================================================================
+1. Print Linked List Elements in Reverse order or Reverse a singly linked list
+
+1a. Reverse a Linked List using Recursion 
+void reverse(struct link_list *node) {
+        if (node == NULL)
+                return;
+        reverse(node->next);
+        printf("%d\t",node->data);
+return;
+}
+
+1b. Print linked list in reverse order alternately
+void reverse(struct link_list *node) {
+        if (node == NULL)
+                return;
+    
+        if(node->next != NULL)
+          reverse(node->next->next);
+        else
+          reverse(node->next);
+
+        printf("%d\t",node->data);
+return;
+}
+
+1c. Print linked list in order and in reverse using same function
+void print_reverse(struct link_list *node) {
+        if (node == NULL)
+                return;
+        printf("%d\t",node->data);
+        print_reverse(node->next);
+        printf("%d\t",node->data);
+return;
+}
+======================================================================================================================================
+2. Write a C program to return the nth node from the end of a linked list
+2a. Write program to print the value of the second last node in a single linked list and write the test cases (code to test) for the same
+void nth_last(int count) {
+        struct link_list *first, *second;
+        first = head;
+        second = head;
+
+        while(count != 0) {
+                 if(second != NULL)
+                        second = second->next;
+                 else {
+                        printf("\nNot enough elements in list");
+                        return
+                 }
+                count--;
+                if (second == NULL && count > 0) {
+                        printf("\nNot enough elements");
+                        return;
+                }
+        }
+
+        while(second != NULL && first != NULL) {
+                second = second->next;
+                first = first->next;
+        }
+
+        printf("\n%dth last is %d",count,first->data);
+return;
+}
+======================================================================================================================================
+3. Reverse a linked list (iteratively)
+When you iterate adjust current->next to prev node, remember we would need three pointers.
+void reversep() {
+        struct link_list *prev, *current, *next;
+
+        prev = NULL;
+        current = head;
+
+        while(current != NULL) {
+                next = current->next;
+                current->next = prev;
+                prev = current;
+                current = next;
+        }
+
+        head = prev;
+return;
+}
+
+3a. Reverse a linked list recursively (recursion)
+void reverse_recur(struct link_list *p) {
+        if (p->next == NULL) {
+                head = p;
+                return;
+        }
+        reverse_recur(p->next);
+        struct link_list *q = p->next;
+        q->next = p;
+        p->next = NULL;
+return;
+}
+
+3c. Reverse last five node of linked list
+void reverse_last_five() {
+        struct link_list *prev, *curr, *next;
+        struct link_list *last, *temp;
+        int count = 1;
+
+        curr = head;
+        last = head;
+
+        while(count <= 5) {
+                last = last->next;
+                count++;
+        }
+
+        while(last != NULL) {
+                last = last->next;
+                prev = curr;
+                curr = curr->next;
+        }
+
+        temp = prev;
+        prev = NULL;
+
+        while(curr != NULL) {
+                next = curr->next;
+                curr->next = prev;
+                prev = curr;
+                curr = next;
+        }
+        temp->next = prev;
+
+return;
+}
+======================================================================================================================================
+4. Write a function to get the intersection point of two Linked Lists (Y Shape)
+Method 1(Simply use two loops)
+Use 2 nested for loops. Outer loop will be for each node of the 1st list and inner loop will be for 2nd list. In the inner loop, check if any of nodes of 2nd list is same as the current node of first linked list. Time complexity of this method will be O(mn) where m and n are the number of nodes in two lists.
+
+Method 2 (Mark Visited Nodes)
+This solution requires modifications to basic linked list data structure. Have a visited flag with each node. Traverse the first linked list and keep marking visited nodes. Now traverse second linked list, If you see a visited node again then there is an intersection point, return the intersecting node. This solution works in O(m+n) but requires additional information with each node. A variation of this solution that doesn’t require modification to basic data structure can be implemented using hash. Traverse the first linked list and store the addresses of visited nodes in a hash. Now traverse the second linked list and if you see an address that already exists in hash then return the intersecting node.
+
+Method 3(Using difference of node counts)
+1) Get count of the nodes in first list, let count be c1.
+2) Get count of the nodes in second list, let count be c2.
+3) Get the difference of counts d = abs(c1 – c2)
+4) Now traverse the bigger list from the first node till d nodes so that from here onwards both the lists have equal no of nodes.
+5) Then we can traverse both the lists in parallel till we come across a common node. (Note that getting a common node is done by comparing the address of the nodes)
+Time Complexity: O(m+n)
+Auxiliary Space: O(1)
+
+Method 4(Make circle in first list)
+Thanks to Saravanan Man for providing below solution.
+1. Traverse the first linked list(count the elements) and make a circular linked list. (Remember last node so that we can break the circle later on).
+2. Now view the problem as find the loop in the second linked list. So the problem is solved.
+3. Since we already know the length of the loop(size of first linked list) we can traverse those many number of nodes in second list, and then start another pointer from the beginning of second list. we have to traverse until they are equal, and that is the required intersection point.
+4. remove the circle from the linked list.
+Time Complexity: O(m+n)
+Auxiliary Space: O(1)
+
+Method 5 (Reverse the first list and make equations)
+1) Let X be the length of the first linked list until intersection point.
+   Let Y be the length of the second linked list until the intersection point.
+   Let Z be the length of the linked list from intersection point to End of
+   the linked list including the intersection node.
+   We Have
+           X + Z = C1;
+           Y + Z = C2;
+2) Reverse first linked list.
+3) Traverse Second linked list. Let C3 be the length of second list - 1. 
+     Now we have
+        X + Y = C3
+     We have 3 linear equations. By solving them, we get
+       X = (C1 + C3 – C2)/2;
+       Y = (C2 + C3 – C1)/2;
+       Z = (C1 + C2 – C3)/2;
+      WE GOT THE INTERSECTION POINT.
+4)  Reverse first linked list.
+Advantage: No Comparison of pointers.
+Disadvantage : Modifying linked list(Reversing list).
+Time complexity: O(m+n)
+Auxiliary Space: O(1)
+
+Method 6 (Traverse both lists and compare addresses of last nodes) This method is only to detect if there is an intersection point or not. (Thanks to NeoTheSaviour for suggesting this)
+1) Traverse the list 1, store the last node address
+2) Traverse the list 2, store the last node address.
+3) If nodes stored in 1 and 2 are same then they are intersecting.
+Time complexity of this method is O(m+n) and used Auxiliary space is O(1)
+
+Method 7 (Use Hashing)
+Basically we need to find common node of two linked lists. So we hash all nodes of first list and then check second list.
+1) Create an empty hash table such that node address is used as key and a binary value present/absent is used as value.
+2) Traverse the first linked list and insert all nodes’ addresses in hash table.
+3) Traverse the second list. For every node check if it is present in hash table. If we find a node in hash table, return the node.
+
+4a. Given two linked lists find if they are making a shape of 'Y' or a shape of 'V'
+Method1:
+1) Traverse list1 till you hit list1->next == NULL
+2) Traverse list2 till you hit list2->next == NULL
+3) if(list1 == list2) "V shaped" else "Y shaped"
+======================================================================================================================================
+5. Union of two linked list
+Method1:
+Union (list1, list2):
+1) Initialize result list as NULL. 
+2) Traverse list1 and add all of its elements to the result.
+3) Traverse list2. If an element of list2 is already present in result then do not insert it to result, otherwise insert.
+
+Method2:
+1) Sort the list1 using merge sort
+2) Sort the list2 using merge sort
+3) while (list1 != null && list2 != null) 
+        if (list1->data < list2->data)
+                insert(list1->data, result)
+                 list1 = list1->next
+        else
+                insert(list2->data, result)
+                list2 = list2->next
+                
+Method3:
+1) Initialize the result list as NULL and create an empty hash table. 
+2) Traverse both lists one by one, for each element being visited, look the element in hash table. 
+3) If the element is not present, then insert the element to result list. If the element is present, then ignore it.
+
+
+5a. Intersection of two linked list
+Method1: 
+Intersection (list1, list2)
+1) Initialize result list as NULL. 
+2) Traverse list1 and look for its each element in list2, if the element is present in list2, then add the element to result.
+
+Method2:
+1) Sort the list1 using merge sort
+2) Sort the list2 using merge sort
+3) while (list1 != null && list2 != null) 
+        if (list1->data == list2->data) {
+                insert(list1->data, result)
+                list1 = list1->next
+                list2 = list2->next
+        }
+        
+Method3:
+1) Initialize the result list as NULL and create an empty hash table. 
+2) Traverse list1. For each element being visited in list1, insert the element in hash table. 
+3) Traverse list2, for each element being visited in list2, look the element in hash table. If the element is present, then insert the element to result list. If the element is not present, then ignore it.
+======================================================================================================================================
+6. Write a C program to detect a loop
+Method1:
+1) Traverse the list one by one and keep putting the node addresses in a Hash Table. 
+2) At any point, if NULL is reached then return false and if next of current node points to any of the previously stored nodes in Hash then return true.
+
+Method2: This solution requires modifications to basic linked list data structure.  
+1) Have a visited flag with each node.  Traverse the linked list and keep marking visited nodes.  
+2) If you see a visited node again then there is a loop. This solution works in O(n) but requires additional information with each node.
+A variation of this solution that doesn’t require modification to basic data structure can be implemented using hash.  Just store the addresses of visited nodes in a hash and if you see an address that already exists in hash then there is a loop.
+
+Method3: This is the fastest method. 
+1) Traverse linked list using two pointers (say fast and slow)
+2) Move slow pointer by one and fast pointer by two nodes at each time.  
+3) If these pointers meet at some node then there is a loop.  If pointers do not meet then linked list doesn’t have loop.
+
+6a. Write a C program to remove the loop
+Method1:
+1) Traverse the list one by one and keep putting the node addresses in a Hash Table. 
+2) At any point, 
+        if NULL is reached then return there is no loop 
+        else
+        if next of current node points to any of the previously stored nodes in Hash 
+                then prev node is last node of the linked list, mark prev->next to NULL
+
+Method2:
+1) Have a visited flag with each node.  
+2) Traverse the linked list and keep marking visited nodes.  
+2) If you see a visited node again then there is a loop, then prev node is last node, mark prev->next = NULL.
+
+Method3: We know that Floyd’s Cycle detection algorithm terminates when fast and slow pointers meet at a common point. 
+1) We also know that this common point is one of the loop nodes (2 or 3 or 4 or 5 in the above diagram). 
+2) We store the address of this in a pointer variable say ptr2. 
+3) Then we start from the head of the Linked List and check for nodes one by one if they are reachable from ptr2. 
+When we find a node that is reachable, we know that this node is the starting node of the loop in Linked List and we can get pointer to the previous of this node.
+
+Method4: (Better Solution)
+This method is also dependent on Floyd’s Cycle detection algorithm.
+1) Detect Loop using Floyd’s Cycle detection algo and get the pointer to a loop node.
+2) Count the number of nodes in loop. Let the count be k. (have p1 nad p2 at loop start, then move p1 until it hits p2)
+3) Fix one pointer to the head and another to kth node from head.
+4) Move both pointers at the same pace, they will meet at loop starting node.
+5) Get pointer to the last node of loop and make next of it as NULL.
+======================================================================================================================================
+7. Write a removeDuplicates() function which takes a list and deletes any duplicate nodes from the list. The list is not sorted.
+Method 1:
+1) This is the simple way where two loops are used. 
+2) Outer loop is used to pick the elements one by one and inner loop compares the picked element with rest of the elements.
+
+Method 2:
+In general, Merge Sort is the best suited sorting algorithm for sorting linked lists efficiently.
+1) Sort the elements using Merge Sort. We will soon be writing a post about sorting a linked list. O(nLogn)
+2) Remove duplicates in linear time using the algorithm for removing duplicates in sorted Linked List. O(n)
+Please note that this method doesn’t preserve the original order of elements.
+Time Complexity: O(nLogn)
+
+Method 3:
+METHOD 3 (Use Hashing)
+1) We traverse the link list from head to end. 
+2) For every newly encountered element, we check whether it is in the hash table: if yes, we remove it; 
+3) otherwise we put it in the hash table.
+Time Complexity: O(n) on average (assuming that hash table access time is O(1) on average).
+======================================================================================================================================
+8. Merge two sorted singly linked lists into one sorted singly linked list. Allocate no extra node.
+void merge(struct link_list *first, struct link_list *second) {
+        struct link_list *temp1 = first, *temp2 = second;
+        struct link_list *prev = first;
+
+        while (temp1 != NULL && temp2 != NULL) {
+                if(temp1->data < temp2->data) {
+                        prev = temp1;
+                        temp1 = temp1->next;
+                } else {
+                        prev->next = temp2;
+                        temp2 = temp2->next;
+                        prev->next->next = temp1;
+                }
+        }
+        print1(first);
+return;
+}
+
+8a. Merge a linked list into another linked list at alternate positions
+void merge_alt(struct link_list *first, struct link_list *second) {
+        struct link_list *temp1 = first, *temp2 = second;
+        struct link_list *temp;
+
+        while(temp1 != NULL) {
+                temp = temp1->next;
+                temp1->next = temp2;
+                temp2 = temp2->next;
+                temp1->next->next = temp;
+                temp1 = temp1->next->next;
+        }
+        print1(first);
+return;
+}
+======================================================================================================================================
+9. Sort a Linked List of 0s, 1s and 2s
+Method 1:
+1) Traverse the list and count the number of 0s, 1s and 2s. Let the counts be n1, n2 and n3 respectively.
+2) Traverse the list again, fill the first n1 nodes with 0, then n2 nodes with 1 and finally n3 nodes with 2.
+
+Method 2 - Dutch National Flag: http://users.monash.edu/~lloyd/tildeAlgDS/Sort/Flag/
+It is easiest to consider just two "colours", {zero,one}, first. The algorithm maintains three sections (possibly empty) in the array a[ ]:
+        a[1..Lo-1] zeroes
+        a[Lo..Hi] unknown
+        a[Hi+1..N] ones
+The unknown section is shrunk while maintaining these conditions:
+        Lo := 1; Hi := N;
+        while Lo <= Hi do
+                Invariant: a[1..Lo-1] are all zero and a[Hi+1..N] are all one; a[Lo..Hi] are unknown.
+                if a[Lo] = 0 then Lo++
+                else swap a[Lo] and a[Hi]; Hi--
+                
+Then the problem was posed with three colours, here `0', `1' and `2'. The array is divided into four sections:
+        a[1..Lo-1] zeroes (red)
+        a[Lo..Mid-] ones (white)
+        a[Mid..Hi] unknown
+        a[Hi+1..N] twos (blue)
+The unknown region is shrunk while maintaining these conditions
+        Lo := 1; Mid := 1; Hi := N;
+        while Mid <= Hi do
+                Invariant: a[1..Lo-1]=0 and a[Lo..Mid-1]=1 and a[Hi+1..N]=2; a[Mid..Hi] are unknown.
+                case a[Mid] in
+                        0: swap a[Lo] and a[Mid]; Lo++; Mid++
+                        1: Mid++
+                        2: swap a[Mid] and a[Hi]; Hi--
+
+======================================================================================================================================
+10. Swap every two nodes in a linked list
+
+Method 1:
+Iteratively parse through the linked list and swap the contents of adjacent nodes
+void swap(struct link_list *head) {
+        struct link_list *temp = head;
+        int temp1 = -1;
+
+        while(temp != NULL && temp->next != NULL) {
+                temp1 = temp->data;
+                temp->data = temp->next->data;
+                temp->next->data = temp1;
+
+                temp = temp->next->next;
+        }
+        print1(head);
+return;
+}
+
+Method 2:
+Recursively parse through the linked list and swap the contents of adjacent nodes
+void swap_recur(struct link_list *node) {
+        int temp = -1;
+
+        if (node != NULL && node->next != NULL) {
+                temp = node->data;
+                node->data = node->next->data;
+                node->next->data = temp;
+
+                swap_recur(node->next->next);
+        }
+return;
+}
+
+Method 3:
+Iteratively parse through the linked list and swap the pointers
+void swap_pointers(struct link_list *node) {
+        struct link_list *temp;
+
+        if(head->next != NULL)
+                head = head->next;
+
+        while(node != NULL && node->next != NULL) {
+                temp = node->next->next;
+                node->next->next = node;
+                node->next = temp;
+
+                node = temp;
+        }
+return;
+}
+
+Method 4:
+Recursively parse through the linked list and swap the pointers
+void swap_pointers_recur(struct link_list *node) {
+        struct link_list *temp;
+
+        while(node != NULL && node->next != NULL) {
+                temp = node->next->next;
+                node->next = node->next->next;
+                node->next->next = node;
+
+                swap_pointers_recur(temp);
+        }
+return;
+}
+
+10a. Given a linked list and two keys in it, swap nodes for two given keys. Nodes should be swapped by changing links. Swapping data of nodes may be expensive in many situations when data contains many fields.
+This may look a simple problem, but is interesting question as it has following cases to be handled.
+1) x and y may or may not be adjacent.
+2) Either x or y may be a head node.
+3) Either x or y may be last node.
+4) x and/or y may not be present in linked list.
+
+======================================================================================================================================
+11a. Delete alternate nodes of a Linked List
+void delete_alternat() {
+        struct link_list *node = head;
+
+        while(node != NULL) {
+                if(node->next != NULL)
+                        node->next = node->next->next;
+                node = node->next;
+        }
+return;
+}
+
+11b. Move last node to front in linked list
+void move_last_to_front() {
+        struct link_list *node = head, *prev = head;
+
+        if (node->next == NULL)
+                return;
+        
+        while(node->next != NULL) {
+                prev = node;
+                node = node->next;
+        }
+
+        prev->next = NULL;
+        node->next = head;
+        head = node;
+return;
+}
+======================================================================================================================================
+12. Given only a pointer to a node to be deleted in a singly linked list, how do you delete it?
+
+Method 1:
+The solution to this is to copy the data from the next node into this node and delete the next node! ofcourse this wont work if this is the last node.
+======================================================================================================================================
+13. How do you find the middle of a linked list? Write a C program to return the middle of a linked list
+
+Method 1:
+1. Have two pointers at the head: slow, fast
+2. Increment slow pointer by one and fast pointer by 2
+3. When fast pointer reaches end, slow pointer points 
+
+Method 2:
+middle = head;
+int i = 1;
+while(head != NULL) {
+        if(i%2 == 0)
+                middle = middle->next;
+        head = head->next;
+        i++;
+}
+======================================================================================================================================
+14. How to read a singly linked list backwards?
+
+Method 1:
+Use recursion to read linked list backwards
+void read_backwards(sturct link_list *node) {
+        if(node == NULL)
+                return;
+         
+        read_backwards(node->next);
+        printf("\n%d ",node->data);
+}
+
+Method 2:
+Reverse the linked list either iteratively or recursively to print it backwards (see reversing linked list)
+======================================================================================================================================
+15. Function to check if a singly linked list is palindrome
+Given a singly linked list of characters, write a function that returns true if the given list is palindrome, else false.
+
+Method 1: Use of stack
+A simple solution is to use a stack of list nodes. This mainly involves three steps.
+1) Traverse the given list from head to tail and push every visited node to stack.
+2) Traverse the list again. For every visited node, pop a node from stack and compare data of popped node with currently visited node.
+3) If all nodes matched, then return true, else false.
+Time complexity of above method is O(n), but it requires O(n) extra space. Following methods solve this with constant extra space.
+
+Method 2: Reverse the linked list
+This method takes O(n) time and O(1) extra space.
+1) Get the middle of the linked list.
+2) Reverse the second half of the linked list.
+3) Check if the first half and second half are identical.
+4) Construct the original linked list by reversing the second half again and attaching it back to the first half
+To divide the list in two halves, method 2 of this post is used.
+When number of nodes are even, the first and second half contain exactly half nodes. The challenging thing in this method is to handle the case when number of nodes are odd. We don’t want the middle node as part of any of the lists as we are going to compare them for equality. For odd case, we use a separate variable ‘midnode’.
+
+METHOD 3 (Using Recursion)
+Use two pointers left and right. Move right and left using recursion and check for following in each recursive call.
+1) Sub-list is palindrome.
+2) Value at current left and right are matching.
+
+If both above conditions are true then return true.
+
+The idea is to use function call stack as container. Recursively traverse till the end of list. When we return from last NULL, we will be at last node. The last node to be compared with first node of list.
+
+In order to access first node of list, we need list head to be available in the last call of recursion. Hence we pass head also to the recursive function. If they both match we need to compare (2, n-2) nodes. Again when recursion falls back to (n-2)nd node, we need reference to 2nd node from head. We advance the head pointer in previous call, to refer to next node in the list.
+
+However, the trick in identifying double pointer. Passing single pointer is as good as pass-by-value, and we will pass the same pointer again and again. We need to pass the address of head pointer for reflecting the changes in parent recursive calls.
+======================================================================================================================================
+16. How would you find out if one of the pointers in a linked list is corrupted or not?
+This is a really good interview question. The reason is that linked lists are used in a wide variety of scenarios and being able to detect and correct pointer corruptions might be a very valuable tool. For example, data blocks associated with files in a file system are usually stored as linked lists. Each data block points to the next data block. A single corrupt pointer can cause the entire file to be lost!
+
+- Discover and fix bugs when they corrupt the linked list and not when effect becomes visible in some other part of the program. Perform frequent consistency checks (to see if the linked list is indeed holding the data that you inserted into it).
+- It is good programming practice to set the pointer value to NULL immediately after freeing the memory pointed at by the pointer. This will help in debugging, because it will tell you that the object was freed somewhere beforehand. Keep track of how many objects are pointing to a object using reference counts if required.
+- Use a good debugger to see how the datastructures are getting corrupted and trace down the problem. Debuggers like ddd on linux and memory profilers like Purify, Electric fence are good starting points. These tools should help you track down heap corruption issues easily.
+- Avoid global variables when traversing and manipulating linked lists. Imagine what would happen if a function which is only supposed to traverse a linked list using a global head pointer accidently sets the head pointer to NULL!.
+- Its a good idea to check the addNode() and the deleteNode() routines and test them for all types of scenarios. This should include tests for inserting/deleting nodes at the front/middle/end of the linked list, working with an empty linked list, running out of memory when using malloc() when allocating memory for new nodes, writing through NULL pointers, writing more data into the node fields then they can hold (resulting in corrupting the (probably adjacent) "prev" and "next" pointer fields), make sure bug fixes and enhancements to the linked list code are reviewed and well tested (a lot of bugs come from quick and dirty bug fixing), log and handle all possible errors (this will help you a lot while debugging), add multiple levels of logging so that you can dig through the logs. The list is endless...
+- Each node can have an extra field associated with it. This field indicates the number of nodes after this node in the linked list. This extra field needs to be kept up-to-date when we inserte or delete nodes in the linked list (It might become slightly complicated when insertion or deletion happens not at end, but anywhere in the linked list). Then, if for any node, p->field > 0 and p->next == NULL, it surely points to a pointer corruption.
+- You could also keep the count of the total number of nodes in a linked list and use it to check if the list is indeed having those many nodes or not.
+
+The problem in detecting such pointer corruptions in C is that its only the programmer who knows that the pointer is corrupted. The program has no way of knowing that something is wrong. So the best way to fix these errors is check your logic and test your code to the maximum possible extent. I am not aware of ways in C to recover the lost nodes of a corrupted linked list. C does not track pointers so there is no good way to know if an arbitrary pointer has been corrupted or not. The platform may have a library service that checks if a pointer points to valid memory (for instance on Win32 there is a IsBadReadPtr, IsBadWritePtr API.) If you detect a cycle in the link list, it's definitely bad. If it's a doubly linked list you can verify, pNode->Next->Prev == pNode. I have a hunch that interviewers who ask this question are probably hinting at something called Smart Pointers in C++. Smart pointers are particularly useful in the face of exceptions as they ensure proper destruction of dynamically allocated objects. They can also be used to keep track of dynamically allocated objects shared by multiple owners. This topic is out of scope here, but you can find lots of material on the Internet for Smart Pointers.
+======================================================================================================================================
+Questions to be worked out:
+Q. Flatten A Binary Tree to Linked List (In-place)
+Q. Implement Stack and Queue using Linked List
+Q. Repeatedly Delete N nodes after M nodes of a Linked list
+Q. Remove Duplicates from a Linked List
+Q. Reverse every k nodes of a linked list
+Q. Convert Sorted Linked list to balanced BST
+Q. Frequency of a given number in a Linked List
+Q. Rotate linked list by K nodes
+Q. Insert nodes into a linked list in a sorted fashion
+Contact GitHub API Training Shop Blog About
+© 2017 GitHub, Inc. Terms Privacy Security Status Help

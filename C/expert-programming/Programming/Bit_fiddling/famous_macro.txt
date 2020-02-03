@@ -1,0 +1,15 @@
+1. Setting nth bit of num
+    num = num | (1U << n)
+    
+2. Clearing nth bit of num
+    num =  num & ~(1U << n)
+    
+3. Toggle the bit
+   num = num ^ (1U << n)
+   
+4. Get nth bit of num
+    nthbit = num & (1U << n)
+    
+5. Write a macro to set bit position from m to n  on a give number
+#define MASK32(m,n)    (1<<(n-m+1)-1)<<m
+#define SET_BITS(num, m, n)   (num | ( (1<<(m-n+1))-1 << n))

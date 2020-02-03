@@ -1,0 +1,89 @@
+----------------------------------------------------
+Compile:
+gcc myprog.c		//binary excecutable output in a.out
+gcc myprog.c -o runme	//binary excecutable output in runme 
+
+----------------------------------------------------
+Compile multiple files:
+$ gcc showdate.c helper.c –o showdate
+
+OR
+
+$ gcc -c showdate.c
+$ gcc -c helper.c
+$ gcc showdate.o helper.o –o showdate
+----------------------------------------------------
+Options:
+1. DONT COMBINE OPTIONS:
+- All GCC compilers accept both single-letter options, such as -o, and multiletter options, such as -ansi. 
+- The consequence of GCC accepting both types of options is that, unlike many GNU programs, you cannot group multiple single-letter options. 
+- For example, the multiletter option -pg is not the same as the two single-letter options -p -g. 
+  The -pg option creates extra code in the final binary that outputs profile information for the GNU code profiler, gprof. 
+  The combination of the -p and –g options, on the other hand, generates extra code in the resulting binary that outputs profiling information for use by the prof code profiler (-p) and causes GCC compilers to generate debugging information using the operating system’s normal format (-g).
+
+2. CAN USE OPTIONS in any order
+
+3. General options:
+-std=C99				//C99 standard
+
+-###					//Displays the programs and arguments that would be invoked as
+					//the compiler executes with the specified command-line, but
+					//does not actually execute them. This is my favorite initial
+					//debugging option, especially in cross-platform compilation.
+
+-dumpmachine				//Displays the compiler’s target CPU.
+Example
+x86_64-apple-darwin14.5.0
+SRMK-M-H00U:linux srmk$ gcc -dumpmachine
+
+-dumpversion				//Displays the compiler version number.
+Example:
+SRMK-M-H00U:linux srmk$ gcc -dumpversion
+4.2.1
+
+-pipe 					//Uses pipes to send information between compiler processes 
+					//rather than intermediate files.
+
+-print-file-name=lib 			//Displays the path to the library named lib, where lib is a library
+					//that is part of the GCC installation.
+
+-print-libgcc-file-name 		//Displays the name of the compiler’s companion library.
+
+-print-multi-directory 			//Displays the root directory for all versions of libgcc.
+
+-print-multi-lib 			//Displays the maps between command-line options and multiple
+					//library search directories.
+
+-print-prog-name=prog 			//Displays the path to the program named prog, where prog is an
+					//application that is part of the GCC installation.
+
+-print-search-dirs 			//Displays the directory search path.
+
+-save-temps 				//Saves intermediate files created during compilation.
+
+--target-help 				//Displays help for command-line options specific to the compiler’s target.
+
+-time 					//Displays the execution time of each compilation subprocess.
+
+-v 					//Displays the programs and arguments invoked as the compiler executes.
+
+-V 					//ver Invokes version number ver of the compiler.
+
+--version 				//Displays the compiler version information and short license.
+
+4.OUTPUT OPTIONS:
+-c 					//Stops the compilation process before the link stage
+					//When you use -c, the output is a link-ready object file, which has an .o filename extension. 
+					//For each input file, GCC compilers generate a corresponding output file.
+
+-E 					//Terminates compilation after preprocessing
+					//if you specify -E, the resulting output will be the preprocessed source code, which is sent to standard output.
+
+-o 					//file Writes output to the file specified by file
+
+-S 					//Stops the compilation process after generating assembler code
+					//each input file results in an output file of assembly code with an .s extension.
+
+-x 					//lang Sets the input language of subsequent files to lang
+
+-x 					//none Turns off the definition of a previous -x lang option

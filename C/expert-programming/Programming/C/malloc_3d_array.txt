@@ -1,0 +1,27 @@
+Two dimensional array:
+int **myarray = (int **)malloc(no_of_rows * sizeof(int *)); 
+for(i = 0; i < no_of_rows; i++) 
+{ 
+    myarray[i] = malloc(no_of_columns * sizeof(int)); 
+} 
+// Access elements as myarray[i][j]
+
+Three dimensional array 
+#define MAXX 3 
+#define MAXY 4
+#define MAXZ 5 
+
+main() { 
+int ***p,i,j; 
+p=(int ***) malloc(MAXX * sizeof(int **)); 
+for(i=0;i<MAXX;i++) { 
+  p[i]=(int **)malloc(MAXY * sizeof(int *)); 
+  for(j=0;j<MAXY;j++) 
+    p[i][j]=(int *)malloc(MAXZ * sizeof(int)); 
+} 
+
+for(k=0;k<MAXZ;k++) 
+for(i=0;i<MAXX;i++) 
+for(j=0;j<MAXY;j++) 
+p[i][j][k]=<something>; 
+}

@@ -1,0 +1,5 @@
+Different Sorting Techniques:
+- Selection Sort
+- Insertion Sort
+- Bubble Sort
+- Merge Sort

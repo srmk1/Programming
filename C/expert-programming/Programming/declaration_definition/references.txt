@@ -1,0 +1,1 @@
+https://blog.feabhas.com/2010/09/scope-and-lifetime-of-variables-in-c/

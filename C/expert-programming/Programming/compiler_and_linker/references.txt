@@ -1,0 +1,14 @@
+https://www.thegeekstuff.com/2011/10/c-program-to-an-executable/
+https://manybutfinite.com/post/how-the-kernel-manages-your-memory/
+https://www.ibm.com/developerworks/library/l-dynamic-libraries/
+
+Linkers:
+http://www.linuxjournal.com/article/6463
+https://www.lurklurk.org/linkers/linkers.html
+https://lwn.net/Articles/276782/ - BEST ON LINKER
+
+Loaders:
+https://lwn.net/Articles/631631/
+
+load_elf_binary() - linux source:
+https://elixir.bootlin.com/linux/v3.18/source/fs/binfmt_elf.c#L571

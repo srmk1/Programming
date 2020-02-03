@@ -1,0 +1,21 @@
+Asymptotic Analysis:
+--------------------
+Asymptotic analysis provides basic vocabulary for discussing the design and analysis of algorithms.
+
+It identifies the sweet spot for discussing high level performance of algorithms. 
+- On the one hand, coarse enough, to suppress all of the details that you want to ignore. Details that depend on
+the choice of architecture, the choice of programming language, the choice of compiler, and so on. 
+- On the other hand it's sharp enough to be useful. In particular, to make predictive comparisons between different high level algorithmic
+approaches to solving a common problem. This is going to be especially true for large inputs.
+
+High level idea is to surpress constant factors and lower order terms. 
+- Constant terms depend on the system, architecture, compiler and so on.
+- Lower order terms become irrelevant for large inputs
+
+Bigoh Definition:
+-----------------
+Worst case running time of the algorithms as a function of input size n (for sufficiently larger values of n).
+      T(n) = O(f(n))
+      if only if there exists constant values c,n'>0 such that:
+        T(n) <= c*f(n)
+      for all n > n'

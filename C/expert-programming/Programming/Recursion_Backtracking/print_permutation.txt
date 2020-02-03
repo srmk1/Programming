@@ -1,0 +1,50 @@
+Write a program to print all permutations of a given string
+A permutation, also called an “arrangement number” or “order,” is a rearrangement of the elements of an ordered list S into a one-to-one correspondence with S itself. A string of length n has n! permutation.
+
+Below are the permutations of string 1234, following are different ways:
+
+1 2 3 4
+1 2 4 3   Fixed the second spot to 2
+
+1 3 2 4   swap 2 with 3
+1 3 4 2   Fixed the second spot to 3
+
+1 4 2 3   swap 2 with 4
+1 4 3 2   Fixed the second spot to 4
+
+
+#include<stdio.h>
+#include<stdlib.h>
+
+void print_perm(char a[], int pos, int len) {
+        char temp;
+        int i = 0;
+
+        if (pos == len) {
+                printf("%s\n",a);
+                return;
+        } else {
+                for (i = pos; i <= len; i++) {
+                        temp = a[i];
+                        a[i] = a[pos];
+                        a[pos] = temp;
+
+                        print_perm(a, pos+1, len);
+
+                        temp = a[i];
+                        a[i] = a[pos];
+                        a[pos] = temp;
+                }
+        }
+return;
+}
+
+int main(int argc, char *argv[]) {
+        char num[5] = { 'a', 'b', 'c', 'd' , '\0'};
+        print_perm(num,0,3);
+return 0;
+}
+
+
+
+

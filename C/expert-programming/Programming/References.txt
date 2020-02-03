@@ -1,0 +1,8 @@
+http://saurabhschool.org/ 
+Contains youtube videos of all the algorithm, datastructure, OS concepts topics (Use speed 1.5 for youtube videos)
+
+https://graphics.stanford.edu/~seander/bithacks.html
+Bit twiddling hacks contains all the bit fiddling tricks
+
+Algorithms:
+http://www.geeksforgeeks.org/fundamentals-of-algorithms/

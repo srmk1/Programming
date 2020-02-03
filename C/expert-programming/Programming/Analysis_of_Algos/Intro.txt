@@ -1,0 +1,37 @@
+Analysis of different resources consumed by the algorithm. Important resources are:
+- CPU Time
+- Memory
+- Disk.. so on
+
+Time complexity OR Running time:
+--------------------------------
+How to analyze time complexity (running time) of the algorithm?
+Suppose there are two algos ALG1 and ALG2: one of the easiest way to find:
+  ti1 = time()            ti1 = time()
+  ALG1                    ALG2
+  ti2 = time()            ti2 = time()
+  ta1 = ti2 - ti1         ta2 = ti2 - ti1
+Compare ta1 & ta2
+
+There are lot of problems with above approach:
+- First, of all both the algorithms needs to run on the same machine
+- Secondly, even if they use same machine, it should be running under same conditions
+  For example: number of processes the machine running, is there any time intensive process running..etc
+  
+Hence, deciding the time complexity using this method is not optimal. 
+Instead we take a mathematical approach, by computing the number of instructions(computations) a algorithm runs w.r.t to the input size. This is called BigOh notation. Bigoh notation is the number is of basic operations (computations/instructions) the algorithm performs to find the solution. It is usually expressed based on the function of input size.
+
+Guiding principles for Analysis of Algorithms:
+----------------------------------------------
+Three fundamental assumptions:
+- Worst case analysis (v/s Best case, Average case, benchmarking - both requires domain knowledge)
+- Dont worry much about small constants and lower order terms
+    - Because it makes life easier without effecting much in performance
+    - These constant factors are Architecture dependent (programmer dependent and so on)
+- Asymptotic Analysis - Focus on the case of large input sizes ( N --tends to--> Infinity)
+    - For small input size frankly we have sufficient processing power, only big problems are interesting
+    - For increase in speed of computer as per Moore's law, our computational ambitions also increases
+    
+Using these three principles, we get definition of FAST ALGORITHM:
+Whose worst case running time grows slowly as input size
+
