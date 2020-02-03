@@ -1,0 +1,4 @@
+Cmd + p - Browse files
+Cmd + Shift + p - Package control
+Cmd + r - Find the definition in current file
+Cmd + Shift + r - Find the definition in global file

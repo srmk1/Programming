@@ -1,0 +1,415 @@
+1. Register a route
+	- Add a get api in routes/web.php			===> This is for web request
+		Route::get(‘Project’,’ProjectControllers@index’);
+
+	- Add a get api in the routes/api.php		==> This is for 
+		Route::get(‘Project’,’ProjectControllers@index’);
+		-> This will create a file under App\Http\Resources\Project.php
+		-> This file will have apis for index, show, create, destroy.. so on
+2. Make a new controller
+	php artisan make:controller ProjectsController
+		- This will create a new controller under
+			app/Http/Controllers/ProjectsController.php
+	- If you want to use RESOURCE model you need to use
+			php artisan make:controller ProjectsController --resource
+3. Link the controller to view
+	- Add an api with “index” (first step)
+		return (“projects.index”);
+	- This will look for “resources/views/projects/index.blade.php
+		- create a directory projects under /resources/views
+		- create a file index.blade.php under it	
+OR
+3a. Link the controller to resource
+	return ProjectResource::Collection($projects);
+4. Create a database table
+	php artisan make:migration create_projects_table
+	- This will create file create_projects_table
+	- Modify up api with the schema for projects table - will be called when you do ‘‘php artisan migrate’
+	- Modify down api - will be called when you do ‘php artisan migrate:rollback’
+5. Create the Eloquent model for this table. The name of Eloquent model is singular form of database table.
+	php artisan make:model project 
+	- “-m” will automatically create migration table also
+6. Access the database in controller - ProjectsController.php
+	- Include the Eloquent model of all the tables required
+		use \App\Project;
+	- Access database
+		$projects = \App\Project::all();
+		OR
+		use \App\Project;
+		$projects = Project::all();
+7. Pass the data to the view
+	$projects = Project::all();
+	return view(‘projects.index’,compact(‘projects’));
+
+
+
+
+1.
+php artisan make:controller RoleController --resource
+php artisan make:resource RoleResource
+php artisan make:controller PermissionController --resource
+php artisan make:resource PermissionResource
+
+2.
+//Add route in web.php
+Route::get('/roles', 'RoleController@index')->name('roles');
+Route::get('/roles/{id}', 'RoleController@show')->name('roles');
+Route::get('/permissions', 'PermissionController@index')->name('permissions');
+Route::get('/permission/{id}', 'RoleController@show')->name('permissions');
+
+3.
+//Update index and show apis for RoleController
+    public function index()
+    {
+        //Get roles
+        $roles = Role::paginate();
+       
+        // Return collection of roles as a resoruce
+        return RoleResource::collection($roles);
+    }
+    
+        public function show($id)
+    {
+        //Get roles
+        $role = Role::findById($id);
+       
+        // Return single role as a resource
+        return new RoleResource($role);
+    }
+    
+    
+    
+    
+    
+———————————————————————————————————————————————————
+Commands:
+- Running PHP server
+	cd <directory>
+	php artisan serve
+———————————————————————————————— ———————————————————
+Composer:
+- Dependency manager
+- Allows to re-use of code, easy to download package
+- Autoloader automatically 
+
+
+
+
+- Install Composer
+- Get a package
+	composer require phpspec/phpspec
+- Any packages that is pulled in using composer is placed in vendor
+	vendor/bin/phpspec
+- Create a project using laravel
+	composer create-project laravel/laravel <directory-name>
+- To download all packages
+	composer install
+———————————————————————————————————————————————————
+Router/Routes	===> Routing Layer
+- Web routes to the application is passed through routes/web.php
+	<project-root>/routes/web.php
+- Route class has static methods of get/post..etc
+	Returns view
+- All views are in directory 
+	<project-root>/resources/views/welcome.blade.php
+	- You need not type whole welcome.blade.php, just tell welcome.
+
+
+
+
+
+Adding a new route:
+	- Go to routes/web.php
+	- Add a new function with Route::get or Route::post
+	- You can return a view from <project-root>/resources/view/. Simple views are okay for small static pages.
+		However for more complex websites we need to register a controller
+Adding a new controller and routing requests to it:
+	- You can use php artisan make for writing new controllers
+	- Everything under php artisan make adds a new files
+	- Execute below php artisan command
+		php artisan make:controller PagesController
+		==> This creates a file under app/Http/Controllers/PagesController.php
+	- In the routes add:
+		Route::get(‘/‘,’PagesController@home’)	=> home() in PagesController.php
+		Route::get(‘/about‘,’PagesController@about’) => about() in PagesController.php
+		Route::get(‘/contact‘,’PagesController@contact’ => contact() in PagesController.php
+Passing data from route to Views:
+	- You can pass it as second dictionary argument to function() return..
+			Route::get('about', function () {
+				return view('about', [
+				'name' => "World"
+				]);
+			});
+	- We can define variable inside function and then send it also
+		Route::get('about', function () {
+			$name = “World”;
+			return view('about', [
+				'name' => $name
+			]);
+		});
+	- Compact version of above action is:
+		Route::get('about', function () {
+			$names = [
+						“Aditi”,
+						“Arjun”,
+						“Ashu”,
+						“Manjula”,
+						“Krishna” ];
+			return view('about', compact(‘names’));
+		});
+
+———————————————————————————————————————————————————
+Views/Blades:	==> Views Layer (V)
+When constructing your views, you are not limited to basic PHP. Instead, you can use Blade: Laravel’s powerful template engine.
+
+
+
+
+
+Create layout file using blade:
+	- Create a layout.blade.php
+	- In layout.blade.php add everything that should be consistent across all pages		liked header, footer, sign-up form, navigation bar
+	- Anything specific to a particular page, you can indicate using @yeild(‘name-of-the-specific-content’)
+	- In the specific blade.php
+		@extends(‘layout’)	//different directory using . separation
+		@section(‘name-of-the-specific-content’)
+			html view here
+		@endsection
+	- Shorthand foreach
+		@foreach ($projects as $project)
+			//Do your stuff
+		@endforeach
+	- Shorthand for
+		<?php echo $project->title; ?> => is {{ $project->title }}
+———————————————————————————————————————————————————
+———————————————————————————————————————————————————
+Database:			===> Database Layer/Model Layer (M)
+
+
+
+
+
+- Database credentials are stored in <project-root>/.env (hidden file)
+	- configure DATABASE, USER_NAME, PASSWORD in .env file
+- These env variables are used by ‘config/database.php’
+- Migrations represent the blue print for creating tables or updating the tables.
+	php artisan migrate
+		- this command creates/update tables by using migration files under <project-root>/database/migrations/*
+		- schema for these tables are present in <project-root>/database/migrations/*
+	php artisan migrate:rollback
+	php artisan migrate:fresh
+	php artisan make:migration create_projects_table
+		- This creates a migrations file under <project-root>/database/migrations/*
+		- Each migration file has a “up” and “down” api. This allows it to migrate and rollback
+
+
+- Running a select query
+	use Illuminate\Support\DB;
+	…
+	$users = DB::select(‘select * from users where active = ?’, [1]);
+- Using Named bindings
+	$users = DB::select(‘select * from users (id, name) values (?, ?)’, [1, ‘Dayle’]);
+- Update statement
+	$affected = DB::update(‘update users set votes = 100 where name = ?’, [‘john’]);
+- Delete statement
+	$deleted = DB::delete(‘delete from users’);
+- Running a general statement
+	DB::statement(‘drop table users’);
+- Database transactions: You may use “transaction” method on the “DB” facade to run a set of operations within a database transaction. 
+	If an exception is thrown within the transaction “Closure”, the transaction will automatically be rolled back.
+	DB::transaction(function () {
+		DB::table(‘users’)->update([‘votes’ => 1]);
+		DB::table9’posts’)->delete();
+	});
+- Second argument specifies how many times transaction should be re-attempted when a deadlock occurs.
+	DB::transaction(function () {
+		DB::table(‘users’)->update([‘votes’ => 1]);
+		DB::table9’posts’)->delete();
+	}, 5);
+- Retrieve all rows from a table
+	$users = DB::table(‘users’)->get();
+- Retrieve a single row/column from a table
+	$user = DB::table(‘users’)->where(‘name’, ‘john’)->first();
+- Retrieve a single row/column - If you dont even need full row, you may extract a single value from a record using “value” api
+	$email = DB::table(‘users’)->where(‘name’, ‘john’)->value(‘email’);
+- Retrieve a list of columns
+	$email = DB::table(‘users’)->pluck(‘title’, ‘name’);
+- CHUNKING: If you need to work with 1000s of database records, consider using the chunk method
+- Aggregates: The query builder also provides a variety of aggregate methods such as count, max, min, avg and sum. 
+
+
+
+Eloquent:
+- Eloquent is Laravel’s active record implementation. 
+	- If we want a model that represents a single record of a table, then singular form of table name
+		ex: if table name is projects, then model file will be singular form
+		php artisan make:model project
+			- This creates a model file app/Provider/Project.php
+	- If you want to specify custom table name for a model, define a “table” proprerty on your model
+		ex: Add below line in app/Provider/Project.php
+				protected $table = ‘my_flights’;
+	- Eloquent will also assume that each table has a primary key column named “id”. You may define a protected $primaryKey property to override this convention.
+				protected $primaryKey = ‘pateint_id’;
+	- By default, Eloquent expects that created_at and updated_at column exist on your tables. If you do not wish to have these column automatically managed by Eloquent, set $timestamps property on your model to “false”
+				public $timestamps = false;
+	- Customize date format by overriding
+				protected $dateFormat = ‘U’;
+	- Customise created_at and udpated_at names
+				const CREATED_AT = ‘creation_date’;
+				const UPDATED_AT = ‘last_update’;
+	- By default, all Eloquent models will use the default database connection configured for your application. If you would like to specify a different connection for the model, use the $connection property:
+				protected $connection = ‘connection-name’;
+
+- Eloquent Retrieving model:
+	- Once you have created a model and its associated database table, we can retrieve data from DB. Eloquent acts as a powerful query builder allowing you to fluently query the database table associated with model.
+		Example:
+			<?php
+				$flights = \App\Projects::all();
+				foreach ($flights as $flight) {
+					echo $flight->title;
+				}
+	- Since Eloquent models are query builders, you may use any of the methods in DB::query builder
+			<?php
+				$flights = \App\Projects::where(‘active’, 1
+											->orderBy(’name’, ‘desc’)
+											->take(10)
+											->get();
+	- Collections: Eloquent models like all and get retrieve multiple results, an instance of collection will be returned. Collection class provides a variety of helpful methods for working with Eloquent results.
+	- Chunking results: If you need to process 1000s of records, use the chunk command. The chunk method will retrieve a “chunk” of Eloquent models, feeding them to given Closure for processing. It also conserves memory
+			Flight::chunk(200, function (flights) {
+				foreach ($flights as $flight) {
+					//
+				}
+			}
+	- CURSORS: The cursor method allows you to iterate through your database records using a cursor, which will only execute a single query. When processing large amount of data, cursor method may be used to greatly 
+					reduce memory usage.
+			foreach (Flight::where(‘foo’,’bar’)->cursor() as $flight) {
+			}
+
+- Eloquent Retrieving Single Models/Aggregates
+	- Retrieve a model by its primary key
+		$flight = App\Flight::find(1);
+	- Retrieve the first model where 
+		$flight = App\Flight::where(‘active’, 1)->first();
+	- Call find method with an array of primary keys, which will return a collection of the matching records:
+		$flights = App\Flight::find([1, 2, 3]);
+	- Retrieve aggregates: you may also use the count, sum, max and other aggregate methods provided by the query builder.
+		$count = App\Flight::where(‘active’, 1)->count();
+		$max = App\Flight::where(‘active’, 1)->max(‘price’);
+
+- Inserting and updating models
+	- To create a new record in the database, create a new model instance, set attributes on the model, then call the “SAVE” method
+			public function store(Request $request) {
+				$flight = new Flight;
+				$flight->name = $request->name;
+				$flight->save();
+			}
+	- UPDATE: “save” method may also be used to update Models that already exist in database
+			$flight = App\Flight::find(1);
+			$flight->name = ‘New Flight Name’;
+			$flight->save();
+	- More insert/update/delete apis are there here
+
+- Collections: All multi-result set returned by Eloquent are instances of collections object
+	including results retrieved via the get method or accessed via a relationship. 
+	Eloquent collection objects extends the Laravel base collection, so it naturally inherits dozens 
+	of methods used of fluently work with 
+	-> Available the apis in collection method
+
+
+
+
+RESOURCE
+
+- create a resource
+	php artisan make:resource Project
+- Fill the resource
+	return parent::toArray($request)
+- Use the resource in controller -> Link resource to controller
+
+
+
+
+
+SEEDING DATABASE:
+- Used to seed the database using classes. All seed classes are stored in the database/seeds directory
+- When seeder is generated it contains default method run (which is called when you call php artisan db:seed command)
+- you can use either query builder or Eloquent model OR Factory methods to insert entries into database 
+- Manually specifying the attributes for each model seed is cumbersome. Instead we can use “model factories” to conveniently generate large amounts of database records
+
+
+- Generate seeder
+	php artisan make:seeder ProjectsTableSeeder
+- Manually seed using DB::insert command
+	public function run()
+	{
+		DB::table(‘users’)->insert([
+			‘name’ => str_random(10),
+			‘email’ => str_random(10).’@gmail.com’,
+			‘password’ => bcrypt(‘secret’)
+		]);
+	}
+
+
+
+
+DATABASE TESTING:
+- assertDatabaseHas helper to assert that data exists in the database matching a given set of criteria
+	$this->assertDatabaseHas(‘projects’, [
+									‘email’ => ‘srmk@gmail.com”
+								]);
+- assertDatabaseMissing helper to assert that data does not exist in the database
+- GENERATING FACTORY
+	php artisan make:factory ProjectFactory —model=Project
+	- Generates new factory in database/factories directory
+- GENERATE SEEDER
+	php artisan make:seeder ProjectsTableSeeder
+- Fill the define function in the factory seeder project
+- Run artisan command seed
+	php artisan db::seed
+	
+———————————————————————————————————————————————————
+Laravel tinker:
+
+
+
+
+
+- Install psysh
+	composer global require psy/psysh:@stable
+- Run the shell
+	psysh
+- Run tinker
+	php artisan tinker
+
+
+
+
+Tinker commands:
+- Look at the documentation about a function
+	doc “function-name”
+- See the code of a function
+	show “function-name”
+- Access database (you need to create a migration and eloquent before this)
+	- Access all records
+		- App\Project::all();
+	- Access first record
+		App\Project::all()[0];
+		App\Project::all()->first();
+		App\Project::first();
+	- Access last record
+		App\Project::latest()->first();
+	- Access only specific field of table
+		App\Project::all()->map->title;
+- Create a new record in the database
+	$project = new App\Project;
+	$project->name = ‘My first project’;
+	$project->lead = ‘srmk’;
+	$project->save();		==> Saves it to database	
+———————————————————————————————————————————————————
+Laravel Directory Structure:
+
+———————————————————————————————————————————————————
+Role based Access Control Schema design:
+https://www.youtube.com/watch?v=Kas2w2DBuFg
+———————————————————————————————————————————————————

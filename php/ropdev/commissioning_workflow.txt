@@ -1,0 +1,35 @@
+git clone https://gitlab.com/penguin-infotech/ropdev.git
+cd ropdev
+composer install
+
+mv .env.example .env
+//Update Database credentials
+
+php artisan key:generate
+
+php artisan migrate
+
+On Sequel Pro:
+- Import the states & Cities
+- Create a single hospital entry
+- Create a single user entry
+
+php artisan db:seed
+
+npm install
+npm install vue
+npm install webpack --save-dev
+npm install vuex --save
+npm install vue-select
+npm install vue-awesome-notifications
+npm install vue-bootstrap-datetimepicker
+npm install vue-sweetalert2
+npm install vue2-datatable-component
+npm install eonasdan-bootstrap-datetimepicker
+npm install vue-template-compiler --save-dev
+npm install vue-loader --save-dev
+npm install css-loader --save-dev
+npm install vue-style-loader --save-dev
+npm audit fix --force
+npm install -g npm-install-peers
+npm run watch

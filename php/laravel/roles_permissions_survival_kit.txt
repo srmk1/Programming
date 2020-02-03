@@ -1,0 +1,14 @@
+composer -vvv require spatie/laravel-permission
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" --tag="migrations"
+
+php artisan make:seeder RolesAndPermissionsSeeder
+//Add Permissions and Roles in the seeder file
+
+//Seed database
+php artisan db:seed --class=RolesAndPermissionsSeeder
+
+------------------------------------------------------------------------------------
+References:
+https://www.youtube.com/watch?v=zIgYJlu03bI&list=PLe30vg_FG4OQKaLJodH9E8htPvfj7jamt
+
+https://github.com/spatie/laravel-permission

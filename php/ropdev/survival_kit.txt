@@ -1,0 +1,155 @@
+### 1. Create a new repository
+    git clone https://gitlab.com/penguin-infotech/ropdev.git
+    cd ropdev
+    touch README.md
+    git add README.md
+    git commit -m "add README"
+    git push -u origin master
+
+### 2. Existing folder
+    cd existing_folder
+    git init
+    git remote add origin https://gitlab.com/penguin-infotech/ropdev.git
+    git add .
+    git commit -m "Initial commit"
+    git push -u origin master
+
+### 3. Existing Git repository
+    cd existing_repo
+    git remote rename origin old-origin
+    git remote add origin https://gitlab.com/penguin-infotech/ropdev.git
+    git push -u origin --all
+    git push -u origin --tags
+------------------------------------------------------------------------------------------------------------------------
+php artisan make:model Patient -m -f
+php artisan make:model RopVisit -m -f
+php artisan make:model RopDiagnosis -m -f
+php artisan make:model Appointment -m -f
+php artisan make:model RopImage -m -f
+
+php artisan make:model Hospital -m -f
+php artisan make:model State -m
+php artisan make:model District -m  
+php artisan make:model City -m
+
+
+php artisan make:model SuperAdmin -m -f
+php artisan make:model User -m -f
+php artisan make:model Role -m -f
+php artisan make:model UserRole -m -f
+php artisan make:model RoleResponsibility -m -f
+
+git add app/Appointment.php
+git add app/City.php
+git add app/District.php
+git add app/Hospital.php
+git add app/Patient.php
+git add app/Role.php
+git add app/RoleResponsibility.php
+git add app/RopDiagnosis.php
+git add app/RopImage.php
+git add app/RopVisit.php
+git add app/State.php
+git add app/SuperAdmin.php
+git add app/UserRole.php
+git add database/factories/AppointmentFactory.php
+git add database/factories/HospitalFactory.php
+git add database/factories/PatientFactory.php
+git add database/factories/RoleFactory.php
+git add database/factories/RoleResponsibilityFactory.php
+git add database/factories/RopDiagnosisFactory.php
+git add database/factories/RopImageFactory.php
+git add database/factories/RopVisitFactory.php
+git add database/factories/SuperAdminFactory.php
+git add database/factories/UserRoleFactory.php
+
+git add database/migrations/2018_11_23_100858_create_patients_table.php
+git add database/migrations/2018_11_23_100901_create_rop_visits_table.php
+git add database/migrations/2018_11_23_100903_create_rop_diagnoses_table.php
+git add database/migrations/2018_11_23_100906_create_appointments_table.php
+git add database/migrations/2018_11_23_100908_create_rop_images_table.php
+git add database/migrations/2018_11_23_100911_create_hospitals_table.php
+git add database/migrations/2018_11_23_100914_create_states_table.php
+git add database/migrations/2018_11_23_100916_create_districts_table.php
+git add database/migrations/2018_11_23_100919_create_cities_table.php
+git add database/migrations/2018_11_23_100922_create_super_admins_table.php
+git add database/migrations/2018_11_23_100924_create_roles_table.php
+git add database/migrations/2018_11_23_100927_create_user_roles_table.php
+git add database/migrations/2025_11_23_100932_create_role_responsibilities_table.php
+
+git commit -m "Added models, migrations, factories for the db design"
+------------------------------------------------------------------------------------------------------------------------
+git rm -r app/Role.php
+git rm -r app/RoleResponsibility.php
+git rm -r app/SuperAdmin.php
+git rm -r app/UserRole.php
+git rm -r database/factories/RoleFactory.php
+git rm -r database/factories/RoleResponsibilityFactory.php
+git rm -r database/factories/SuperAdminFactory.php
+git rm -r database/factories/UserRoleFactory.php
+git rm -r database/migrations/2018_11_23_100922_create_super_admins_table.php
+git rm -r database/migrations/2018_11_23_100924_create_roles_table.php
+git rm -r database/migrations/2018_11_23_100927_create_user_roles_table.php
+git rm -r database/migrations/2025_11_23_100932_create_role_responsibilities_table.php
+------------------------------------------------------------------------------------------------------------------------
+php artisan make:seeder RolesAndPermissionsSeeder
+------------------------------------------------------------------------------------------------------------------------
+php artisan make:controller RoleController --resource
+php artisan make:resource RoleResource
+php artisan make:controller PermissionController --resource
+php artisan make:resource PermissionResource
+
+//Add route in web.php
+Route::get('/roles', 'RoleController@index')->name('roles');
+Route::get('/roles/{id}', 'RoleController@show')->name('roles');
+Route::get('/permissions', 'PermissionController@index')->name('permissions');
+Route::get('/permission/{id}', 'RoleController@show')->name('permissions');
+
+//Update index and show apis for RoleController
+    public function index()
+    {
+        //Get roles
+        $roles = Role::paginate();
+       
+        // Return collection of roles as a resoruce
+        return RoleResource::collection($roles);
+    }
+    
+        public function show($id)
+    {
+        //Get roles
+        $role = Role::findById($id);
+       
+        // Return single role as a resource
+        return new RoleResource($role);
+    }
+------------------------------------------------------------------------------------------------------------------------
+Vue JS Frontend:
+https://github.com/LaravelDaily/Laravel-Vue-Employees-Adminpanel
+
+Vue JS Frontend Videos:
+https://www.youtube.com/watch?v=DJ6PD_jBtU0&pbjreload=10
+https://www.youtube.com/watch?v=z6hQqgvGI4Y&t=319s
+------------------------------------------------------------------------------------------------------------------------
+Laravel Package development:
+https://www.youtube.com/playlist?list=PLkZU2rKh1mT_UmFeEqZiJep_vrFwLyR07
+------------------------------------------------------------------------------------------------------------------------
+Laravel Form handling and CRPF protection:
+https://laracasts.com/series/laravel-from-scratch-2018/episodes/10
+------------------------------------------------------------------------------------------------------------------------
+CSS Cards
+https://speckyboy.com/wp-content/uploads/2017/09/css-content-cards-07.jpg
+http://smashinghub.com/wp-content/uploads/2013/09/cards-UI-example-9.png 
+------------------------------------------------------------------------------------------------------------------------
+Vue JS - Awesome views
+https://github.com/vuejs/awesome-vue 
+------------------------------------------------------------------------------------------------------------------------
+Tailwind css
+https://github.com/aniftyco/awesome-tailwindcss
+------------------------------------------------------------------------------------------------------------------------
+php artisan make:model Models/User
+php artisan make:resource Penguin/UserResource
+------------------------------------------------------------------------------------------------------------------------
+Authentication and authorisation
+https://www.youtube.com/watch?v=gzT-JQKTfGo/
+------------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,54 @@
+Install Node JS:
+https://nodejs.org/en/download/
+
+Install Vue JS:
+https://vuejs.org/v2/guide/installation.html (Using Vue CLI)
+sudo npm install -g @vue/cli
+
+Create a new app project:
+vue create my_first_vuejs_proj
+
+Run the serve:
+cd my_first_vuejs_proj/
+npm run serve
+
+===========================================================================================================================
+Using the https://github.com/LaravelDaily/Laravel-Vue-Employees-Adminpanel:
+
+cp -r from-git-bub/resources/client <to-our-tree>
+cp -r from-git-bub/resources/lang/en/quickadmin.php <to-our-tree>
+cp -r from-git-bub/resources/partials/* <to-our-tree>
+cp -r from-git-bub/resources/views/layouts/app.blade.php <to-our-tree> 
+cp -r from-git-bub/resources/views/welcome.blade.php <to-our-tree> 
+cp -r from-git-bub/public/adminlte/* <to-our-tree> 
+cp -r from-git-hub/webpack.mix.js <to-our-tree>
+
+cp -r /Users/srmk/php-projects/ropdev_nov18/ropdev/resources/assets .
+cp -r /Users/srmk/php-projects/ropdev_nov18/ropdev/resources/client .
+cp -r /Users/srmk/php-projects/ropdev_nov18/ropdev/resources/lang/en/quickadmin.php .
+cp -r /Users/srmk/php-projects/ropdev_nov18/ropdev/resources/views/partials .
+cp -r /Users/srmk/php-projects/ropdev_nov18/ropdev/resources/views/layouts/app.blade.php .
+cp -r /Users/srmk/php-projects/ropdev_nov18/ropdev/resources/views/welcome.blade.php .
+cp -r /Users/srmk/php-projects/ropdev_nov18/ropdev/public/adminlte .
+cp -r /Users/srmk/php-projects/ropdev_nov18/ropdev/webpack.mix.js .
+
+In root directory of laravel:
+npm install
+npm install vue
+npm install webpack --save-dev
+npm install vuex --save
+npm install vue-select
+npm install vue-awesome-notifications
+npm install vue-bootstrap-datetimepicker
+npm install vue-sweetalert2
+npm install vue2-datatable-component
+npm install eonasdan-bootstrap-datetimepicker
+npm install vue-template-compiler --save-dev
+npm install vue-loader --save-dev
+npm install css-loader --save-dev
+npm install vue-style-loader --save-dev
+npm audit fix --force
+npm install -g npm-install-peers
+npm run watch
+
+PS: right click on page "INSPECT SOURCE"
