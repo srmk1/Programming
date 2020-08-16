@@ -13,7 +13,9 @@ makara = 'Makara'
 kumbha = 'Kumbha'
 meena = 'Meena'
 
-rashis = {
+rashis = [ mesha, vrishabha, mithuna, karka, simha, kanya, tula, vrishchika, dhanu, makara, kumbha, meena]
+
+rashi_properties = {
     #rashi: { id, name, }
     mesha: {'id':1, 'name':'Mesha'},
     vrishabha: {'id':2, 'name':'Vrishabha'},
