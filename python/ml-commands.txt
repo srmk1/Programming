@@ -1,0 +1,48 @@
+python3 -m venv <dir>
+source ./<dir>/bin/activate
+pip3 install notebook
+jupyter notebook
+ 
+import pandas as pd
+pip install pandas
+melb_data = pd.read_csv("/Users/srmk/Downloads/melb_data.csv")
+ 
+melb_data.info
+melb_data.columns
+melb_data.head
+melb_data.tail
+ 
+melb_data = melb_data.dropna(axis=0)
+ 
+import seaborn as sns
+pip install seaborn
+# Lets use count graph to check the number of houses with different rooms
+sns.set_style('whitegrid')
+sns.countplot(x='Rooms',data=melb_data)
+sns.countplot(x='Bathroom',data=melb_data)
+ 
+y = melb_data.Price
+ 
+melbourne_features = ['Rooms', 'Bathroom', 'Landsize', 'Lattitude', 'Longtitude']
+X = melb_data[melbourne_features]
+ 
+from sklearn.model_selection import train_test_split
+ 
+train_X, val_X, train_y, val_y = train_test_split(X, y, random_state = 0)
+ 
+from sklearn.tree import DecisionTreeRegressor
+ 
+melbourne_model = DecisionTreeRegressor()
+ 
+melbourne_model.fit(train_X, train_y)
+ 
+print("Making predictions for the following 5 houses:")
+print(val_X.head())
+print("The predictions are")
+print(melbourne_model.predict(val_X.head()))
+print("Actuals are")
+print(val_y.head())
+ 
+from sklearn.metrics import mean_absolute_error
+val_predictions = melbourne_model.predict(val_X)
+print(mean_absolute_error(val_y, val_predictions))
