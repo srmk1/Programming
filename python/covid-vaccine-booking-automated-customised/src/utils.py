@@ -4,6 +4,7 @@ from collections import Counter
 from inputimeout import inputimeout, TimeoutOccurred
 import tabulate, copy, time, datetime, requests, sys, os, random
 from captcha import captcha_builder
+import subprocess
 
 BOOKING_URL = "https://cdn-api.co-vin.in/api/v2/appointment/schedule"
 BENEFICIARIES_URL = "https://cdn-api.co-vin.in/api/v2/appointment/beneficiaries"
@@ -503,6 +504,10 @@ def check_and_book(
                 item.pop("session_id", None)
                 item.pop("center_id", None)
                 cleaned_options_for_display.append(item)
+
+            # Added code to do ping sound when hit
+            for i in range(1,2):
+                subprocess.call(["afplay","ping.wav"])
 
             display_table(cleaned_options_for_display)
             randrow = random.randint(1, len(options))
