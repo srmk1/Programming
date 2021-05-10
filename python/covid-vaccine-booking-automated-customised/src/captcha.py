@@ -2,7 +2,7 @@ from svglib.svglib import svg2rlg
 from reportlab.graphics import renderPM
 import PySimpleGUI as sg
 import re
-
+from PIL import Image
 
 def captcha_builder(resp):
     with open('captcha.svg', 'w') as f:
@@ -10,8 +10,14 @@ def captcha_builder(resp):
 
     drawing = svg2rlg('captcha.svg')
     renderPM.drawToFile(drawing, "captcha.png", fmt="PNG")
+    
+    #Seems like tkinter on my mac does not support PNG, convert it to GIF
+    im = Image.open('captcha.png')
+    im = im.convert('RGB').convert('P', palette=Image.ADAPTIVE)
+    im.save('captcha.gif')
 
-    layout = [[sg.Image('captcha.png')],
+    layout = [[sg.Image('captcha.gif')],
+    #layout = [[sg.Image('captcha.png')],
               [sg.Text("Enter Captcha Below")],
               [sg.Input()],
               [sg.Button('Submit', bind_return_key=True)]]
