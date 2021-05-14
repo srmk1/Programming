@@ -26,8 +26,8 @@ def captcha_builder(resp):
     #window = sg.Window('Enter Captcha', layout)
     window = sg.Window('Enter Captcha', layout, finalize=True)
     window.TKroot.focus_force() # focus on window
-    window.Element('inp').SetFocus() # focus on field
+    window.Element('input').SetFocus() # focus on field
     
     event, values = window.read()
     window.close()
-    return values[1]
+    return values[input]
