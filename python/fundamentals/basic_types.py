@@ -1,175 +1,175 @@
-————————————————————————————————————————————————————————————————————————————————————————————————
-Lists: 
-- List can contain non-homogenous entries (unlike array of C)
-- List can indexed negatively to start from end
-- Lists can be appended, deleted based on index and values
-- Lists can be sliced i.e. select only few entries from list
-- You can list of list of lists and so on
-- Lists are usually used when the order of your data items matters, so that you can refer them using numeric index
-- Although, lists of mixed data types are possible, lists are most appropriate where you’re collecting data items of the same type
-
-
-
-
-
-- nephews = ["Huey","Dewey","Louie"]
-- Indexing
-	nephews[0]
-	nephews[2]
-	nephews[-1] - last element
-- Length of lists
-	len(nephews)
-- Appending to list
-	nephews.append(‘Donald’) OR
-	nephews.extend(['May Duck','June Duck']) OR
-	ducks = nephews + ['Donald Duck','Daisy Duck']
-- Insert into specific index
-	nephews.insert(0,'Scrooge McDuck')
-- Delete an element by index
-	del nephews[0]
-	del nephews[-1]
-- Delete by value in the lists
-	nephews.remove('Donald Duck')
-- Sort an list
-	nephews.sort()
-- Slicing a list
-	squares[0:2]	=> From 0 till index 2
-	squares[1:3]	=> From 1 till index 3
-	squares[:3]	=> From 0 till index 3 OR first 3 elements
-	squares[1:]	=> From 1 till end of list
-	squares[:]		=> From 0 till end of list
-	squares[-3:-1]	=> From last one till last but three 
-- Modifying slices of lists
-	squares[2:4] = ['4','9']		=> Replace multiple elements of lists
-	del squares[-2:]			=> Delete from last but second till last
-- Getting index of elements in lists:
-	for index, value in enumerate(squares):
-    		print("Element",index,"->",value)
-- List of lists
-	tlas = [ 
-        #Name       num_of_tlas     enabled
-        ["nug",     4,              True],
-        ["Fec",     2,              True],
-        ];
-- Remove duplicate from a list
-	- Convert the list to python construct “set” (which can contain only unique values)
-		- It will remove duplicates
-	- Convert the set back to list
-	word_unique = list(set(words))
-————————————————————————————————————————————————————————————————————————————————————————————————
-Dictionary:
-- Dictionaries lets you associate names with data and they’re most natural to use where data items can be given unique labels 
-- They’re most appropriate to collect data items of different kinds 
-- Syntax of dictionary:
-	{ key:value, key1:value1,… so on }
-
-
-
-
-
-- capitals = {'United States': 'Washington, DC','France': 'Paris','Italy': 'Rome'}
-- Indexing
-	capitals[‘Italy’]
-- Adding an element
-	capitals[‘Spain’] = ‘Madrid’
-- Updating dictionary
-	more_capitals = { ‘Germany’: ‘Berlin’, ‘United Kingdom’: ‘London’ }
-	capitals.update(more_capitals)
-- Deleting an element in dictionary
-	del capitals[‘Germany’]
-- Looping through:
-	for key in capitals:
-		print(key, capitals[key])
-- Looping through using keys()
-	for key in capitals.keys():
-		print(key)
-- Looping through using values()
-	for value in capitals.values():
-		print(value)
-- Looping through using items():
-	for key, value in capitals.items():
-		print(key, value)
-————————————————————————————————————————————————————————————————————————————————————————————————
-Comprehensions:
-- For loops/if conditionals on each element of list OR dictionary can be written in compact readable format called Comprehension
-- Comprehensions are a concise and expressive way to write a data transformation
-- They are quick to write, easy to parse and are surpassingly powerful
-
-
-
-
-
-- Inlining for loop inside lists
-	squares = [i**2 for i in range(10)]
-- Inlining for loop and if conditionals inside lists
-	squares_divisible_by_3 = [i**2 for i in range(10) if i % 3 == 0]
-- Inlining for loop and if conditionals inside dictionary
-	squares3_dict = { i: i**2 for i in range(10) if i % 3 == 0 }
-- Inlining lists and comprehensions inside built in function
-	sum(i**2 for i in range(10))
-
-Examples:
-- Remove “\n” at the end of all strings in list, convert it into lowercase.. for all words in wordlist[]
-	word clean = [word.strip().lower() for word in wordlist)
-- Guess what this does
-	wordclean = sorted(list(set([word.strip().lower() for word in open('words','r')])))
-	- Opens file words in read mode
-	- Read words to a list
-	- Remove duplicates by converting it into a “set” and back to “list”
-	- Sorts it in alphabetical order
-————————————————————————————————————————————————————————————————————————————————————————————————
-File Operations:
-- Opening a file
-	word = open('words','r')
-- Read operations
-	- Read all contents into one big string
-		word_string = word.read()
-	- Read one line of the file to a string
-		word_string = word.readline()		
-	- Read separate lines of files into a list
-		word_list = word.readlines()
-- Write Operations
-	- Write a string to file
-		word.write(“Welcome to file”)
-	- Write a list of lines to a file
-		word.writelines(word_list)
-- Close operation
-	- file.close()
-- Print first ten lines of the file
-	print(wordlist[:10])
-————————————————————————————————————————————————————————————————————————————————————————————————
-String operations:
-- Strip terminal “\n”
-	“Aditi\n”.strip() => “Aditi”
-- Sort the characters of string
-	sorted(“Aditi”) => ['A', 'd', 'i', 'i', ’t]
-- Sort the characters of string and place it back in string
-	‘’.join(sorted(“Aditi”))
-- Captalize all letter in string
-	“Aditi”.captialize()
-- Replace all “i” in a word to “e”
-	“Ashwini”.repalce(‘i’,’e’)
-- Split string separated by a delimiter to a list
-	"Some, csv, values".split(",") == ["Some", "csv", "values"]
-- Check if string is alphanumeric or digit
-	“Srikanth”.isalpha() => True
-	“Srikanth”.isdigit() => False
-	“123”.isalpha() => False
-	“123”.isdigit() => True
-————————————————————————————————————————————————————————————————————————————————————————————————
-
-
-
-
-
-
-
-
-
-
-
-
-
+## ————————————————————————————————————————————————————————————————————————————————————————————————
+## Lists: 
+## - List can contain non-homogenous entries (unlike array of C)
+## - List can indexed negatively to start from end
+## - Lists can be appended, deleted based on index and values
+## - Lists can be sliced i.e. select only few entries from list
+## - You can list of list of lists and so on
+## - Lists are usually used when the order of your data items matters, so that you can refer them using numeric index
+## - Although, lists of mixed data types are possible, lists are most appropriate where you’re collecting data items of the same type
+## 
+## 
+## 
+## 
+## 
+## - nephews = ["Huey","Dewey","Louie"]
+## - Indexing
+## 	nephews[0]
+## 	nephews[2]
+## 	nephews[-1] - last element
+## - Length of lists
+## 	len(nephews)
+## - Appending to list
+## 	nephews.append(‘Donald’) OR
+## 	nephews.extend(['May Duck','June Duck']) OR
+## 	ducks = nephews + ['Donald Duck','Daisy Duck']
+## - Insert into specific index
+## 	nephews.insert(0,'Scrooge McDuck')
+## - Delete an element by index
+## 	del nephews[0]
+## 	del nephews[-1]
+## - Delete by value in the lists
+## 	nephews.remove('Donald Duck')
+## - Sort an list
+## 	nephews.sort()
+## - Slicing a list
+## 	squares[0:2]	=> From 0 till index 2
+## 	squares[1:3]	=> From 1 till index 3
+## 	squares[:3]	=> From 0 till index 3 OR first 3 elements
+## 	squares[1:]	=> From 1 till end of list
+## 	squares[:]		=> From 0 till end of list
+## 	squares[-3:-1]	=> From last one till last but three 
+## - Modifying slices of lists
+## 	squares[2:4] = ['4','9']		=> Replace multiple elements of lists
+## 	del squares[-2:]			=> Delete from last but second till last
+## - Getting index of elements in lists:
+## 	for index, value in enumerate(squares):
+##     		print("Element",index,"->",value)
+## - List of lists
+## 	tlas = [ 
+##         #Name       num_of_tlas     enabled
+##         ["nug",     4,              True],
+##         ["Fec",     2,              True],
+##         ];
+## - Remove duplicate from a list
+## 	- Convert the list to python construct “set” (which can contain only unique values)
+## 		- It will remove duplicates
+## 	- Convert the set back to list
+## 	word_unique = list(set(words))
+## ————————————————————————————————————————————————————————————————————————————————————————————————
+## Dictionary:
+## - Dictionaries lets you associate names with data and they’re most natural to use where data items can be given unique labels 
+## - They’re most appropriate to collect data items of different kinds 
+## - Syntax of dictionary:
+## 	{ key:value, key1:value1,… so on }
+## 
+## 
+## 
+## 
+## 
+## - capitals = {'United States': 'Washington, DC','France': 'Paris','Italy': 'Rome'}
+## - Indexing
+## 	capitals[‘Italy’]
+## - Adding an element
+## 	capitals[‘Spain’] = ‘Madrid’
+## - Updating dictionary
+## 	more_capitals = { ‘Germany’: ‘Berlin’, ‘United Kingdom’: ‘London’ }
+## 	capitals.update(more_capitals)
+## - Deleting an element in dictionary
+## 	del capitals[‘Germany’]
+## - Looping through:
+## 	for key in capitals:
+## 		print(key, capitals[key])
+## - Looping through using keys()
+## 	for key in capitals.keys():
+## 		print(key)
+## - Looping through using values()
+## 	for value in capitals.values():
+## 		print(value)
+## - Looping through using items():
+## 	for key, value in capitals.items():
+## 		print(key, value)
+## ————————————————————————————————————————————————————————————————————————————————————————————————
+## Comprehensions:
+## - For loops/if conditionals on each element of list OR dictionary can be written in compact readable format called Comprehension
+## - Comprehensions are a concise and expressive way to write a data transformation
+## - They are quick to write, easy to parse and are surpassingly powerful
+## 
+## 
+## 
+## 
+## 
+## - Inlining for loop inside lists
+## 	squares = [i**2 for i in range(10)]
+## - Inlining for loop and if conditionals inside lists
+## 	squares_divisible_by_3 = [i**2 for i in range(10) if i % 3 == 0]
+## - Inlining for loop and if conditionals inside dictionary
+## 	squares3_dict = { i: i**2 for i in range(10) if i % 3 == 0 }
+## - Inlining lists and comprehensions inside built in function
+## 	sum(i**2 for i in range(10))
+## 
+## Examples:
+## - Remove “\n” at the end of all strings in list, convert it into lowercase.. for all words in wordlist[]
+## 	word clean = [word.strip().lower() for word in wordlist)
+## - Guess what this does
+## 	wordclean = sorted(list(set([word.strip().lower() for word in open('words','r')])))
+## 	- Opens file words in read mode
+## 	- Read words to a list
+## 	- Remove duplicates by converting it into a “set” and back to “list”
+## 	- Sorts it in alphabetical order
+## ————————————————————————————————————————————————————————————————————————————————————————————————
+## File Operations:
+## - Opening a file
+## 	word = open('words','r')
+## - Read operations
+## 	- Read all contents into one big string
+## 		word_string = word.read()
+## 	- Read one line of the file to a string
+## 		word_string = word.readline()		
+## 	- Read separate lines of files into a list
+## 		word_list = word.readlines()
+## - Write Operations
+## 	- Write a string to file
+## 		word.write(“Welcome to file”)
+## 	- Write a list of lines to a file
+## 		word.writelines(word_list)
+## - Close operation
+## 	- file.close()
+## - Print first ten lines of the file
+## 	print(wordlist[:10])
+## ————————————————————————————————————————————————————————————————————————————————————————————————
+## String operations:
+## - Strip terminal “\n”
+## 	“Aditi\n”.strip() => “Aditi”
+## - Sort the characters of string
+## 	sorted(“Aditi”) => ['A', 'd', 'i', 'i', ’t]
+## - Sort the characters of string and place it back in string
+## 	‘’.join(sorted(“Aditi”))
+## - Captalize all letter in string
+## 	“Aditi”.captialize()
+## - Replace all “i” in a word to “e”
+## 	“Ashwini”.repalce(‘i’,’e’)
+## - Split string separated by a delimiter to a list
+## 	"Some, csv, values".split(",") == ["Some", "csv", "values"]
+## - Check if string is alphanumeric or digit
+## 	“Srikanth”.isalpha() => True
+## 	“Srikanth”.isdigit() => False
+## 	“123”.isalpha() => False
+## 	“123”.isdigit() => True
+## ————————————————————————————————————————————————————————————————————————————————————————————————
+## 
+## 
+## 
+## 
+## 
+## 
+## 
+## 
+## 
+## 
+## 
+## 
+## 
 print("Hello World")
 myint = 42
 mystring = "Srikanth" \
