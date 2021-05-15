@@ -33,6 +33,9 @@ logging.disable(logging.INFO)
 # The protocol is documented here, and there is Python sample code that shows the use of XOAUTH2 with imaplib.
 # Independent of this, you should consider enabling two-step verification on your account to make it more secure. 
 # If you do, you can use an App Password to connect to IMAP, which might also avoid the above warning.
+#
+# SIGIN TO GMAIL USING APP PASSWORDS
+# https://support.google.com/accounts/answer/185833?hl=en
 # ------------------------------------------------
 ORG_EMAIL   = "@gmail.com"
 FROM_EMAIL  = "yourid" + ORG_EMAIL
