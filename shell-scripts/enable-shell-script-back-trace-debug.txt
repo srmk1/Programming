@@ -1,0 +1,27 @@
+How to enable tracing and debugging on a UNIX shell script
+
+
+SUMMARY:
+If a shell script is returning an error or producing an unexpected behavior, it is possible to trace the step-by-step instructions in a script in order to troubleshoot a shell script problem.
+
+SYMPTOMS:
+Shell script returns unexpected error and needs to be traced
+
+SOLUTION:
+For tracing a shell script using the various shells available (bash, sh, tcsh, ksh), follow one of the two possible methods below:
+
+Method 1:
+Edit the shell script and append "-x" at the end of the first line of the shell script.  
+Example:
+The following shell script starts with:
+#!/bin/sh
+Change the line to:
+#!/bin/sh -x
+Run the script again and a debug output will be shown on the console which shows the trace of the script.
+
+
+Method 2:
+From the command line, run the script by calling explicitly the shell interpreter; use the "-x" parameter followed by the script name.
+Example:
+# bash -x my_script_name.sh
+The debug output will be shown on the console as well as the regular text output from the script.
