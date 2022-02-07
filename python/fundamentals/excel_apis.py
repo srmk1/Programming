@@ -5,8 +5,9 @@ import xlwings as xw
 import datetime
 
 # Add linechart to the sheet
+# https://docs.xlwings.org/en/stable/api.html#xlwings.main.Charts
 def addLineChart(sheet):
-    chart = sheet.charts.add()
+    chart = sheet.charts.add(left=10, top=10, width=355, height=211)
     chart.set_source_data(sheet.range('E2').expand())
     chart.chart_type = 'line'
     chart.name = 'Close'
@@ -28,11 +29,38 @@ def readFromSheet(sheet):
     data = sheet['A1'].expand().options(pd.DataFrame).value
     return data
 
+# https://docs.xlwings.org/en/stable/matplotlib.html
+def AddMatPlotToSheet(sheet, dataFrame):
+    fig = plt.figure()
+    plt.plot(dataFrame['Close'])
+    sheet.pictures.add(fig, name='MyPlot', update=True)
+
 nifty = yf.Ticker("^NSEI")
 day1 = datetime.datetime.strptime("2021-01-01","%Y-%m-%d")
 seven_days = datetime.timedelta(days=7)
 #Open a new excel Workbook
 book = xw.Book()
+
+start_date = day1
+end_date = day1 + seven_days
+
+for i in range(1, 2):
+    df = nifty.history(start=start_date, end=end_date, interval="1h")
+    name = "Week#" + str(i)
+    sheet = addSheet(book, name, df)
+    start_date = end_date
+    end_date = end_date + seven_days
+    addLineChart(sheet)
+
+# Read the data back to frame
+data = readFromSheet(sheet)
+print(data)
+
+AddMatPlotToSheet(sheet, data)
+
+saveBook(book)
+book.close()
+
 
 start_date = day1
 end_date = day1 + seven_days
