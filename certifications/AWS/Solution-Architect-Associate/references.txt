@@ -1,0 +1,43 @@
+1. A curated list of AWS resources to prepare for the AWS Certifications: ---> Very useful
+https://gist.github.com/leonardofed/bbf6459ad154ad5215d354f3825435dc
+
+2. Amazon documentation for each service:
+https://aws.amazon.com/rds/
+https://docs.aws.amazon.com/rds/index.html
+https://docs.aws.amazon.com/
+
+3. Mind maps:
+https://www.amanhardikar.com/mindmaps.html -- Best
+https://www.mindmeister.com/1130032609/aws-well-architected-framework?fullscreen=1 -- AWS Well Architected Framework
+
+4. Google drives:
+https://drive.google.com/drive/folders/1laP1s0Xz0qvRbOCCFNMZmFTLg1-oZOfD  -- Together we grow
+
+5. Performance pillar:
+https://aws.amazon.com/blogs/storage/maximizing-microsoft-sql-server-performance-with-amazon-ebs/
+
+6. How I passed the AWS Solution architect??
+https://medium.com/@psdilip/how-i-passed-the-aws-solutions-architect-associate-june-2019-5ed43c5b210e
+
+7. Githubs
+https://github.com/srijithsrk/AWS
+
+8. AWS Reinvent Youtube lists
+2017: https://www.youtube.com/playlist?list=PL6J6C8KXE4GRlZ6TPTbmBY-TPt6KZPyZd
+2018: https://www.youtube.com/playlist?list=PLh9t8FYiPlQsddcnIkAl5ZXGSdvqPFGam
+
+9. Cheatesheet
+http://jayendrapatil.com/aws-certification-exam-cheat-sheet/
+
+10. TIPS: ---> Very useful
+http://blog.ioconnectservices.com/2018/03/aws-certified-solution-architect.html
+
+11. Question database:
+https://www.briefmenow.org/amazon/
+
+12. Quick references:
+https://tutorialsdojo.com/aws-cheat-sheet-elastic-beanstalk-vs-cloudformation-vs-opsworks-vs-codedeploy/
+
+13. Tests:
+https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c01/
+https://www.udemy.com/course/aws-certified-solutions-architect-associate-amazon-practice-exams/

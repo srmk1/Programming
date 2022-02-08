@@ -1,0 +1,22 @@
+- Its not a single disk, its a managed block storage service provided by AWS
+- Block storage accessed over the network
+- EBS disk lifecycle is independent of the lifecycle of EC2 instance, it persists independent of EC2 termination
+- You can detach and attach between instances within the same AZ (EBS is linked to AZ)
+- EBS is replicated across multiple locations in a given AZ
+- EBS volume can attach to one instance at any given time
+- Many EBS volumes can attach to an EC2 instance
+
+- EBS has different volume types
+    - SSD based (random access)
+      - General purpose SSD (gp2)
+      - Provisioned IOPs SSD (io1)
+    - HDD based (sequential access)
+      - Throughput optimised HDD (st1)
+      - Cold HDD(sc1)
+
+-EBS Usescases
+  - Relational Databases (SSD, random access) - MySQL, SQL Server, PostgreSQL, SAP, Oracle
+  - NoSQL Databases (SSD, random access) - Cassandra, MangoDB, CouchDB
+  - Big Data, Analytics (HDD, sequential access) - Kafka, Splunk, Hadoop, Datawarehousing
+  - File/Media encoding - CIFS/NFS, Transcoding, Encoding, Rendering
+

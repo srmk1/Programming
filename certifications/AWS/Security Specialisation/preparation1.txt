@@ -1,0 +1,58 @@
+I thought I'd break up the continuous stream of Oleg Vishnepolsky posts in your feed and hopefully add a little value.
+It’s been a while since I reached my target of gaining all 5 AWS exams (3xAccociate and 2XProfessional).
+The thought of taking another exam was the last thing on my mind as I concentrated on the finer subjects in my "cloud life" (Blur 1994 anyone?) such as serverless frameworks, infrastructure as code and boto3.
+However, as security is woven into the fabric of public clouds I'm always spending a chunk of time with JSON IAM polices, Security groups, NACL's and KMS.
+So much so, I thought I may as well take the AWS Certified Security Specialty Exam. So I did.
+Let’s cut to the chase, you're reading this because you’re planning on taking the exam at some point and want to add some half decent meat to your study sandwich, so without ado:
+I was penniless, I arrived at the interview with a ripped suit, I was one of over 50,000 applicants.......Sorry I slipped back into OV magazine there, if you have never seen one of Oleg's posts you really are missing something ;)  
+
+OK Back on point, use these 10 commandments:
+
+1) Official Exam guide and blueprint:
+https://d1.awsstatic.com/training-and-certification/docs-security-spec/AWS_Certified_Security_Specialty_Exam_Guide_v1.5.pdf
+It doesn't give away much except that it's a 75% passing rate. If you are coming from the Associate tracks then that’s 10% more. Don't rush in, make sure you know everything to a decent level in my list (check #4).
+
+2) Watch all the Video's from A Cloud Guru, Linux Academy or other recommended training course
+I watched the A Cloud Guru videos (As I have with every exam) at least once and listened at least twice whilst on my commute.
+
+3) Read the AMS Key Management Service Best Practice whitepaper at least thrice. It’s the best whitepaper for this exam by far.
+https://d1.awsstatic.com/whitepapers/aws-kms-best-practices.pdf
+
+4) The list: Go through each service below, know what it is and how to apply it. I've added a suggested link, play with it. The best way to learn is to implement it in your account:
+KMS (As per #3 above)
+Config: https://aws.amazon.com/blogs/security/how-to-use-aws-config-to-monitor-for-and-respond-to-amazon-s3-buckets-allowing-public-access/
+S3 SSE: https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html
+Directoty Services: https://aws.amazon.com/directoryservice/faqs/
+IAM JSON Policies: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policies-json
+Macie: https://aws.amazon.com/blogs/aws/launch-amazon-macie-securing-your-s3-buckets/
+Systems manager: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-actions.html
+IAM (Users/Groups/Roles)
+Cloudtrail: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html
+SAML: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-saml.html
+Inspector: https://docs.aws.amazon.com/inspector/latest/userguide/inspector_concepts.html
+Config / Guard Duty / WAF / VPC / NACL / Security groups / VPC Endpoints / Cloudwatch Logs
+Penetration testing / STS / Key Pairs / Cognito / Trusted Advisor / Cloudfront / DDOS
+
+5) Set up a 2nd account
+Practice with cross account S3 bucket policies and KMS keys (KMS CMK Keys are $1 a month so create a new test key and delete it when finished. )
+
+6) Walk through these 3 scenarios.
+How to Restrict Amazon S3 Bucket Access to a Specific IAM Role
+https://aws.amazon.com/blogs/security/how-to-restrict-amazon-s3-bucket-access-to-a-specific-iam-role/
+How to Create an AWS IAM Policy to Grant AWS Lambda Access to an Amazon DynamoDB Table
+https://aws.amazon.com/blogs/security/how-to-create-an-aws-iam-policy-to-grant-aws-lambda-access-to-an-amazon-dynamodb-table/
+https://aws.amazon.com/blogs/security/how-to-create-an-aws-iam-policy-to-grant-aws-lambda-access-to-an-amazon-dynamodb-table/
+Federated Authentication with Active Directory Federation Services (AD FS)
+https://aws.amazon.com/blogs/security/aws-federated-authentication-with-active-directory-federation-services-ad-fs/
+
+7) Choose Roles whenever possible.
+Don’t create users and put your keys on github. This is also a real-life tip and not just for the exam.
+
+8) The exam is 3 hrs, which is plenty of time.
+It's not like the Professional exams where its super tight. I had an hour spare with an unrushed pace.
+
+9) It's a decent exam and a fair test of your knowledge.
+It's easier than either of the Professional exams and harder than any of the associate exams. At only 2 months in it feels up to date and relevant to a job in AWS security.
+
+10) It’s a good exam to get.
+With all the hype and noise about security (You do get used to it, I’ve been a CISSP for 17years) combined with Cloud it hits the current spot in the market well.

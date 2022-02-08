@@ -1,0 +1,93 @@
+I normally like to take 4 to 6 months breaks between each certification to keep refreshing my knowledge on AWS. I completed all my Associates and Pro certifications in 2017 and targetting to complete Specialities certification one in every 6 months to keep myself up-to-date. In that series, I completed big data certification in Jun-2018 and now completed my AWS Certified Security Specialty exam in January-2019.
+
+Here is my study plan for AWS Certified Security – Specialty exam:
+
+This exam is easier than either of the Professional exams and harder than any of the associate exams. At high level, this exam have pretty much good complexity and include some new feature which you won't find any of the course covering.
+
+I will give Kudos to Linux Academy course for covering the deep concept, which appeared in the exam but you must go through entire course twice and complete all labs to get success. However, some concept you need to focus more, which is not covered in course mainly:
+ Query logging using Athena 
+ Cloudtrail integration with Athena 
+ Amazon Macie 
+ Glacier Vault lock 
+ Different e-mail protocols in secure port 
+ Quicksight
+There is strong focus on KMS , Mutli-account strategy using AWS Organization and many troubleshooting questions. See more details at the end of the blog.
+
+To know more about certification, Visit AWS Security Specialty Certification webpage.
+To start the First step
+
+Video Course: Recommend must go through Cloud Guru Videos first and then Linux Academy.
+
+ACloudGuru Security Specialty Course - aCloudGuru has prepared  detail course material but not very deep , however it is covering all security aspect like KMS, IAM, securing S3, CloudTrail, CloudWatch, multiple AWS account access, Config, VPC, security groups, NACLs, and WAF.
+Linux Academy Security Specialty Course - This is very detailed , deep and well alinged with exam along with labs. A must go course material for exam. Specially love their security runbook.
+
+Go through this YouTube playlist for AWS re-invent videos.
+
+Exam Notes:
+Read through linux academy security runbook. 
+Read through all questions explanation in Whizlab .
+
+Demo Test:  
+Whizlab test helped a lot to prepare well on many topics. You can purchase test here with nominal price and 240 questions.
+Lab: 
+
+Labs are must pass this exam. Make sure to go through all Linux Academy labs and follow along labs for all acloud guru practical videos.
+
+WhitePaper:
+Amazon Web Services: Overview of Security Processes
+AMS Key Management Service Best Practice 
+S3 Bucket Policies 
+AWS Well Architected  Framework Security Piller
+AWS Best Practices for DDoS Resiliency
+Secure Content Delivery with Amazon CloudFront
+Security at Scale: Logging in AWS
+Blogs and AWS UserDocs: 
+
+You may not need to read all of them but it is great source to clarify concept in depth
+https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html 
+https://aws.amazon.com/directoryservice/faqs/ 
+https://aws.amazon.com/blogs/security/how-to-use-aws-config-to-monitor-for-and-respond-to-amazon-s3-buckets-allowing-public-access/
+https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policies-json 
+https://aws.amazon.com/blogs/aws/launch-amazon-macie-securing-your-s3-buckets/ 
+https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-actions.html 
+https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html 
+https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-saml.html 
+https://docs.aws.amazon.com/inspector/latest/userguide/inspector_concepts.html 
+https://aws.amazon.com/blogs/security/how-to-restrict-amazon-s3-bucket-access-to-a-specific-iam-role/
+https://aws.amazon.com/blogs/security/how-to-create-an-aws-iam-policy-to-grant-aws-lambda-access-to-an-amazon-dynamodb-table/
+https://aws.amazon.com/blogs/security/aws-federated-authentication-with-active-directory-federation-services-ad-fs/
+https://aws.amazon.com/blogs/aws/elastic-load-balancing-perfect-forward-secrecy-and-other-security-enhancements/
+https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-via-service
+https://aws.amazon.com/blogs/aws/s3-encryption-with-your-keys/ 
+https://aws.amazon.com/blogs/aws/new-amazon-s3-encryption-security-features/ 
+https://aws.amazon.com/blogs/security/how-to-encrypt-and-decrypt-your-data-with-the-aws-encryption-cli/ 
+https://docs.aws.amazon.com/organizations/latest/userguide/orgsmanagepolicies_scp.html 
+https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html 
+https://aws.amazon.com/premiumsupport/knowledge-center/s3-bucket-owner-access/ 
+https://docs.aws.amazon.com/AmazonS3/latest/dev/example-walkthroughs-managing-access-example1.html?shortFooter=true 
+https://docs.aws.amazon.com/kms/latest/developerguide/services-parameter-store.html 
+https://aws.amazon.com/blogs/security/how-to-encrypt-and-sign-dynamodb-data-in-your-application/ 
+https://docs.aws.amazon.com/kms/latest/developerguide/services-rds.html 
+https://aws.amazon.com/blogs/big-data/encrypt-and-decrypt-amazon-kinesis-records-using-aws-kms/
+ 
+What Exam Covers:
+Config, Guard Duty, WAF, VPC, NACL, Security groups, VPC Endpoints, Cloudwatch Logs, Penetration testing, STS, Key Pairs, Cognito, Trusted Advisor, Cloudfront, DDOS.
+How to Restrict Amazon S3 Bucket Access to a Specific IAM Role
+Don’t create users and put your keys on github. 
+Classic load balancing and perfect forward secrecy especially based on it being essentially phased out.
+Using ALB and Cloudfront - how many certs you need and where they are taken from like Region
+Compromised EC2 and memory dumps
+Scenario based questions around buckets and keys, what key for each bucket and why. 
+Key rotation questions and KMS 'via-service'
+Know how AWS services (DynamoDB, SSM, RDS, Kinesis, etc) integrate with and use KMS for encryption
+Use your own Encryption Keys with S3’s Server-Side Encryption
+New Amazon S3 Encryption & Security Features
+How to Encrypt and Decrypt Your Data with the AWS Encryption CLI
+Service Control Policies (SCPs)
+Rotating Customer Master Keys
+How can I make sure the bucket owner has access to resources that are copied or moved between Amazon S3 buckets owned by different AWS accounts?
+Bucket Permission examples
+How AWS Systems Manager Parameter Store Uses AWS KMS
+How to encrypt and sign DynamoDB data in your application
+How Amazon Relational Database Service Uses AWS KMS
+Encrypt and Decrypt Amazon Kinesis Records Using AWS KMS

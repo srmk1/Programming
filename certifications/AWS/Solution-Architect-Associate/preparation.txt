@@ -1,0 +1,79 @@
+---------------------------------------------------------------------------------------------------------------------------------------
+1. First step is to look at the AWS certifications paths:
+https://aws.amazon.com/training/path-architecting/
+
+2. Second step go through the Exam-Guide/Blueprint for AWS Certified Solutions Architect - Associate exam:
+https://d1.awsstatic.com/training-and-certification/docs-sa-assoc/AWS_Certified_Solutions_Architect_Associate-Exam_Guide_EN_1.8.pdf
+
+3. Go through AWS Well-Architected Framework:
+https://aws.amazon.com/architecture/well-architected/
+https://wa.aws.amazon.com/wat.map.en.html
+
+4. Go through all 5 pillars white papers from AWS Well-Architected Framework:
+https://aws.amazon.com/architecture/well-architected/ -- Linked to above link
+Following are five pillars and corresspondig weightage give in exam:
+Domain 1: Design Resilient Architectures                    34%
+Domain 2: Define Performant Architectures                   24%
+Domain 3: Specify Secure Applications and Architectures     26%
+Domain 4: Design Cost-Optimized Architectures               10%
+Domain 5: Define Operationally Excellent Architectures       6%
+TOTAL                                                       100%
+
+5. Take free digital training provided by Amazon for exam readiness, this will give you an understanding on what kind of probing(questions) will be done in exam (I found it very informative):
+https://www.aws.training/Details/Curriculum?id=20685
+
+6. Do the following courses from Udemy:
+https://www.udemy.com/aws-certified-solutions-architect-associate-saa-c01/ - Stephane Maarek
+https://www.udemy.com/aws-certified-solutions-architect-associate/ - Cloud Guru (optional)
+
+7. Go through FAQs of all services, important one;s are:
+https://aws.amazon.com/ec2/faqs/
+https://aws.amazon.com/s3/faqs/
+https://aws.amazon.com/vpc/faqs/
+https://aws.amazon.com/route53/faqs/
+https://aws.amazon.com/rds/faqs/
+https://aws.amazon.com/sqs/faqs/
+
+7. Do the AWS Dumps from below google drive:
+https://drive.google.com/open?id=1-bLgQWT2lom6sYU5qIRgX0U2T5Ysplir
+
+8. You can take practice test here (current fees 20$):
+https://www.certmetrics.com/amazon/candidate/exam_scheduling.aspx
+
+9. Finally, take the exam:
+https://www.certmetrics.com/amazon/candidate/exam_scheduling.aspx
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+Optional references
+---------------------------------------------------------------------------------------------------------------------------------------
+
+Domain 2: Define Performant Architectures
+-----------------------------------------
+Storage:
+EBS performance tuning: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSPerformance.html
+Instance store performance: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/disk-performance.html
+Amazon S3 performance: https://docs.aws.amazon.com/AmazonS3/latest/dev/optimizing-performance.html
+EFS performance: https://docs.aws.amazon.com/efs/latest/ug/performance.html
+
+Database:
+Amazon RDS performance:
+https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_BestPractices.html
+Amazon DynamoDB performance:
+https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/best-practices.html
+Amazon redshift performance:
+https://docs.aws.amazon.com/redshift/latest/dg/c_challenges_achieving_high_performance_queries.html
+
+Monitoring with Cloudwatch:
+AWS Services That Publish CloudWatch Metrics
+https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html
+
+What is caching?
+https://aws.amazon.com/caching/?nc1=f_cc
+
+What is NoSQL?
+https://aws.amazon.com/nosql/?nc1=f_cc
+
+What are data-lakes?
+https://aws.amazon.com/big-data/datalakes-and-analytics/

@@ -1,0 +1,37 @@
+1. Portfolio of Storage products in AWS
+Block Storage:
+  - Amazon EBS
+File Storage:
+  - Amazon EFS
+  - Amazon FSx for Windows File Server
+  - Amazon FSx for Lustre
+Object Storage:
+  - Amazon S3
+Hybrid Product:
+  - AWS Storage Gateway Family
+Storage Transfer and edge:
+  - AWS DataSync
+  - AWS Transfer SFTP
+  - AWS Snow Family
+Backup:
+  - AWS Backup
+  
+2.  Object Store:
+- Suitable for WORM (Write Once Read Multiple) contents i.e. static contents like media files
+
+S3:
+- 11 9's of highly durable object store
+- Suitable for WORM (Write Once Read Multiple) contents i.e. static contents like media files
+- Suitable for Backup & restore, disaster recovery, archives, data-lakes, big-data-analytics
+- Automatically replicated across multiple AZs
+
+3.
+Block Store:
+- Suitable for write intensive contents i.e. dyamic contents like transactional database
+
+EBS:
+
+
+References:
+https://youtu.be/rBUrayAMvOI
+https://youtu.be/m9mKzdBE90I

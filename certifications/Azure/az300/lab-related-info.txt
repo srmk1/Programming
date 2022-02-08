@@ -1,0 +1,15 @@
+https://acloud.guru/forums/az-300-architect-technologies-2019/discussion/-LdyfAyyhoLPEqFAlZhS/Where%20can%20we%20find%20lab%20question%20samples%3F
+
+I passed the exam on 2nd May. Following is based on my experience.
+
+The lab tests do open up a Azure Portal with the credentials to login specified.The labs expect one to know the fundamental concepts around Azure. Each Lab has about 9 to 8 tasks. Each task specifies a requirement. The task ends with a statement like "How will you achieve this in Azure" ? One can use PowerShell, CLI or Azure Portal to accomplish the task. Each of the tasks is a discrete requirement. Time management is crucial. In the interest of time, it is best to quickly glance through all the tasks first to know which ones can be accomplished quickest by you. There are two Labs sections. The entire exam is split into sections viz. case studies,multi-choice questions, drag and drop, Labs. Once you finish a section you cannot go back. There are multi-choice questions after the second lab too. One needs to be mindful of that. One other tip is: do take a look at the pre-created resource group, there may be a portion of the resources related to the task already created. You can perform the task on that pre-created resource.
+
+
+Thanks for the excellent description Mahesh! And congratulations on passing the exam! Quick clarification - are you saying there were two sections with labs and each with multiple labls (ie, task sets)? How many labs total and how many labs per section? Just trying to get an idea of what percentage of the test are labs / lab tasks. Thanks again!
+
+
+Welcome! wcatlan ( an upvote to my post, will help! :-) ). You are right...there were two sections with Labs and each with multiple tasks. One Lab section had 9 tasks. The other Lab section had 8 tasks. These tasks were discrete.
+
+Great info - thanks! Sounds like a task may be the equivalent of a question, and the test I think can have 40 to 60 questions. Microsoft is terrible at describing the scope and nature of their own exams! It is unfair to not provide a clear path to success, like AWS does. So, the labs seem like they may be anywhere from 30 - 45% of exam points.
+-------------------------------------------------------------------------------------------------------------------------------------
+

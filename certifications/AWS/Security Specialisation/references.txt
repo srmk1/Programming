@@ -1,0 +1,9 @@
+Youtube Videos:
+https://youtu.be/aISWoPf_XNE
+https://youtu.be/X1eZjXQ55ec
+https://youtu.be/gTZgxsCTfbk
+
+References:
+https://github.com/mykter/aws-security-cert-service-notes
+http://getyouralgorithm.blogspot.com/2018/09/aws-certified-security-specialty-exam.html
+https://daviseford.com/blog/2018/08/17/aws-security-specialty-exam-tips.html

@@ -1,0 +1,182 @@
+https://acloud.guru/forums/aws-certified-solutions-architect-associate/discussion/-L7uITWGWEI21g2BXL1_/Exam%20Feedback%20-%20SAA%20February%202018%20Edition
+----------------------------------------------------------------------------------------------------------------------------------------
+1.) ECS: Only remember maybe one questions on ECS, but it was more challenging than expected. Consider how you would split up processing jobs that had a critical 24/7 component and a non-critical batch component.
+
+2.) Redshift: There were a surprising number of questions in this area, some of which I had reviewed based on other folk's feedback, but other, mostly infrastructure questions for which I was wholly unprepared. Topics included how to perform encryption, cross-region backups/replication, and disaster recovery of a cluster (through cloudformation?). In retrospect I would have definitely reviewed the Redshift FAQs and maybe even tried to setup a cluster.
+
+3.) One question related to when to use AWS Config.
+
+4.) A handful questions about choosing the optimum (performance+cost) EBS storage solution based on a set of given requirements. I think the course prepares you well for this.
+
+5.) A few questions on optimizing DB performance through different means, like Elasticache, read replicas and Aurora. Glad I read through the RDS FAQ for this but might be a little overkill.
+
+6.) Another handful of questions regarding VPCs/Subnets/Peering. Definitely glad I read through the VPC FAQs for this. Examples include how to keep private S3 connections when using VPNs.
+
+7.) Lots of questions regarding setting up 3, 2 and 1 Tier web applications, which were in line with the types of questions for which the course prepare you.
+
+8.) A question regarding about which service to use for an NGINX apps. Made an educated guess on this.
+
+9.) There were a couple complete curveball questions on specific classes of EC2 reservations, like Convertible vs Standard reserved instances and spot vs spot block instances. To be honest most of the terminology was new to me and wish I had read more into this, possible through the EC2 FAQ. I think I made good answers based on context clues.
+----------------------------------------------------------------------------------------------------------------------------------------
+1) 1-2 Questions on ECS
+
+2) I also had a surprising number of Reshift questions. Same topics as Dan
+
+3) Don't think I had AWS config questions
+
+4) Also a handful (4-5) of questions on optimum EBS storage solutions. Make sure you understand the different types of storage solutions VERY well (S3, EBS, EFS, EBS-Provisioned IOPS, etc.) and how to implement them and change them
+
+5) Optimizing DB performance as Dan stated was similar
+
+6) VPCs/ Subnets/ Peering as Dan said was similar. Also knowing when traffic stays within a VPC or goes over the public internet.
+
+7) Know tiered web applications like Dan said. The only thing that I think the course could do more with is knowing how to cost optimize even more, such as using a mix of reserved instances with spot instances. Definitely set up a couple different multi tiered web applications
+
+8) I had a NGINX question as well, but I had never even heard of it (still don't know what it is). These types of applications I don't think the course covered, so be sure to look these things up. I am sure that they are in something AWS like white papers or FAQs (which I admittedly hardly went through)
+
+9) Spot vs. Spot Block was the one for me too. Also knowing the different between when to an application ELB versus a classic and what would be best practice.
+
+10) Additionally, know what it means to attach roles to ec2 instances and how ec2 instances get internet access (both incoming and outgoing)
+
+Overall, I think most of my questions were focused around the well-architected framework with questions being framed like "What is most cost-optimized… " or "Focusing on a highly available system…". Understand each pillar of the framework and understand how you implement a multi-tiered web application such that it can be optimized in all of the pillars. I though it was pretty straight forward though because when it comes to highly available, you just know that it refers to multi-AZ and highly secure means things only have the permissions that they need to operate. Things that public doesn't talk to means it doesn't go in a public subnet. That kind of stuff.
+----------------------------------------------------------------------------------------------------------------------------------------
+Looking through Dan and Andy's experience I had a similar set of questions.
+
+1) ECS - I had two questions on this.
+
+2) RDS - I think I had 8-9 question on all sorts of RDS. I was quite surprised by this. I thought I'd get 3-4 of these and more questions on VPC. I had only 3-4 VPC questions. I would emphasize knowing RDS in more depth as I felt unprepared for it. The FAQ is quite large for RDS but I'd recommend you spend some time on it, I should have.
+
+3) Redshift - Similar type questions as already noted above. I had 4-5 questions on Redshift.
+
+4) Lots of EBS questions. Maybe 6-7, make sure you know the types and which scenario is best for the question. Cost vs Performance.
+
+5) I had a couple of tricky questions about S3. I skipped them initially and came back to them. I'd say I probably got 1/2 based on eliminating bad answers.
+
+Oddly enough I had no questions on Classic vs Application ELB. I was surprised by this. I had prepped for that.
+
+Ditto with Dan and Andy on Tiered Architecture, EC2 internet accessibility, VPC Endpoints and when to use them, EC2 instance types (1), AWS Config (1),
+
+Had these too: Cloudwatch (2), Cloudtrail (2). I expected more CloudWatch because the Pillar Whitepapers talk a lot about it that didn't turn out to be true.
+
+Per Andy's point, a lot of the questions were framed within the Well Architected Framework language. Make sure you read the whitepapers presented in the Exam Blue Print. I had probably 3-4 questions that came right out of there. Plus knowing the "lingo" will help on this new version of the exam. Make sure you understand if the question is about Optimization, Availability, Security, Cost, etc.
+----------------------------------------------------------------------------------------------------------------------------------------
+I went though the ACloudGuru course, read most of the white papers in the Exam Blueprint, read through a lot of FAQs, and took the Practice Exam offered by AWS on the training website. I feel like the ACloudGuru course is the base knowledge that everyone should do before going into the exam. After that there are diminishing returns on the extra content you cover. I would say that the most valuable thing to do by far is to read through the FAQs. Some FAQs that are particularly important are VPC, EBS, RDS, and EC2. Also because so many Redshift questions the FAQs for that would be helpful to. I felt like WAF Whitepapers where a lot of content to go through with little returns after the ACloudGuru course. I got a 96% on the Practice test, so the actual test was slightly harder, but taking the practice test gave me the opportunity to solidify a couple of critical topics before going into the test.
+
+Extra Tips:
+1) There were a surprising number of questions about s3 performance:
+https://docs.aws.amazon.com/AmazonS3/latest/dev/request-rate-perf-considerations.html
+
+2) The ECS questions where pretty basic. The course gives you enough information to get these questions right.
+
+3) Understand RDS well, see the posts above.
+
+4) I would also second the EBS tips above.
+
+5) One topic that I had to skip and come back to made me consider storage mediums for indexed metadata. I'm still not sure on the right answer.
+----------------------------------------------------------------------------------------------------------------------------------------
+Preparation:
+My main preparation material is official study guide, read cover to cover. I also watched Ryan’s videos (I can’t do just with videos). I didn’t have any prior AWS experience but came from solid IT background. In my view, doing labs is not mandatory to pass this exam, but…they help you remember and grasp concepts better. This is a great way to prepare for scenarios questions. I must have spent about 120-150 hours in total preparing for this exam.
+
+Exam Tips:
+Don’t attempt this exam unless you are clear on VPC and Networking concepts.
+Lot of scenario questions mainly around architecture!
+ELB: Classic, application and EC2 reverse proxy. Around 10 questions one way or other!
+3-4 questions each on EFS and Lambda.
+S3 and storage questions are straight forward.
+Don’t worry about remembering any numbers (soft limit on number of EC2 instances, max. size of EBS vol. etc.). I didn’t get even a single question on that.
+Be familiar with new retrieval options with Glacier.
+Relative cost of various storage options.
+Lengthy, scenario questions made me exhaust by that time I complete.
+I scored consistently around 80% in all practice tests first time - 4 practice tests from ACloudGuru, Tests from Official study guide, Official practice test day before exam, 2-3 whiz labs.
+----------------------------------------------------------------------------------------------------------------------------------------
+For my study: I went through Ryan's lessons/videos, taking notes and reviewing them afterwards. I also went through the official book, as part of my review. The book is wanting, it was less useful for learning, more for familiarization with the concepts, intent of the exam, and practice quizzes. I also went through all recommended whitepapers and FAQs (EC2, S3, VPC, Route 53, RDS, SQS) at https://aws.amazon.com/certification/certification-prep, click "Solution Architect - Associate", see step 3.
+
+Ryan's lessons were critical. We do not appreciate how much effort they put in getting students from nothing to ready-for-exam. Thank you for all that.
+
+There were a few questions/topics that were not covered by the course (or I have missed) on my exam:
+- Beanstalk w. NGINX. Go read at least Beanstalk FAQ.
+- cross-region snapshots for databases. There were two questions about ensuring backups reside in a different region. I do not remember seeing the topic in FAQs or lessons.
+- S3 vs. EFS vs. EBS storage. Again, at least 2 scenarios for choosing right file service. I did not see a clear choice or factors that would eliminate EFS for a particular scenario.
+- ELB in public subnet fronting app servers in the private subnet. Again, 2 scenarios where they preferred hiding database AND web servers in private subnets, exposing only web server ELBs in the public subnet.
+----------------------------------------------------------------------------------------------------------------------------------------
+My studying path over the course of 1 month with a day job and giving up weekends (I gave myself 4 straight days of studying prior to the exam date):
+- Went through acloud guru's SAA course twice. The first time slowly doing the labs myself etc., the second time just watching it at 1.3-1.5x speed
+- Studied the whitepapers recommended for the CCP exam and passed that exam. This helps setup a foundation in understanding all the AWS services and elasticity/availability/durability concepts and gives you experience in the testing environment.
+- Read every FAQ of the major topics (S3, EC2, VPC, RDS, Aurora, Redshift, DynamoDB, ECS, EBS, ELB, Lambda, Storage Gateway)
+- Skimmed the Well Architected Framework whitepapers
+- Used Whizlabs and focused on their five (currently) Feb 2018 version practice exams. Whoever says that these are nothing like the actual exams should take a look at them again and closely. Doing HONEST attempts at them in a simulated exam setting were a huge help to me. Review every question after, especially the ones you get wrong, and look at the documentation links each question offers and you should be in good shape in some of the more detailed features of certain services. I was scoring between 82-90 on these practice exams.
+
+Some highlights that were covered in the exam:
+- RDS/Aurora/Redshift/DynamoDB comes up ALOT. Know the framework features of each such as how to do cross region snapshop copying, read replicas, what each DB specializes in, how encryption is done and what is used (KMS)
+- VPC concepts. If you can build yourself a custom VPC by memory with private and public subnets with instances on both where the private instance can access either the internet or an S3 bucket you should be in good shape. Know the difference between Security Groups and NACLS clearly. Better reinforcement if you figure out how to add an ELB on top of all of this too. Don't forget VPC Peering and Endpoints.
+- S3 in detail. How security is done, when to use it, tying with cloudfront, VPC Endpoints to it, hashing the prefix for performance, Lifecycle policies, tiers of storage
+- EC2 instance types, know the in-depth types as well such as standard vs. convertible reserved
+- EBS in detail. Each type, how to encrypt, how to snapshot copy cross regionally, what each are best used for, memorize that chart including their max throughput speeds
+- IAM roles and policies to grant permissions to services to use other services
+- Hybrid Architecture. VPN, Storage Gateway types
+- Auto Group Scaling. Know how this is implemented and how to configure it depending on scenario
+- Route 53, know this well and what it can do especially for low-cost scenarios
+- SQS high level understanding of what it does and when it can be used (decoupling, reducing load on system etc)
+- Minimal ECS questions, just know high level and how it's generally implemented (tasks, containers, etc.)
+- Minimal Elastic Beanstalk, just know it's for quick launching applications with minimal planning etc.
+- Minimal Lambda, but know it anyways to help eliminate certain answers
+- Minimal ELB, odd
+
+General Tips:
+- Most things are still based on the generic concepts of elasticity, availability, efficiency, and cost optimization. If you can understand each service with those concepts in mind, you'll do well in simply deriving the answer from the question itself.
+- Read slowly and carefully. A couple well placed words here and there drastically changes the answer to the question.
+- Continuously use process of elimination of the clearly wrong answers to simplify your pace of the exam. You feel better knowing it's just a 50/50 guess even if you aren't 100% sure on an answer.
+----------------------------------------------------------------------------------------------------------------------------------------
+just passed the new CSA2018 (65 question/130 min) on Jun 22 2018, got 82% (831). It was tough exam for sure. Not impressed with my score, but it is a pass. I have very limited public cloud experience, almost none, but I build custom cloud and private cloud to provide similar service as AWS/Azure, specifically around IaaS, PaaS, DBaaS, DRaaS.
+
+- Much more focus on "architect" role, and all scenarios based questions. I took about 80 mins to complete the test, 20 mins for review, so I still had 30 mins left. User interface sucked royally during review, I took forever to review about 17 questions. It is better to find the right answer first time, and only mark question which you are unsure about and skip the review if u think you are going to run out of time. Use the paper/pencil provided on the side to do memory dump before the exam and list maybe review question for folks who think they are running out of time.
+- Must know VPC, S3, Cloudfront, RDS, EC2, Nat gateway, ASG, Encryption for EBS, S3, RDS. Know the difference between ELB vs ALB including cost. There were like 5-8 question which I was confused about due to lack of clarity in the questions. Few of them, i didn't know since skipped reading the EC2 FAQ, that hurt me for sure. Question on EC2 Spot Block, Convertible reserved instances, ALB threw me off on few questions especially with regards to cheapest solution.
+- I felt majority of the question are around cheapest, secured, resilient, or performant solution. Few question which services to use a given scenarios. So always identify these keywords in the questions to hunt down the right answer. For example, There is cost for each ELB, you can potentially use ALB (and target groups with path mappings) to merge multiple ELB into single ALB for a given website/application. EC2 Reserved Convertible Vs on demand, Spot Fleet Block vs on demand and such.
+- Definitely recommend doing hand-on for ALB, ELB, ASG, EBS, S3, Cloudfront, Encryption at rest and VPC. No doubt you have to know VPC/S3 inside out. Other thing I recommend is know how to migrate on premise to AWS scenarios/strategies with above mentioned keywords (cheap, secure, resilient and such).
+- To Acloud instructors, I suggest you add separate section in AWS SA course regarding Encryption and cost effective way to do this when you have to compare multiple AWS services, and select the most cheapest, resilient, secure, and optimal one. Basically, what am I saying is for architect course is I want course not only to be technical focused but significantly more architect role (aka scenarios) focused. It is architect focused to an extent, new exam is different. EC2 EBS vs Storage Gateway vs S3 vs RDS. ALB vs ELB. On-premise to AWS migration, Hybrid approach.
+- Nothing on STS or AD, There was one crazy question about choosing, ECS, Cloud Formation, Opsworks, which throw me off.
+- Finally, to iterate what I said earlier, make sure to read the question in complete details, understand the full details, identify the keywords (most secure, most HA enabled, cheapest, resilient). If you look at the Section covered for the exam include these keywords as well.
+----------------------------------------------------------------------------------------------------------------------------------------
+• CloudFormation vs. ElastiCache, when to use each
+• Load Balancing and Route 53 in relation to on-premises
+• A lot of mention of Application load balancers in situation-based questions
+• Amazon COGNITO came up in a question – gotta know what it is!
+• When to use EFS vs. EBS vs. S3
+• Understanding the scalability and use cases for API Gateway, and basically how it works (know it scales automatically, but can throttle if back end service doesn’t scale well)
+• Lambda and environment variables
+----------------------------------------------------------------------------------------------------------------------------------------
+My highlights:
+1. Know the difference between Security Groups and Network ACLs. The issue of blacklisting IPs came up at least 2x.
+2. Redshift came up in probably 5 questions, one having to do with multi-AZ deployments, some higher level. This is one area where the course could use more depth
+3. I had quite a few questions that involved Lambda. Lambda is clearly getting a higher profile, so spend some time on this. Funny enough, there was one question which basically was the same basic setup as the Amazon Polly project. Definitely do that project, it's fun and you'll need to know some lambda.
+4. Lots of questions about CLB vs ELB vs NLB.
+5. You need to know about eventual consistency in S3. It was the key clue in a couple questions.
+6. RDS came up a lot, almost always with respect to Multi-AZ vs Read Replicas. Probably a half dozen questions on this.
+7. Cognito came up in 2 questions. Aside from knowing it exists, I knew nothing, I think it's worth spending an hour learning about it.
+8. Quite a bit of DynamoDB as well. I had one question on partitioning strategy, mostly you can get by with high level knowledge.
+9. Also, one question on the default termination policy for autoscaling.
+10. There were 2 questions around S3 performance and name prefixing. See this article for what I mean. https://aws.amazon.com/blogs/aws/amazon-s3-performance-tips-tricks-seattle-hiring-event/
+
+Some general recommendations:
+1. Sign up for Qwiklabs and do their free labs, especially the one on repairing a broken VPC. Super valuable. They also have a free one on Redshift. You can also buy credits and do other labs, but there's a ton of value in just the free labs. Then do like Ryan said and set up a custom 2-tier VPC from scratch. These days Amazon makes that push-button easy, but you should be able to do it from the ground up.
+2. Cloud Guru has a course just on passing the exams. You should watch it. Actually, I mostly listened to it in the car like a podcast. It's good info, but listening to it is enough.
+3. Time management is key. I flagged a ton of questions the first time through, but I worked quickly and had over half my time left for review. I ended up reviewing every question, then still having time to go back and review the flagged questions again, then still had time to go review the questions I still had flagged. You get a piece of paper and a pencil, I found it helpful to take notes on which answers I'd narrowed down to so I didn't waste time on answers I'd already ruled out, or just take notes on what I thought the key answers were.
+4. Finally, read the questions AND answers CAREFULLY. Many of the answers are very similar and you need to think carefully about the differences and what those differences mean.
+----------------------------------------------------------------------------------------------------------------------------------------
+https://medium.com/@Miha.Kralj/passing-the-aws-certified-solutions-architect-professional-exam-ebbdc26d6598
+
+There were several questions related to DR solutions with specified RPO/RTO times. Modern cloud-born solutions use completely different BCP approach, but hey, someone in AWS really likes traditional disaster recovery scenarios and is making sure that you love them too. I know it is 2016, but you need to learn the old skool BCP techniques for this exam.
+Questions about the AWS Storage Gateway appear at least 3 times. Yeah. Storage Gateway. The stuff that cloud-native architects never saw in action - nor do we want to. You have to learn the difference between Cached Volumes, Stored Volumes and understand how VTL works.
+Lots and lots and lots of questions on deployment management. CloudFormation. Elastic Beanstalk. OpsWorks. Learn these three technologies well - not well for an architect, but well for a 2nd-tier escalation operations engineer. One of the examiners really really really liked cloud deployment automation. And now you will like it too. Who cares if you use SaltStack, Terraform or Ansible - learn CF, Beanstalk and OpsWorks!
+Networking questions were everywhere, like 30% of the test or even more: VPN/DirectConnect/VPC peering. For me, DDOS protection, WAF, Cloudfront, and SSL/TLS stuff is networking too, although AWS treats them as security issues. Anyway, the examiners *love* networking. Learn networking. I mean, learn it like this is a Cisco exam, not a cloud architecture exam. Federated access, SAML, IAM roles and all possible AuthZ/AuthN scenarios - learn them all. Learn how IAM policies work. How cross-account trust works. And specifically how they don't work. Think like troubleshooting support personnel and what they need to know about identity flows; that's what you need to know for this exam.
+Whenever you see the need for high-performing scalable solution, the answer is always DynamoDB. Even if you think that architecturally there might be a better choice (Cassandra, or CouchDB anyone?), the correct answer will be DynamoDB. People that wrote the test were clearly in love with DynamoDB, Elasticache and Kinesis. Just pick the answer that includes all three of them and you'll be right.
+If a scenario is asking for something cheap (cost-effective), the answer must include spot instances, SQS for throttling and perhaps S3 RRS or Glacier.
+There were at least two questions where I was simply forced to propose the AWS Data Pipeline. Yeah, the obscure and rarely-seen Data Pipeline service, in the age when Lambda solves the same problem way more efficiently. No, Lambda was not an option at all and it didn't appear anywhere in the test.
+----------------------------------------------------------------------------------------------------------------------------------------
+https://www.linkedin.com/pulse/how-get-all-aws-certifications-asia-wong-chun-yin-cyrus-%E9%BB%83%E4%BF%8A%E5%BD%A5-/
+----------------------------------------------------------------------------------------------------------------------------------------
+https://medium.com/@psdilip/how-i-passed-the-aws-solutions-architect-associate-june-2019-5ed43c5b210e
+----------------------------------------------------------------------------------------------------------------------------------------
+http://blog.ioconnectservices.com/2018/03/aws-certified-solution-architect.html
+----------------------------------------------------------------------------------------------------------------------------------------
+http://blog.ioconnectservices.com/2018/03/aws-certified-solution-architect.html
