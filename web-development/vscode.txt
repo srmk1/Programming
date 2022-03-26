@@ -1,0 +1,16 @@
+Cmd + Shift + P: Open Command Palette
+Cmd + Shift + X: Extensions
+
+Cmd + Ctrl + Space: Type emojis
+=========================================================================
+Install Extensions: Cmd + Shift + X - Search - Click Install
+esbenp.prettier-vscode
+formulahendry.auto-close-tag
+hex-ci.stylelint-plus
+dbaeumer.vscode-eslint
+naumovs.color-highlight
+DigitalBrainstem.javascript-ejs-support
+ritwickdey.LiveServer
+erikphansen.vscode-toggle-column-selection
+file-icons
+=========================================================================

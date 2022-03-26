@@ -1,0 +1,288 @@
+To debug css styles:
+	- On Chrome, right-click + inspect
+	- Element styles - you can click on elements and change required
+	  setting
+	- Very useful style
+
+To check how to apply css to html tag:
+	- Go to https://devdocs.io/
+	- Search for element like hr
+	- Look at css
+
+how to check different css atrribute values:
+	- Go to google search <keyword> css mdn
+	- example: border-style css mdn
+	- example: change text color css
+	- https://developer.mozilla.org/en-US/docs/Web/CSS/border-style
+	- search for different ways of using this
+
+Select color using: https://colorhunt.co/
+		    https://developer.mozilla.org/en-US/docs/Web/CSS/color_value
+
+Select css properties using: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference
+
+Select emojis from: https://emojipedia.org/
+
+For the icon displayed in the tile of the site:  https://www.favicon.cc/
+
+For images: https://www.flaticon.com/
+	    https://giphy.com/
+
+For trying out html and css code: https://codepen.io/pen/?editors=1100
+
+To generate css code for buttons: https://css3buttongenerator.com/
+=====================================================
+Inline CSS:
+- CSS code can be enclosed in style atrribute of a html tag
+
+<body style="background-color: rgb(202, 230, 209);">
+=====================================================
+Internal CSS:
+- Like functions, you can define css once in head and then used in multiple html
+  tags
+	<head>
+		<style>
+			body {
+				background-color: rgb(220, 233, 223);
+			}
+		</style>
+	</head>
+- When you are not using css also, by default the browser uses default css
+- You can check for each tag what default css used from below link
+	https://www.w3schools.com/csSref/css_default_values.asp
+- Pretty much everything that exists in css are boxes, you can look at boxes in
+  a page using "pesticide" extension
+- Website design is about thinking that everything on the page are just boxes
+and we can effect how these boxes looks like using css style attributes on 
+that html element
+- You can look at the different boxes using pesticide extension
+- If you have multiple pages, using this method you might have to copy 
+this css to all pages
+=====================================================
+External CSS:
+- Create a file called styles.css and add below code
+	body {
+    background-color: rgb(220, 233, 223);
+}
+
+hr {
+    background-color: rgb(220, 233, 223);
+    border-style: dotted none none none;
+    border-color: rgb(171, 171, 171);
+    border-width: 5px;
+    width: 10%;
+}
+
+img {
+    height: 100px;
+}	
+- Go to your html pages, add link in all pages using css
+	<head>
+	<link rel="stylesheet" href="css/style.css">
+	</head>
+=====================================================
+How to debug css?
+- Imagine everything is a box and use pesticide extension extensively
+- Use chrome developer tools -> view -> Developer -> tools
+	- Go to console and look for errors
+	- Select Elements and look under styles to check what got selected
+- Inline tag overrides External and Internal CSS
+	- In developer tools - Select Elements and look under styles to check what got selected
+	- Order of high priority: inline, internal, external
+=====================================================
+CSS Syntax:
+	selector { property: value; }
+	  Who?	    What?    How?
+
+Selectors can be:
+	- TAG Selectors: HTML tag selector like body, h1, h3..etc which are html tags
+	- CLASS Selectors: We can add "class" attribute to html tags and use that as selector
+		<h1 class="test"> Heading </h1>
+	 	In CSS file, use 
+			.class { property: value;} 
+		as syntax
+	- ID Selectors: We can add "id" attribute to html tags and use that as selector
+		<h1 id="test"> Heading </h1>
+	 	In CSS file, use 
+			#class { property: value;} 
+		as syntax
+	- When we both have class/id selector and tag selectors,
+		class/id selectors are given more priority
+		more specific selectors are given more priority
+	- When to use class and when to use id?
+		- id vlaue has to be unique only one in whole page
+		- class values can be reused at multiple places in whole page
+		- Whenever you have an element which will occur only one in a
+		  page, use id otherwise use class
+	- You can add multiple class values for elements 
+	- You can't add multiple class values for elements 
+	- Use of class is more frequent and id is less freqeuent
+=====================================================
+favicon:
+- icon displayed in the tile of the site
+- Create and download icon from: https://www.favicon.cc/
+- Link it to your page (place downloaded icon file under your directory)
+	<link rel="icon" href="favicon.ico">
+=====================================================
+Box Model of website:
+Every single HTML element onscreen is just treated as a box by our CSS and by styling that box, by changing its height, its width, its margin, its padding, that's how we can determine how our elements can be laid out and how it will show up onscreen. And this concept in CSS is lovingly known as the box model.
+
+- Every box will have - height, width, border, padding (b/w text and border),
+margin,
+- Border is border of the box. Border it self can have width n height, border-top, border-bottom, border-left,
+border-right.
+- Margin is between two elements, outermost of css box
+
+You can right-click and do Inspect element and then play with margin, border,
+padding of all the boxes.
+=====================================================
+Display property:
+
+Block elements:
+Well by default some elements are what's called block display, for example this h1 and this paragraph tag. And block elements are those that take up essentially the whole width of the screen on a web page, so effectively blocking out any other elements from sitting next to it on the left or on the right.
+Most common block elements:
+- paragraph
+- Headers (<h1> through <h6>)
+- Divisions (<div>)
+- List and list items (<ol>, <ul> and <li>)
+- Forms (<form>)
+
+
+Inline elements:
+So unlike block display elements, for example the heading and also the paragraph
+element, an inline display element only takes up as much space as it needs to in
+the height and in its width so you can see that the box around the span is only
+as large as it needs to be as is the box around.
+You cannot change the width of the inline elements.
+- Spans (<span>)
+- Images (<img>)
+- Anchors (<a>)
+
+Inline Block type:
+Inline elements dont allow to change width. Block elements occupies full width
+of screen. If we want a type which does not occupy full width (set width:
+100px;) but still come next to each other, we can set display property to
+"inline-block"
+- p {
+	display: inline-block;
+  }
+
+Block type: None (just disappears element)
+=====================================================
+Postion Property:
+
+CSS Static and Relative positioning:
+But before we do so, the first thing we have to realize is that even without
+CSS, your HTML element already has predefined rules for how it should be
+displayed on your web page even if you don't have any CSS.
+- Content determines how large things are displayed on website. Inline elements
+  width is determined by text, block elements height is determined height of
+elements and so on.
+- Order is determined by order of tags in the html code
+- Children sit on parents (on z-axis)
+
+CSS position property:
+Position property:
+- static - default - Go along with html rules
+- relative - Postion of the element relative default html flow 
+		- top, bottom, left, right co-ordinates how we want to move w.r.t 
+		- postion property starts doing something when we use top,
+		  bottom, left, right
+		- position property alone does not do anything unless used with
+		  top..etc
+- Absolute postion - Absolute position adds margin w.r.t to parent element in
+  html 
+		   - suppose you have a div container and image inside it, image position
+		     w.r.t to div element
+		.red {
+  			background: red;
+  			width: 100px;
+  			height: 100px;
+  			position: absolute;
+  			top: 200px;
+  			left: 200px;
+		}
+- Fixed postion: will not change w.r.t to anything
+
+Float Property:
+Float to the left of next element
+	- float: right;
+=====================================================
+Centering:
+- text-align center inside the container, or the parent element, will center
+  everything inside that doesn't have a width set. If you set it on the body all
+the elements in the body will be center aligned.
+	body {
+		margin: 0;
+		text-align: center;
+	     }
+	- Note that adding text-align: center; in the body works for inline block elements
+	  or if we have full width set in block elements
+	- It wont work if width is set for any of the block elemenets
+	- For block elements that have width set, we need to use a different
+	  statergy
+- Now if it is a block element and it has a width set, then you're going to have to center it using this auto value in the margin.
+	h1 {
+		width: 10%;
+		margin: 0 auto 0 auto;
+	}
+
+=====================================================
+Font:
+https://www.w3schools.com/css/css_font.asp
+
+Font family: 
+- There are only 3 major font family used: Serif, Sans-Serif, Monospace
+- Use this link to find differences: https://www.w3schools.com/css/css_font.asp
+- In body css we can include:
+	- font-family: sans-serif; 
+- You can include font type at the beginning of font-family, this is a
+  suggestion to browser to try and render in Verdana... if that font is not
+installed then it will use default sans-serif font installed
+	- font-family: verdana, sans-serif; 
+- You can check commonly used font by users, you can check below website:
+	- https://www.cssfontstack.com/
+- What do you do if font is not installed, can we have fallback mechanisms?
+	- Go to https://www.cssfontstack.com/
+	- Select the font you want fallback mechanisms 
+	- Click on copy on top-left corner, it will give all fall-back
+	  mechanisms
+		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+- What if you want user has to see exactly what you font choose to?
+	- You can do font-embedding
+	- Lot of fonts are avaliable for commercial use @ https://fonts.google.com/
+	- You can select fonts and then embed link as below in the head
+		<!-- From Google fonts -->
+    		<link rel="preconnect" href="https://fonts.googleapis.com">
+    		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    		<link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Sacramento&display=swap" rel="stylesheet">
+		And in CSS as:
+		font-family: 'Montserrat', sans-serif;
+		font-family: 'Sacramento', cursive;
+=====================================================
+Font Size:
+- font-size: 90px; ==> this is absolute
+- For font size to change based on the website view (large, small, medium) use %
+	- 16px = 100% = 1em
+	- 90px = 562.5% = 5.62em 
+- Better to use either % or em instead of px
+- Sometimes if we include font-size(em) in body and then include in h1, it will
+  multiply both and use it. To avoid this we can use "rem" 
+	- like font-size = 1rem;
+
+Text color: 
+- color: white;
+
+Font weight:
+- The font-weight CSS property sets the weight (or boldness) of the font. The weights available depend on the font-family that is currently set.
+	/* Keyword values */
+	font-weight: normal;
+	font-weight: bold;
+
+line-height:
+- The line-height CSS property sets the height of a line box. It's commonly used to set the distance between lines of text. On block-level elements, it specifies the minimum height of line boxes within the element. On non-replaced inline elements, it specifies the height that is used to calculate line box height.
+
+=====================================================
+Lorem Ipsum Generator
+http://lorem-ipsum.perbang.dk/
+=====================================================

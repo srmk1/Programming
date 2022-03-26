@@ -1,0 +1,374 @@
+<script>
+// var x = 6;   I will NOT be executed
+
+document.write(5 + 6);   //Writes 11 to the html
+
+<button type="button" onclick="document.write(5 + 6)">Try it</button>
+
+window.alert(5 + 6);
+
+console.log(5 + 6);
+
+var x, y;          // How to declare variables
+x = 5; y = 6;      // How to assign values
+z = x + y;         // How to compute values
+a = 5; b = 6; c = a + b;
+
+var lastname, lastName;
+lastName = "Doe";
+lastname = "Peterson";
+
+document.getElementById("demo").innerHTML = "Hello Dolly.";
+
+function myFunction() {
+  document.getElementById("demo1").innerHTML = "Hello Dolly!";
+  document.getElementById("demo2").innerHTML = "How are you?";
+}
+
+/*
+The code below will change
+the heading with id = "myH"
+and the paragraph with id = "myP"
+in my web page:
+*/
+document.getElementById("myH").innerHTML = "My First Page";
+document.getElementById("myP").innerHTML = "My first paragraph.";
+
+
+var pi = 3.14;
+var person = "John Doe";
+var answer = 'Yes I am!';
+
+var carName = "Volvo";
+document.getElementById("demo").innerHTML = carName; 
+
+var person = "John Doe", carName = "Volvo", price = 200;
+
+var x = 5;         // assign the value 5 to x
+var y = 2;         // assign the value 2 to y
+var z = x + y;     // assign the value 7 to z (x + y)
+
+var txt1 = "What a very ";
+txt1 += "nice day";
+
+function myFunction(p1, p2) {
+  return p1 * p2;    // The function returns the product of p1 and p2
+}
+
+var x = myFunction(4, 3);   // Function is called, return value will end up in x
+function myFunction(a, b) {
+  return a * b;             // Function returns the product of a and b
+}
+
+function toCelsius(fahrenheit) {
+  return (5/9) * (fahrenheit-32);
+}
+document.getElementById("demo").innerHTML = toCelsius(77);
+
+var text = "The temperature is " + toCelsius(77) + " Celsius";
+
+
+// code here can NOT use carName
+function myFunction() {
+  var carName = "Volvo";
+  // code here CAN use carName
+}
+// code here can NOT use carName
+
+///////////////////////OBJECTS
+var car = {type:"Fiat", model:"500", color:"white"};
+var person = {firstName:"John", lastName:"Doe", age:50, eyeColor:"blue"};
+var person = {
+  firstName:"John",
+  lastName:"Doe",
+  age:50,
+  eyeColor:"blue"
+  fullName : function() {
+    return this.firstName + " " + this.lastName;
+  }
+};
+
+name = person.fullName();
+first_name = person.firstName;
+
+var x = new String();        // Declares x as a String object
+var y = new Number();        // Declares y as a Number object
+var z = new Boolean();       // Declares z as a Boolean object
+
+///////////////////////EVENTS///////////////////////
+<element event="some JavaScript">
+<button onclick="document.getElementById('demo').innerHTML = Date()">The time is?</button>
+<button onclick="this.innerHTML = Date()">The time is?</button>
+Event	            Description
+-----             -----------
+onchange	        An HTML element has been changed
+onclick	          The user clicks an HTML element
+onmouseover	      The user moves the mouse over an HTML element
+onmouseout	      The user moves the mouse away from an HTML element
+onkeydown	        The user pushes a keyboard key
+onload	          The browser has finished loading the page
+
+What can JavaScript Do?
+Event handlers can be used to handle, and verify, user input, user actions, and browser actions:
+- Things that should be done every time a page loads
+- Things that should be done when the page is closed
+- Action that should be performed when a user clicks a button
+- Content that should be verified when a user inputs data
+And more ...
+Many different methods can be used to let JavaScript work with events:
+- HTML event attributes can execute JavaScript code directly
+- HTML event attributes can call JavaScript functions
+- You can assign your own event handler functions to HTML elements
+- You can prevent events from being sent or being handled
+And more ...
+
+
+///////////////////////FORM VALIDATION///////////////////////
+<form action="/action_page.php" method="post">
+  <input type="text" name="fname" required>
+  <input type="submit" value="Submit">
+</form>
+
+<form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post">
+Name: <input type="text" name="fname">
+<input type="submit" value="Submit">
+</form>
+
+function validateForm() {
+  var x = document.forms["myForm"]["fname"].value;
+  if (x == "") {
+    alert("Name must be filled out");
+    return false;
+  }
+}
+
+******
+<input id="id1" type="number" min="100" max="300" required>
+<button onclick="myFunction()">OK</button>
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+  var inpObj = document.getElementById("id1");
+  if (!inpObj.checkValidity()) {
+    document.getElementById("demo").innerHTML = inpObj.validationMessage;
+  }
+}
+</script>
+******
+
+******
+<input id="id1" type="number" max="100">
+<button onclick="myFunction()">OK</button>
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+  var txt = "";
+  if (document.getElementById("id1").validity.rangeOverflow) {
+    txt = "Value too large";
+  }
+  document.getElementById("demo").innerHTML = txt;
+}
+</script>
+******
+
+******
+<input id="id1" type="number" min="100">
+<button onclick="myFunction()">OK</button>
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+  var txt = "";
+  if (document.getElementById("id1").validity.rangeUnderflow) {
+    txt = "Value too small";
+  }
+  document.getElementById("demo").innerHTML = txt;
+}
+</script>
+******
+
+
+///////////////////////OBJECTS///////////////////////
+var person = {
+  firstName: "John",
+  lastName: "Doe",
+  age: 50,
+  eyeColor: "blue"
+};
+
+var person = new Object();
+person.firstName = "John";
+person.lastName = "Doe";
+person.age = 50;
+person.eyeColor = "blue";
+
+var x = person;  // This will not create a copy of person.
+
+var person = {fname:"John", lname:"Doe", age:25}; 
+for (x in person) { //For each property of object person
+  txt += person[x];
+}
+
+person.nationality = "English";     //Adding new property to JS
+
+//Delete property of the object
+var person = {firstName:"John", lastName:"Doe", age:50, eyeColor:"blue"};
+delete person.age;   // or delete person["age"]; 
+
+
+******** METHODS
+var person = {
+  firstName: "John",
+  lastName : "Doe",
+  id       : 5566,
+  fullName : function() {
+    return this.firstName + " " + this.lastName;
+  }
+};
+
+var message = "Hello world!";
+var x = message.toUpperCase();    //Built-in methods
+
+///JavaScript Accessors (Getters and Setters)
+// Create an object:
+var person = {
+  firstName: "John",
+  lastName : "Doe",
+  language : "en",
+  get lang() {
+    return this.language;
+  }
+  set lang(lang) {
+    this.language = lang;
+    //this.language = lang.toUpperCase();
+  }
+};
+// Set an object property using a setter:
+person.lang = "en";
+// Display data from the object:
+document.getElementById("demo").innerHTML = person.language;
+
+var obj = {
+  counter : 0,
+  get reset() {
+    this.counter = 0;
+  },
+  get increment() {
+    this.counter++;
+  },
+  get decrement() {
+    this.counter--;
+  },
+  set add(value) {
+    this.counter += value;
+  },
+  set subtract(value) {
+    this.counter -= value;
+  }
+};
+// Play with the counter:
+obj.reset;
+obj.add = 5;
+obj.subtract = 1;
+obj.increment;
+obj.decrement;
+
+
+//Constructors
+function Person(first, last, age, eye) {
+  this.firstName = first;
+  this.lastName = last;
+  this.age = age;
+  this.eyeColor = eye;
+}
+
+var myFather = new Person("John", "Doe", 50, "blue");
+var myMother = new Person("Sally", "Rally", 48, "green");
+
+var x1 = new Object();    // A new Object object
+var x2 = new String();    // A new String object
+var x3 = new Number();    // A new Number object
+var x4 = new Boolean();   // A new Boolean object
+var x5 = new Array();     // A new Array object
+var x6 = new RegExp();    // A new RegExp object
+var x7 = new Function();  // A new Function object
+var x8 = new Date();      // A new Date object
+var x1 = {};            // new object
+var x2 = "";            // new primitive string
+var x3 = 0;             // new primitive number
+var x4 = false;         // new primitive boolean
+var x5 = [];            // new array object
+var x6 = /()/           // new regexp object
+var x7 = function(){};  // new function object
+
+
+///////////////////////FUNCTIONS///////////////////////
+function functionName(parameters) {
+  // code to be executed
+}
+
+var x = function (a, b) {return a * b};
+var z = x(4, 3);
+
+var myFunction = new Function("a", "b", "return a * b");
+var x = myFunction(4, 3);
+
+myFunction(5);
+function myFunction(y) {
+  return y * y;
+}
+
+///////////////////////DOM///////////////////////
+When a web page is loaded, the browser creates a Document Object Model of the page.
+With the object model, JavaScript gets all the power it needs to create dynamic HTML:
+- JavaScript can change all the HTML elements in the page
+- JavaScript can change all the HTML attributes in the page
+- JavaScript can change all the CSS styles in the page
+- JavaScript can remove existing HTML elements and attributes
+- JavaScript can add new HTML elements and attributes
+- JavaScript can react to all existing HTML events in the page
+- JavaScript can create new HTML events in the page
+
+What is the HTML DOM?
+The HTML DOM is a standard object model and programming interface for HTML. It defines:
+- The HTML elements as objects
+- The properties of all HTML elements
+- The methods to access all HTML elements
+- The events for all HTML elements
+In other words: The HTML DOM is a standard for how to get, change, add, or delete HTML elements.
+
+HTML DOM methods are actions you can perform (on HTML Elements).
+HTML DOM properties are values (of HTML Elements) that you can set or change.
+
+The HTML DOM Document Object
+The document object represents your web page.
+If you want to access any element in an HTML page, you always start with accessing the document object.
+Below are some examples of how you can use the document object to access and manipulate HTML.
+Method	                                  Description
+document.getElementById(id)	              Find an element by element id
+document.getElementsByTagName(name)	      Find elements by tag name
+document.getElementsByClassName(name)	    Find elements by class name
+
+Changing HTML Elements
+Method	                                      Description
+element.innerHTML =  new html content	        Change the inner HTML of an element
+element.attribute = new value	                Change the attribute value of an HTML element
+element.setAttribute(attribute, value)	      Change the attribute value of an HTML element
+element.style.property = new style	          Change the style of an HTML element
+
+Adding and Deleting Elements
+Method	                                      Description
+document.createElement(element)	              Create an HTML element
+document.removeChild(element)	                Remove an HTML element
+document.appendChild(element)	                Add an HTML element
+document.replaceChild(element)	              Replace an HTML element
+document.write(text)	                        Write into the HTML output stream
+
+Adding Events Handlers
+Method	                                                    Description
+document.getElementById(id).onclick = function(){code}	    Adding event handler code to an onclick event

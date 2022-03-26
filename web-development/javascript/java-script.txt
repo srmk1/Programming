@@ -1,0 +1,301 @@
+========================================================
+How Javascript works?
+Let's briefly recap the story of what happens when you load a web page in a browser (first talked about in our How CSS works article). When you load a web page in your browser, you are running your code (the HTML, CSS, and JavaScript) inside an execution environment (the browser tab). This is like a factory that takes in raw materials (the code) and outputs a product (the web page).
+
+A very common use of JavaScript is to dynamically modify HTML and CSS to update a user interface, via the Document Object Model API (as mentioned above). Note that the code in your web documents is generally loaded and executed in the order it appears on the page. Errors may occur if JavaScript is loaded and run before the HTML and CSS that it is intended to modify.
+
+Browser Security:
+Each browser tab has its own separate bucket for running code in (these buckets are called "execution environments" in technical terms) — this means that in most cases the code in each tab is run completely separately, and the code in one tab cannot directly affect the code in another tab — or on another website. This is a good security measure — if this were not the case, then pirates could start writing code to steal information from other websites, and other such bad things.
+
+Order of execution:
+When the browser encounters a block of JavaScript, it generally runs it in order, from top to bottom. This means that you need to be careful what order you put things in. 
+
+Compiled or interpreted:
+JavaScript is a lightweight interpreted programming language. The web browser receives the JavaScript code in its original text form and runs the script from that. From a technical standpoint, most modern JavaScript interpreters actually use a technique called just-in-time compiling to improve performance; the JavaScript source code gets compiled into a faster, binary format while the script is being used, so that it can be run as quickly as possible. However, JavaScript is still considered an interpreted language, since the compilation is handled at run time, rather than ahead of time.
+
+Server side vs Client Side:
+You might also hear the terms server-side and client-side code, especially in the context of web development. Client-side code is code that is run on the user's computer — when a web page is viewed, the page's client-side code is downloaded, then run and displayed by the browser. In this module we are explicitly talking about client-side JavaScript.
+Server-side code on the other hand is run on the server, then its results are downloaded and displayed in the browser. Examples of popular server-side web languages include PHP, Python, Ruby, ASP.NET and... JavaScript! JavaScript can also be used as a server-side language, for example in the popular Node.js environment — you can find out more about server-side JavaScript in our Dynamic Websites – Server-side programming topic.
+
+Dynamic vs Static:
+Dynamic versus static code
+The word dynamic is used to describe both client-side JavaScript, and server-side languages — it refers to the ability to update the display of a web page/app to show different things in different circumstances, generating new content as required. Server-side code dynamically generates new content on the server, e.g. pulling data from a database, whereas client-side JavaScript dynamically generates new content inside the browser on the client, e.g. creating a new HTML table, filling it with data requested from the server, then displaying the table in a web page shown to the user. The meaning is slightly different in the two contexts, but related, and both approaches (server-side and client-side) usually work together.
+A web page with no dynamically updating content is referred to as static — it just shows the same content all the time.
+
+Script Loading statergies:
+There are a number of issues involved with getting scripts to load at the right time. Nothing is as simple as it seems! A common problem is that all the HTML on a page is loaded in the order in which it appears. If you are using JavaScript to manipulate elements on the page (or more accurately, the Document Object Model), your code won't work if the JavaScript is loaded and parsed before the HTML you are trying to do something to.
+
+In the above code examples, in the internal and external examples the JavaScript is loaded and run in the head of the document, before the HTML body is parsed. This could cause an error, so we've used some constructs to get around it.
+
+In the internal example, you can see this structure around the code:
+document.addEventListener('DOMContentLoaded', () => {
+  ...
+});
+This is an event listener, which listens for the browser's DOMContentLoaded event, which signifies that the HTML body is completely loaded and parsed. The JavaScript inside this block will not run until after that event is fired, therefore the error is avoided (you'll learn about events later in the course).
+
+In the external example, we use a more modern JavaScript feature to solve the problem, the defer attribute, which tells the browser to continue downloading the HTML content once the <script> tag element has been reached.
+<script src="script.js" defer></script>
+
+In this case both the script and the HTML will load simultaneously and the code will work.
+
+An old-fashioned solution to this problem used to be to put your script element right at the bottom of the body (e.g. just before the </body> tag), so that it would load after all the HTML has been parsed. The problem with this solution is that loading/parsing of the script is completely blocked until the HTML DOM has been loaded. On larger sites with lots of JavaScript, this can cause a major performance issue, slowing down your site.
+
+async and defer
+There are actually two modern features we can use to bypass the problem of the blocking script — async and defer (which we saw above). Let's look at the difference between these two.
+
+Scripts loaded using the async attribute will download the script without blocking the page while the script is being fetched. However, once the download is complete, the script will execute, which blocks the page from rendering. You get no guarantee that scripts will run in any specific order. It is best to use async when the scripts in the page run independently from each other and depend on no other script on the page.
+
+Scripts loaded with the defer attribute will load in the order they appear on the page. They won't run until the page content has all loaded, which is useful if your scripts depend on the DOM being in place (e.g. they modify one or more elements on the page).
+
+
+For example, if you have the following script elements:
+<script async src="js/vendor/jquery.js"></script>
+<script async src="js/script2.js"></script>
+<script async src="js/script3.js"></script>
+You can't rely on the order the scripts will load in. jquery.js may load before or after script2.js and script3.js and if this is the case, any functions in those scripts depending on jquery will produce an error because jquery will not be defined at the time the script runs.
+
+async should be used when you have a bunch of background scripts to load in, and you just want to get them in place as soon as possible. For example, maybe you have some game data files to load, which will be needed when the game actually begins, but for now you just want to get on with showing the game intro, titles, and lobby, without them being blocked by script loading.
+
+Scripts loaded using the defer attribute (see below) will run in the order they appear in the page and execute them as soon as the script and content are downloaded:
+<script defer src="js/vendor/jquery.js"></script>
+<script defer src="js/script2.js"></script>
+<script defer src="js/script3.js"></script>
+In the second example, we can be sure that jquery.js will load before script2.js and script3.js and that script2.js will load before script3.js. They won't run until the page content has all loaded, which is useful if your scripts depend on the DOM being in place (e.g. they modify one of more elements on the page).
+
+To summarize:
+- async and defer both instruct the browser to download the script(s) in a separate thread, while the rest of the page (the DOM, etc.) is downloading, so the page loading is not blocked during the fetch process.
+- scripts with an async attribute will execute as soon as the download is complete. This blocks the page and does not guarantee any specific execution order.
+- scripts with a defer attribute will load in the order they are in and will only execute once everything has finished loading.
+- If your scripts should be run immediately and they don't have any dependencies, then use async.
+- If your scripts need to wait for parsing and depend on other scripts and/or the DOM being in place, load them using defer and put their corresponding <script> elements in the order you want the browser to execute them.
+===========================================================================
+How to embed javascript to website?
+
+- Like CSS, javascript can be embedded to website in 3 ways:
+	- inline
+	- internal
+	- external
+
+Inline:
+- You can execute javascript on loading the html element
+	<body onload='alert("Hello");'>
+
+Internal:
+- You can embed the script between <script> tags
+	<script type="text/javascript">
+	alert("Hello");
+	</script>
+
+External:
+- You can embed the script with src attribute
+	<script src="scripts/index.js"></script>
+===========================================================================
+Declarations
+============
+const a = "init"; 		// block scoped const variables like let
+let a = "init";			// block scoped variables
+var a = "init";			// function-scoped or globally-scoped variable	
+var pageGreetings = 		// Array/List declaration - pageGreetings[0|1|2]
+	["Hello", "Aditi", "Arjun"]
+
+- unassigned variables will return value "undefined"
+
+- we recommend that you use let in your code, rather than var
+
+- We can declare 
+	let num = 10;
+	let str = "Aditi/Arjun";
+	let iAmAlive = true;
+	let iAmAlive = (6 > 3);
+
+- Array declaration
+	let myNameArray = ['Chris', 'Bob', 'Jim'];
+	let myNumberArray = [10, 15, 40];
+	myNameArray[0]; // should return 'Chris'
+	myNumberArray[2]; // should return 40
+
+- Object declaraion
+	let dog = { name : 'Spot', breed : 'Dalmatian' };
+	dog.name //returns Spot
+
+- Dynamic typing
+	- JavaScript is a "dynamically typed language", which means that, unlike some other languages, you don't need to specify what data type a variable will contain (numbers, strings, arrays, etc).
+	- For example, if you declare a variable and give it a value enclosed in quotes, the browser treats the variable as a string:
+		let myString = 'Hello';
+	- Even if the value enclosed in quotes is just digits, it is still a string — not a number — so be careful:
+		let myNumber = '500'; // oops, this is still a string
+		typeof myNumber;
+		myNumber = 500; // much better — now this is a number
+		typeof myNumber;
+
+- Constants
+	- As well as variables, you can declare constants. These are like variables, except that:
+		- you must initialize them when you declare them
+		- you can't assign them a new value after you've initialized them.
+	- const count; //throws error
+	- const count = 10; //works fine
+	- Note that although a constant in JavaScript must always name the same value, you can change the content of the value that it names. This isn't a useful distinction for simple types like numbers or booleans, but consider an object:
+		const bird = { species : 'Kestrel'};
+		console.log(bird.species);  // "Kestrel"
+	  You can update, add, or remove properties of an object declared using const, because even though the content of the object has changed, the constant is still pointing to the same object:
+		bird.species = 'Striated Caracara';
+		console.log(bird.species);  // "Striated Caracara"
+
+- When to use const and let?
+	- Use const when you can, and use let when you have to.
+	- This means that if you can initialize a variable when you declare it, and don't need to reassign it later, make it a constant.
+===========================================================================
+LISTS:
+- JavaScript arrays are resizable and can contain a mix of different data types
+- JavaScript arrays are not associative arrays and so, array elements cannot be accessed using strings as indexes, but must be accessed using integers as indexes
+- JavaScript arrays are zero-indexed: the first element of an array is at index 0, the second is at index 1, and so on — and the last element is at the value of the array's length property minus 1
+- JavaScript array-copy operations create shallow copies. (All standard built-in copy operations with any JavaScript objects create shallow copies, rather than deep copies)
+
+MAP:
+===
+The map() method creates a new array populated with the results of calling a provided function on every element in the calling array.
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+
+const numbers = [1, 2, 3, 4, 5];
+// pass a function to map
+const doubled = numbers.map((number) => number * 2);
+console.log(doubled);
+Syntax:
+// Arrow function
+map((element) => { /* ... */ })
+map((element, index) => { /* ... */ })
+map((element, index, array) => { /* ... */ })
+// Callback function
+map(callbackFn)
+map(callbackFn, thisArg)
+// Inline callback function
+map(function(element) { /* ... */ })
+map(function(element, index) { /* ... */ })
+map(function(element, index, array){ /* ... */ })
+map(function(element, index, array) { /* ... */ }, thisArg)
+
+FILTER:
+=======
+The filter() method creates a new array with all elements that pass the test implemented by the provided function.
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
+
+const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
+const result = words.filter(word => word.length > 6);
+console.log(result);
+// expected output: Array ["exuberant", "destruction", "present"]
+Syntax:
+// Arrow function
+filter((element) => { /* ... */ } )
+filter((element, index) => { /* ... */ } )
+filter((element, index, array) => { /* ... */ } )
+// Callback function
+filter(callbackFn)
+filter(callbackFn, thisArg)
+// Inline callback function
+filter(function(element) { /* ... */ })
+filter(function(element, index) { /* ... */ })
+filter(function(element, index, array){ /* ... */ })
+filter(function(element, index, array) { /* ... */ }, thisArg)
+
+Transform and render list:
+==========================
+const list =[
+{
+  title: 'React',
+  url: 'https://',
+  objectId: 0
+},
+{
+  title: 'React1',
+  url: 'https://1',
+  objectId: 1
+}
+];
+
+<hr />
+{list.map(function(item, index) {
+     return <div> {item.title} </div>
+})}
+
+KEYS: (react only)
+===================
+https://reactjs.org/docs/lists-and-keys.html
+When you run this code, you’ll be given a warning that a key should be provided for list items. A “key” is a special string attribute you need to include when creating lists of elements. We’ll discuss why it’s important in the next section.
+
+Keys help React identify which items have changed, are added, or are removed. Keys should be given to the elements inside the array to give the elements a stable identit
+The best way to pick a key is to use a string that uniquely identifies a list item among its siblings. Most often you would use IDs from your data as keys
+const todoItems = todos.map((todo) =>
+  <li key={todo.id}>
+    {todo.text}
+  </li>
+);
+
+When you don’t have stable IDs for rendered items, you may use the item index as a key as a last resort
+const todoItems = todos.map((todo, index) =>
+  // Only do this if items have no stable IDs
+  <li key={index}>
+    {todo.text}
+  </li>
+);
+
+<hr />
+{list.map(function(item, index) {
+     return <div key={item.objectId}> {item.title} </div>
+})}
+=============================================================================
+Conditions and Loops:
+====================
+- if (condition) {
+  	code to run if condition is true
+  } else if (condition) {
+  	run some other code instead
+  } else {
+  	run some other code instead
+  }
+
+- Operators
+	- === and !== — test if one value is identical to, or not identical to, another.
+	- < and > — test if one value is less than or greater than another.
+	- <= and >= — test if one value is less than or equal to, or greater than or equal to, another.
+ 	- We wanted to make a special mention of testing boolean (true/false) values, and a common pattern you'll come across again and again. Any value that is not false, undefined, null, 0, NaN, or an empty string ('') actually returns true when tested as a conditional statement, therefore you can use a variable name on its own to test whether it is true, or even that it exists (that is, it is not undefined.) 	
+	- && — AND; allows you to chain together two or more expressions so that all of them have to individually evaluate to true for the whole expression to return true.
+	- || — OR; allows you to chain together two or more expressions so that one or more of them have to individually evaluate to true for the whole expression to return true.
+	- ! operator, can be used to negate an expression
+
+- switch (expression) {
+  case choice1:
+    run this code
+    break;
+
+  case choice2:
+    run this code instead
+    break;
+
+  // include as many cases as you like
+
+  default:
+    actually, just run this code
+}
+
+- Ternary operator
+	( condition ) ? run this code : run this code instead
+=============================================================================
+APIs
+====
+Web APIs - https://developer.mozilla.org/en-US/docs/Web/API
+DOM - https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model
+Geolocation - https://developer.mozilla.org/en-US/docs/Web/API/Geolocation
+WEBGL - https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API
+Twitter - https://developer.twitter.com/en/docs
+
+Browser APIs are built into your web browser, and are able to expose data from the surrounding computer environment, or do useful complex things. For example:
+
+- The DOM (Document Object Model) API allows you to manipulate HTML and CSS, creating, removing and changing HTML, dynamically applying new styles to your page, etc. Every time you see a popup window appear on a page, or some new content displayed (as we saw above in our simple demo) for example, that's the DOM in action.
+- The Geolocation API retrieves geographical information. This is how Google Maps is able to find your location and plot it on a map.
+- The Canvas and WebGL APIs allow you to create animated 2D and 3D graphics. People are doing some amazing things using these web technologies — see Chrome Experiments and webglsamples.
+- Audio and Video APIs like HTMLMediaElement and WebRTC allow you to do really interesting things with multimedia, such as play audio and video right in a web page, or grab video from your web camera and display it on someone else's computer (try our simple Snapshot demo to get the idea).
+=============================================================================
+Document Object Model APIs:
+==========================
+https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model
+=============================================================================

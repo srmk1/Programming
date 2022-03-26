@@ -1,0 +1,313 @@
+- Standard - https://html.spec.whatwg.org/multipage/indices.html#element-content-categories
+
+- Image cropper - https://crop-circle.imageonline.co/
+====================================================================================================
+- HTML contains series of elements
+
+====================================================================================================
+- HTML comments
+<!-- <p>I am!</p> -->
+
+====================================================================================================
+- Browser Developer tools
+	- Chrome - View -> Developer -> Developer Tools
+
+====================================================================================================
+- Anatomy of an HTML element
+	<p> This is a paragraph </p>
+	<p> - opening tag
+	</p> - closing tag
+	This is a paragraph - Content
+	Whole line - Element
+
+====================================================================================================
+- Nesting of elements - Elements can be placed within other elements
+	<p>My cat is <strong>very</strong> grumpy.</p>
+
+====================================================================================================
+- Block vs inline elements
+	Block - Block-level elements form a visible block on a page. A block-level element appears on a new line following the content that precedes it. Any content that follows a block-level element also appears on a new line. Block-level elements are usually structural elements on the page. For example, a block-level element might represent headings, paragraphs, lists, navigation menus, or footers. A block-level element wouldn't be nested inside an inline element, but it might be nested inside another block-level element.
+	Inline - Inline elements are contained within block-level elements, and surround only small parts of the document's content (not entire paragraphs or groupings of content). An inline element will not cause a new line to appear in the document. It is typically used with text, for example an <a> element creates a hyperlink, and elements such as <em> or <strong> create emphasis.
+
+====================================================================================================
+- Empty elements
+	Not all elements follow the pattern of an opening tag, content, and a closing tag. Some elements consist of a single tag, which is typically used to insert/embed something in the document. For example, the <img> element embeds an image file onto a page
+	<img src="https://raw.githubusercontent.com/mdn/beginner-html-site/gh-pages/images/firefox-icon.png">
+
+====================================================================================================
+- Attributes
+	Elements can also have attributes. Attributes look like this:
+		<p class="editor-note"> This is a paragraph </p>
+	Attributes contain extra information about the element that won't appear in the content. In this example, the class attribute is an identifying name used to target the element with style information.
+
+	An attribute should have:
+		- A space between it and the element name. (For an element with more than one attribute, the attributes should be separated by spaces too.)
+		- The attribute name, followed by an equal sign.
+		- An attribute value, wrapped with opening and closing quote marks.
+
+====================================================================================================
+- Boolean Attributes
+	Sometimes you will see attributes written without values. This is entirely acceptable. These are called Boolean attributes. Boolean attributes can only have one value, which is generally the same as the attribute name. For example, consider the disabled attribute, which you can assign to form input elements. (You use this to disable the form input elements so the user can't make entries. The disabled elements typically have a grayed-out appearance.) For example:
+	<input type="text" disabled="disabled">
+	<!-- using the disabled attribute prevents the end user from entering text into the input box -->
+	<input type="text" disabled>
+	<!-- text input is allowed, as it doesn't contain the disabled attribute -->
+	<input type="text">
+
+====================================================================================================
+- Single or double quotes?
+	In this article you will also notice that the attributes are wrapped in double quotes. However, you might see single quotes in some HTML code. This is a matter of style. 
+	- You can feel free to choose which one you prefer.
+	- Make sure you don't mix single quotes and double quotes.
+
+====================================================================================================
+Anatomy of an HTML document
+Individual HTML elements aren't very useful on their own. Next, let's examine how individual elements combine to form an entire HTML page:
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My test page</title>
+  </head>
+  <body>
+    <p>This is my page</p>
+  </body>
+</html>
+
+
+- <!DOCTYPE html>: The doctype. When HTML was young (1991-1992), doctypes were meant to act as links to a set of rules that the HTML page had to follow to be considered good HTML. Doctypes used to look something like this:
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+Copy to Clipboard
+More recently, the doctype is a historical artifact that needs to be included for everything else to work right. <!DOCTYPE html> is the shortest string of characters that counts as a valid doctype. That is all you need to know!
+
+- <html></html>: The <html> element. This element wraps all the content on the page. It is sometimes known as the root element.
+
+- <head></head>: The <head> element. This element acts as a container for everything you want to include on the HTML page, that isn't the content the page will show to viewers. This includes keywords and a page description that would appear in search results, CSS to style content, character set declarations, and more. You will learn more about this in the next article of the series.
+
+- <meta charset="utf-8">: The <meta> element. This element represents metadata that cannot be represented by other HTML meta-related elements, like <base>, <link>, <script>, <style> or <title>. The charset attributes sets the character set for your document to UTF-8, which includes most characters from the vast majority of human written languages. With this setting, the page can now handle any textual content it might contain. There is no reason not to set this, and it can help avoid some problems later.
+
+- <title></title>: The <title> element. This sets the title of the page, which is the title that appears in the browser tab the page is loaded in. The page title is also used to describe the page when it is bookmarked.
+
+- <body></body>: The <body> element. This contains all the content that displays on the page, including text, images, videos, games, playable audio tracks, or whatever else.
+
+====================================================================================================
+HEAD
+The head of an HTML document is the part that is not displayed in the web browser when the page is loaded. It contains information such as the page <title>, links to CSS (if you choose to style your HTML content with CSS), links to custom favicons, and other metadata (data about the HTML, such as the author, and important keywords that describe the document). Web browsers use information contained in the head to render the HTML document correctly. 
+
+The HTML head is the contents of the <head> element. Unlike the contents of the <body> element (which are displayed on the page when loaded in a browser), the head's content is not displayed on the page. Instead, the head's job is to contain metadata about the document. 
+<head>
+  <meta charset="utf-8">
+  <title>My test page</title>
+</head>
+
+- The <title> element is metadata that represents the title of the overall HTML document (not the document's content.)
+
+------------------
+META
+- Meta: Metadata is data that describes data, and HTML has an "official" way of adding metadata to a document — the <meta> element.
+- Specifying your document's character encoding 
+		<meta charset="utf-8">
+- name and content attributes: Many <meta> elements include name and content attributes:
+	- name specifies the type of meta element it is; what type of information it contains.
+	- content specifies the actual meta content.
+			<meta name="author" content="Chris Mills">
+			<meta name="description" content="The MDN Web Docs Learning Area
+	- Specifying a description that includes keywords relating to the content of your page is useful as it has the potential to make your page appear higher in relevant searches performed in search engines (such activities are termed Search Engine Optimization, or SEO.)
+	- Adding custom icons to your site: To further enrich your site design, you can add references to custom icons in your metadata, and these will be displayed in certain contexts. The most commonly used of these is the favicon (short for "favorites icon", referring to its use in the "favorites" or "bookmarks" lists in browsers).
+
+- A favicon can be added to your page by:
+	- Saving it in the same directory as the site's index page, saved in .ico format (most browsers will support favicons in more common formats like .gif or .png, but using the ICO format will ensure it works as far back as Internet Explorer 6.)
+	- Adding the following line into your HTML's <head> block to reference it: <link rel="icon" href="favicon.ico" type="image/x-icon">
+	<!-- third-generation iPad with high-resolution Retina display: -->
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://developer.mozilla.org/static/img/favicon144.png">
+	<!-- iPhone with high-resolution Retina display: -->
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://developer.mozilla.org/static/img/favicon114.png">
+	<!-- first- and second-generation iPad: -->
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://developer.mozilla.org/static/img/favicon72.png">
+	<!-- non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+	<link rel="apple-touch-icon-precomposed" href="https://developer.mozilla.org/static/img/favicon57.png">
+	<!-- basic favicon -->
+	<link rel="icon" href="https://developer.mozilla.org/static/img/favicon32.png">
+
+- Applying CSS and JavaScript to HTML
+	- ust about all websites you'll use in the modern day will employ CSS to make them look cool, and JavaScript to power interactive functionality, such as video players, maps, games, and more. These are most commonly applied to a web page using the <link> element and the <script> element, respectively.
+	- The <link> element should always go inside the head of your document. This takes two attributes, rel="stylesheet", which indicates that it is the document's stylesheet, and href, which contains the path to the stylesheet file:
+		<link rel="stylesheet" href="my-css-file.css">
+	- The <script> element should also go into the head, and should include a src attribute containing the path to the JavaScript you want to load, and defer, which basically instructs the browser to load the JavaScript after the page has finished parsing the HTML. This is useful as it makes sure that the HTML is all loaded before the JavaScript runs, so that you don't get errors resulting from JavaScript trying to access an HTML element that doesn't exist on the page yet. There are actually a number of ways to handle loading JavaScript on your page, but this is the most reliable one to use for modern browsers (for others, read Script loading strategies).
+		<script src="my-js-file.js" defer></script>
+
+- Setting the primary language of the document
+	- Finally, it's worth mentioning that you can (and really should) set the language of your page. This can be done by adding the lang attribute to the opening HTML tag (as seen in the meta-example.html and shown below.)
+		<html lang="en-US">
+	- This is useful in many ways. Your HTML document will be indexed more effectively by search engines if its language is set (allowing it to appear correctly in language-specific results, for example), and it is useful to people with visual impairments using screen readers (for example, the word "six" exists in both French and English, but is pronounced differently.)
+====================================================================================================
+Headings and Paragraphs:
+- There are six heading elements: <h1>, <h2>, <h3>, <h4>, <h5>, and <h6>. Each element represents a different level of content in the document; <h1> represents the main heading, <h2> represents subheadings, <h3> represents sub-subheadings, and so on.
+- Search engines indexing your page consider the contents of headings as important keywords for influencing the page's search rankings. Without headings, your page will perform poorly in terms of SEO (Search Engine Optimization).
+- On the other hand, you could make any element look like a top level heading. Consider the following:
+	<span style="font-size: 32px; margin: 21px 0; display: block;">Is this a top level heading?</span>
+	This is a <span> element. It has no semantics. You use it to wrap content when you want to apply CSS to it (or do something to it with JavaScript) without giving it any extra meaning. (You'll find out more about these later on in the course.) We've applied some CSS to it to make it look like a top level heading, but since it has no semantic value, it will not get any of the extra benefits described above. It is a good idea to use the relevant HTML element for the job.
+
+====================================================================================================
+Unordered Lists:
+Every unordered list starts off with a <ul> element—this wraps around all the list items:
+The last step is to wrap each list item in a <li> (list item) element:
+<ul>
+  <li>milk</li>
+  <li>eggs</li>
+  <li>bread</li>
+  <li>hummus</li>
+</ul>
+
+Ordered Lists:
+Ordered lists are lists in which the order of the items does matter. 
+The markup structure is the same as for unordered lists, except that you have to wrap the list items in an <ol> element, rather than <ul>
+<ol>
+  <li>Drive to the end of the road</li>
+  <li>Turn right</li>
+  <li>Go straight across the first two roundabouts</li>
+  <li>Turn left at the third roundabout</li>
+  <li>The school is on your right, 300 meters up the road</li>
+</ol>
+
+Nesting lists: It is perfectly OK to nest one list inside another one. 
+
+Emphasis:
+In HTML we use the <em> (emphasis) element to mark up such instances. Browsers style this as italic by default, but you shouldn't use this tag purely to get italic styling. To do that, you'd use a <span> element and some CSS, or perhaps an <i> element (see below).
+	<p>I am <em>glad</em> you weren't <em>late</em>.</p>
+
+Strong importance:
+In HTML we use the <strong> (strong importance) element to mark up such instances. As well as making the document more useful, again these are recognized by screen readers and spoken in a different tone of voice. Browsers style this as bold text by default, but you shouldn't use this tag purely to get bold styling. To do that, you'd use a <span> element and some CSS, or perhaps a <b> element (see below).
+	<p>This liquid is <strong>highly toxic</strong>.</p>
+	<p>I am counting on you. <strong>Do not</strong> be late!</p>
+
+Italic, bold and underline:
+The elements we've discussed so far have clearcut associated semantics. The situation with <b>, <i>, and <u> is somewhat more complicated. They came about so people could write bold, italics, or underlined text in an era when CSS was still supported poorly or not at all. Elements like this, which only affect presentation and not semantics, are known as presentational elements and should no longer be used because, as we've seen before, semantics is so important to accessibility, SEO, etc.
+HTML5 redefined <b>, <i>, and <u> with new, somewhat confusing, semantic roles.
+Here's the best rule of thumb: It's likely appropriate to use <b>, <i>, or <u> to convey a meaning traditionally conveyed with bold, italics, or underline, provided there is no more suitable element. However, it always remains critical to keep an accessibility mindset. The concept of italics isn't very helpful to people using screen readers, or to people using a writing system other than the Latin alphabet.
+<i> is used to convey a meaning traditionally conveyed by italic: foreign words, taxonomic designation, technical terms, a thought...
+<b> is used to convey a meaning traditionally conveyed by bold: key words, product names, lead sentence...
+<u> is used to convey a meaning traditionally conveyed by underline: proper name, misspelling...
+====================================================================================================
+HYPERLINKS:
+ Hyperlinks allow us to link documents to other documents or resources, link to specific parts of documents, or make apps available at a web address. Almost any web content can be converted to a link so that when clicked or otherwise activated the web browser goes to another web address (URL).
+	<p>I'm creating a link to
+	<a href="https://www.mozilla.org/en-US/"
+   		title="The best place to find more information about Mozilla's
+          	mission and how to contribute">the Mozilla homepage</a>.
+	</p>
+
+Block level links:
+As mentioned before, almost any content can be made into a link, even block-level elements. If you have an image you want to make into a link, use the <a> element and reference the image file with the <img> element.
+	<a href="https://www.mozilla.org/en-US/">
+  	<img src="mozilla-image.png" alt="mozilla logo that links to the mozilla homepage">
+	</a>
+
+URL for html in same directory:
+<p>Want to contact a specific staff member?
+Find details on our <a href="contacts.html">contacts page</a>.</p>
+
+URL moving down subdirectories:
+<p>Visit my <a href="projects/index.html">project homepage</a>.</p>
+
+URL moving back up to parent directories:
+<p>A link to my <a href="../pdfs/project-brief.pdf">project brief</a>.</p>
+
+Document fragments:
+It's possible to link to a specific part of an HTML document, known as a document fragment, rather than just to the top of the document. To do this you first have to assign an id attribute to the element you want to link to. It normally makes sense to link to a specific heading, so this would look something like the following:
+	<h2 id="Mailing_address">Mailing address</h2>
+Then to link to that specific id, you'd include it at the end of the URL, preceded by a hash/pound symbol (#), for example:
+	<p>Want to write us a letter? Use our <a href="contacts.html#Mailing_address">mailing address</a>.</p>
+You can even use the document fragment reference on its own to link to another part of the current document:
+	<p>The <a href="#Mailing_address">company mailing address</a> can be found at the bottom of this page.</p>
+
+LINK best practices:
+- Don't repeat the URL as part of the link text — URLs look ugly, and sound even uglier when a screen reader reads them out letter by letter.
+- Don't say "link" or "links to" in the link text — it's just noise. Screen readers tell people there's a link. Visual users will also know there's a link, because links are generally styled in a different color and underlined (this convention generally shouldn't be broken, as users are used to it).
+- Keep your link text as short as possible — this is helpful because screen readers need to interpret the entire link text.
+- Minimize instances where multiple copies of the same text are linked to different places. This can cause problems for screen reader users, if there's a list of links out of context that are labeled "click here", "click here", "click here".
+
+Linking to non-HTML resources — leave clear signposts:
+When linking to a resource that will be downloaded (like a PDF or Word document), streamed (like video or audio), or has another potentially unexpected effect (opens a popup window, or loads a Flash movie), you should add clear wording to reduce any confusion.
+For example:
+If you're on a low bandwidth connection, click a link, and then a multiple megabyte download starts unexpectedly.
+If you don't have the Flash player installed, click a link, and then suddenly get taken to a page that requires Flash.
+Let's look at some examples, to see what kind of text can be used here:
+<p><a href="https://www.example.com/large-report.pdf">
+  Download the sales report (PDF, 10MB)
+</a></p>
+
+<p><a href="https://www.example.com/video-stream/" target="_blank">
+  Watch the video (stream opens in separate tab, HD quality)
+</a></p>
+
+<p><a href="https://www.example.com/car-game">
+  Play the car game (requires Flash)
+</a></p>
+
+DOWNLOAD: Use the download attribute when linking to a download:
+When you are linking to a resource that's to be downloaded rather than opened in the browser, you can use the download attribute to provide a default save filename. Here's an example with a download link to the latest Windows version of Firefox:
+<a href="https://download.mozilla.org/?product=firefox-latest-ssl&os=win64&lang=en-US"
+   download="firefox-latest-64bit-installer.exe">
+  Download Latest Firefox for Windows (64-bit) (English, US)
+</a>
+
+EMAIL LINKS:
+It's possible to create links or buttons that, when clicked, open a new outgoing email message rather than linking to a resource or page. This is done using the <a> element and the mailto: URL scheme.
+In its most basic and commonly used form, a mailto: link indicates the email address of the intended recipient. For example:
+<a href="mailto:nowhere@mozilla.org">Send email to nowhere</a>
+In addition to the email address, you can provide other information. In fact, any standard mail header fields can be added to the mailto URL you provide. The most commonly used of these are "subject", "cc", and "body" (which is not a true header field, but allows you to specify a short content message for the new email). Each field and its value is specified as a query term.
+Here's an example that includes a cc, bcc, subject and body:
+<a href="mailto:nowhere@mozilla.org?cc=name2@rapidtables.com&bcc=name3@rapidtables.com&subject=The%20subject%20of%20the%20email&body=The%20body%20of%20the%20email">
+  Send mail with cc, bcc, subject and body
+</a>
+Here are a few other sample mailto URLs:
+mailto:
+mailto:nowhere@mozilla.org
+mailto:nowhere@mozilla.org,nobody@mozilla.org
+mailto:nowhere@mozilla.org?cc=nobody@mozilla.org
+mailto:nowhere@mozilla.org?cc=nobody@mozilla.org&subject=This%20is%20the%20subject
+====================================================================================================
+TABLES:
+- In pure html website this could also be used to format the content
+
+<table>
+    <thead>
+        <tr>
+            <th colspan="2">The table header</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>The table body</td>
+            <td>with two columns</td>
+        </tr>
+    </tbody>
+</table>
+====================================================================================================
+Form:
+https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
+
+<form action="index.html" method="POST" >
+	<label for="name">Name (4 to 8 characters):</label>
+	<input type="text" id="name" name="name" required
+       i	minlength="4" maxlength="8" size="10"> <br>
+	<input type="submit"> ==> will give submit button
+</form>
+
+    <form action="index.html" method="POST">
+        <label for="name">Your Name (4 to 8 characters):</label>
+        <input type="text" id="name" name="name" minlength="4" maxlength="8" size="10">
+        <br>
+        <label for="email">Your Email (4 to 8 characters):</label>
+        <input type="email" id="email" name="email" minlength="4" maxlength="8" size="10">
+        <br>
+        <label for="message">Your Message (500 characters):</label><br>
+        <textarea name="" id="" cols="30" rows="10"></textarea>
+        <br>
+        <input type="submit">
+    </form>
+====================================================================================================
+
