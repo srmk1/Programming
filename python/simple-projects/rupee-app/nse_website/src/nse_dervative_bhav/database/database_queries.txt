@@ -1,0 +1,50 @@
+sqlite3 nse_website_db
+
+CREATE TABLE IF NOT EXISTS nse_derivative_bhav_data (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+derivative_key TEXT NOT NULL UNIQUE, 
+derivative_type TEXT NOT NULL,
+symbol TEXT NOT NULL,
+option_type TEXT NOT NULL,
+expiry_date TEXT NOT NULL,
+strike_price REAL NOT NULL,
+open_price REAL NOT NULL,
+close_price REAL NOT NULL,
+low_price REAL NOT NULL,
+high_price REAL NOT NULL,
+settle_pr REAL NOT NULL,
+contracts REAL,
+val_inlakh REAL,
+open_interest REAL,
+change_in_oi REAL,
+timestamp REAL
+);
+
+CREATE TABLE IF NOT EXISTS nse_derivative_participant_oi_data (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+client_type TEXT NOT NULL,
+future_index_long REAL NOT NULL,
+future_index_short REAL NOT NULL,
+future_stock_long REAL NOT NULL,
+future_stock_short REAL NOT NULL,
+option_index_call_long REAL NOT NULL,
+option_index_call_short REAL NOT NULL,
+option_stock_call_long REAL NOT NULL,
+option_stock_call_short REAL NOT NULL,
+option_index_put_long REAL NOT NULL,
+option_index_put_short REAL NOT NULL,
+option_stock_put_long REAL NOT NULL,
+option_stock_put_short REAL NOT NULL,
+timestamp REAL
+);
+
+Count number of entries in a table:
+SELECT COUNT(*) FROM nse_derivative_bhav_data;
+
+SELECT * FROM nse_derivative_bhav_data WHERE symbol LIKE '%INFY%';
+SELECT * FROM nse_derivative_bhav_data WHERE symbol LIKE '%INFY%' AND option_type = 'PE';
+SELECT COUNT(*) FROM nse_derivative_bhav_data WHERE symbol LIKE '%INFY%' AND option_type = 'PE';
+
+SELECT DISTINCT symbol FROM nse_derivative_bhav_data WHERE derivative_key LIKE '%IDX%';
+
+To exit: Ctrl + D

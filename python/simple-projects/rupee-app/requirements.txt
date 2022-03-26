@@ -1,0 +1,3 @@
+xlwings
+pandas
+sqlite3
