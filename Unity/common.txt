@@ -1,0 +1,396 @@
+0. Common Usages:
+    Find an object:
+        private GameObject bulb = GameObject.Find("bulb");
+
+    Find an component of an object: 
+        private RectTransform rectTransform = bulb.GetComponent<CanvasGroup>();
+
+    Rotate an object by 90 degress on x-axis:
+        void update {
+        nailTransform.rotation *= Quaternion.Euler(90, 0, 0);
+        }
+ 
+    How to hide/unhide a UI element?
+        void HideCompareButton()
+        {
+            GameObject.Find("CompareButton").transform.localScale = new Vector3(0, 0, 0);
+        }
+
+    How to unhide an UI element:
+        void UnHideCompareButton()
+        {
+            GameObject.Find("CompareButton").transform.localScale = new Vector3(1, 1, 1);
+        }
+
+1. How to make an object follow another-object?
+	- Take the position of current object (transform.position)
+	- Take the position of the object to be followed (object-to-be-followed.transform.postion)
+	- Subtract one from another
+		Vector3 lookDirection = (object-to-be-followed.transform.postion - transform.position).normalised
+	- Add force towards that direction
+		enemyRb.AddForce(lookDirection * speed);
+
+2. 
+Vector3.up - Shorthand for writing Vector3(0, 1, 0).
+Vector3.down - Shorthand for writing Vector3(0, -1, 0).
+Vector3.back - Shorthand for writing Vector3(0, 0, -1).
+Vector3.forward - Shorthand for writing Vector3(0, 0, 1).
+Vector3.right - Shorthand for writing Vector3(1, 0, 0).
+Vector3.left - Shorthand for writing Vector3(-1, 0, 0).
+Vector3.zero - Shorthand for writing Vector3(0, 0, 0).
+Vector3.one - Shorthand for writing Vector3(1, 1, 1).
+
+3.
+tranform.up corresponds to the yellow arrow on the object and is related to it. As you rotate your object, the gizmo on the object moves and all three arrows change direction (not magnitude, always 1). transform.up, right and forward gives you the vector to which they correspond in world space.
+So if no rotation, all three are equal to their world equivalent but as you start rotating, they change. In the case of a character, it is most likely rotating around its transform.up so that vector actually never change.
+transform.up - The green axis of the transform in world space.
+transform.right - The red axis of the transform in world space.
+transform.forward - The blue axis of the transform in world space.
+
+4. How to calculate angle between two objects?
+using UnityEngine;
+using System.Collections;
+
+public class ExampleClass : MonoBehaviour {
+    public float angleBetween = 0.0F;
+    public Transform target;
+    void Update() {
+        Vector3 targetDir = target.position - transform.position;
+        angleBetween = Vector3.Angle(transform.forward, targetDir);
+    }
+}
+
+5. How to add force towards an object?
+using UnityEngine;
+using System.Collections;
+
+public class ExampleClass : MonoBehaviour {
+    public float thrust;
+    public Rigidbody rb;
+    void Start() {
+        rb = GetComponent<Rigidbody>();
+    }
+    void Update() {
+        rb.AddForce(transform.forward * thrust);
+    }
+}
+
+6. How to Spin the object around the target at 20 degrees/second?
+using UnityEngine;
+
+//Attach this script to a GameObject to rotate around the target position.
+public class Example : MonoBehaviour
+{
+    //Assign a GameObject in the Inspector to rotate around
+    public GameObject target;
+
+    void Update()
+    {
+        // Spin the object around the target at 20 degrees/second.
+        transform.RotateAround(target.transform.position, Vector3.up, 20 * Time.deltaTime);
+    }
+}
+
+7. Beaker project (play with different scale for ObiSolver and ObiEmitter)
+=== Beaker Project Start ===
+- Add GameObject->3D Object->Obi->Obi Emitter
+	- Obi-Solver - Transform - Scale - x:0.1, y:0.1, z:0.1	
+	- Obi-Solver - Backend - Burst
+	- Obi-Solver - Mode - 3D
+	- Obi-Solver - Interpolation - None
+	- Obi-Solver - Gravity - x:0, Y:-6, z:0
+	- Obi-Solver - Constraints - Uncheck the following
+		- Distance, Bending, Particle-Collision, Skin, Volume, Tether, Pin, Chain
+	- Emitter->Obi-Solver - Constraints - Particle-Friction/Collision/Friction->Iterations: 3
+
+	- Emitter->Obi-Emitter->Blueprint - set it to Faucet (Faucet - Assets->Obi->Samples->Fluid->Blueprints->Faucet)
+	- Emitter->Obi-Emitter->Collision Material - None
+	- Emitter->Obi-Emitter->Phase - 1
+	- Emitter->Obi-Emitter->Emission Method = STREAM
+	- Emitter->Obi-Emitter->Min Pool size = 0.5
+	- Emitter->Obi-Emitter->Speed - 1.5
+	- Emitter->Obi-Emitter->LifeSpan - 100
+	- Emitter->Obi-Emitter->Check Use-Shape-Color
+	- Emitter->Obi-Emitter - Transform - Scale - x:0.1, y:0.1, z:0.1
+
+	- Emitter->Disk->Emi: Drag and Drop Obi Emitter
+	- Emitter->Disk->Color:
+	- Emitter->Disk->Radius: 0.2
+    - Emitter->Disk->Color: R/G/B/A: 255
+
+	- Emitter->Obi-Particle-Renderer->Uncheck Renderer (remember we add renderer to camera)
+	- Emitter->Obi-Particle-Renderer->Radius Scale: 1.7 ====> Setting this to lesser value like 0.5 will make liquid transparent
+    - Emitter->Obi-Particle-Renderer->Particle Color: R:235, G:254, B:255, A:125, Hexadecimal:EBFEFF
+
+- Add Obi Particle Renderer to Main-Camera	
+	- Main-Camer->Camera->HDR = Off
+	- Main-Camer->Add Component - Obi Fluid Renderer
+	- Obi Fluid Renderer->Particle-Renderers = 1
+	- Obi Fluid Renderer->Particle-Renderers->Element -> Drag and Drop Emitter
+
+- Add flask04/05
+	- Add Rigid body - Enable Use-Gravity & Is-Kinematic
+	- Add Mesh-Collider
+	- Add Obi Kinematic Velocities
+	- Add Obi Rigid body
+	- Add Obi-Collider
+
+- To change the color of the liquid 
+	- Go to Obi-Emitter->Obi-Particle-Renderer->Particle-Color
+
+- Ideas for moving beaker near flask
+    - Add a empty component under flask - call it pour-point
+    - Place it at the point where beaker has to move and then rotate 90%
+    - To move object use following code
+        step = 1.0f * Time.deltaTime;
+        if (transform.position != targetObjectTransform.position)
+            transform.position = Vector3.MoveTowards(transform.position, targetObjectTransform.position, step);
+    - To rotate object to pour into the beaker use below code
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.AngleAxis(90, transform.forward), Time.deltaTime * 10);
+
+If you dont see liquid falling outside, try increasing the scale of flask, emitter and solver.
+Play with the scale of the emitter, solver and beaker.
+=== Beaker Project End ===
+
+8. Objects not visible in Camera
+	- Check Hierarchy->Main Camera->Depth, it its set to -1.. set it to 1
+
+9. Rotate APIs
+   void RotateBackwardsFromCenterOfObject()
+    {
+        transform.Rotate(30.0f, 0, 0, Space.Self);
+    }
+
+    void RotateForwardsFromCenterOfObject()
+    {
+        transform.Rotate(30.0f, 0, 0, Space.Self);
+    }
+
+    void RotateLikeEartOnYourAxis()
+    {
+        transform.Rotate(0, 30.0f, 0, Space.Self);
+    }
+
+    void RotateLeftFromCenterOfObject()
+    {
+        transform.Rotate(0, 0, 30.0f, Space.Self);
+    }
+
+    void RotateRightFromCenterOfObject()
+    {
+        transform.Rotate(0, 0, -30.0f, Space.Self);
+    }
+
+10. ObjectDrag - Dragging an object
+using UnityEngine;
+using System.Collections;
+ 
+public class ObjectDragger : MonoBehaviour 
+{
+	private Vector3 screenPoint;
+	private Vector3 offset;
+	 
+	void OnMouseDown()
+	{
+		screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+		offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
+	}
+	
+	void OnMouseDrag()
+	{
+		Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
+		transform.position = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
+	}
+
+ }
+
+11. Use Keyboard key D and R to move the object around:
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class FlaskController : MonoBehaviour
+{
+    public Obi.ObiEmitter emitter;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.D))
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.AngleAxis(-90, -transform.forward), Time.deltaTime * 50);
+        }
+        else
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.identity, Time.deltaTime * 100);
+        }
+
+        if (Input.GetKey(KeyCode.R))
+        {
+            emitter.KillAll();
+        }
+    }
+}
+
+12. Camera icon not visible in Scene window
+- On Scene-Window->Gizmos(downward triangle nexto Gizmos)->3D Icons-> Check this and then increase/decrease slide bar next to it
+
+13. Camera and Scale settings tips
+    - To make life simpler have front view of the camera. Following are settings
+        - Position: x:0, y:1/1.5, z:0
+        - Rotation: x:0, y:180, z:0
+        - Scale: x:1, y:1, y:1
+        - Projection: Perspective
+        - Field of View: Setting it to less zooms in
+    - For all the objects, make sure that you work with scale x:1, y:1, z:1 - life will be simpler
+
+14. How to move an object towards other object?
+    void MoveTowardsObject(Transform targetTransform)
+    {
+        float step = 1.0f * Time.deltaTime;
+        if (transform.position != targetObjectTransform.position)
+            transform.position = Vector3.MoveTowards(transform.position, targetObjectTransform.position, step);
+    }
+
+    Ideas for moving beaker near flask
+        - Add a empty component under flask - call it pour-point
+        - Place it at the point where beaker has to move and then rotate 90%
+        - To move object use following code
+            step = 1.0f * Time.deltaTime;
+            if (transform.position != targetObjectTransform.position)
+                transform.position = Vector3.MoveTowards(transform.position, targetObjectTransform.position, step);
+        - To rotate object to pour into the beaker use below code
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.AngleAxis(90, transform.forward), Time.deltaTime * 10);
+
+
+15. Obi Fluid Visibility problem:
+    - Have you tried simply increasing the fluid material's resolution? This is the one and only parameter that controls fluid scale. Higher resolutions yield finer fluid (smaller particles), lower resolutions will make it coarser. See:
+    http://obi.virtualmethodstudio.com/manual/6.2/emittermaterials.html
+        Note that scaling or resizing the emitter will not affect the fluid resolution. (It's like scaling a faucet: big or small, it will still dispense honey instead of water).Also, changing the radius scale in the particle renderer (a common mistake) will only affect the renderer, not the simulation.
+If setting the resolution directly does not work for your scene for some reason, you could also use local space simulation and just scale down the solver.
+
+16. How to reset a scene to begin from the beginning?
+    public void resetScene()
+    {
+        SceneManager.LoadScene("SampleScene");
+    }
+
+17. Move an object towards a position:
+ void moveFlaskToPosition()
+ {
+     if (Vector3.Distance(flask.transform.position,flaskTargetPosition) > 1e-3f)
+     {
+         // Move our position a step closer to the target.
+            float step = speed * Time.deltaTime; // calculate distance to move
+            flask.transform.position = Vector3.MoveTowards(flask.transform.position, flaskTargetPosition, step);
+     }
+ }
+
+ 18. How to make a UI element (button or text box) face camera always?
+    - Add a component called TextCamerHandler to the UI-element
+    - Update the script update api as below?
+        void Update()
+        {
+            transform.LookAt(Camera.main.transform);
+        }
+    - Sometimes the text will be show in reverse, if so go the TextBox->RectTransform->Rotation->y=180
+
+19. How to Rotate camera around scene?
+    using System.Collections;
+    using System.Collections.Generic;
+    using UnityEngine;
+
+    public class CameraHandler : MonoBehaviour
+    {
+        // Store an object which is at the center of the screen
+        public GameObject beakerRack;
+        // Start is called before the first frame update
+        void Start()
+        {
+            beakerRack = GameObject.Find("Flask02");
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            transform.RotateAround(beakerRack.transform.position, Vector3.up, 5 * Time.deltaTime);
+        }
+    }
+
+20. How to Stop rotating camera around the scene?
+    public void StopRotatingCamera(Transform origCamTransform)
+    {
+        Camera.main.GetComponent<CameraHandler>().enabled = false;
+        Camera.main.transform.rotation = origCamTransform.rotation;
+        Camera.main.transform.position = origCamTransform.position;
+    }
+
+30. How to change the materials?
+    - Click on the material
+    - If you want to change color - play with Shader RGB value
+    https://docs.unity3d.com/Manual/StandardShaderMaterialCharts.html
+
+31. What is the use of SerializeField OR Why should I use SerializeField?
+Using the SerializeField attribute causes Unity to serialize any private variable. This doesn't apply to static variables and properties in C#.
+You use the SerializeField attribute when you need your variable to be private but also want it to show up in the Editor.
+
+References:
+==========
+Unity tutorials: https://www.youtube.com/c/GabrielAguiarProd/videos
+
+Liquid Simulations:
+===================
+Best Simple liquid pour: https://unitylist.com/p/pvy/Unity-Simple-Liquid
+                    https://github.com/Macoron/Unity-Simple-Liquid/releases
+
+Bubbles: https://www.patreon.com/posts/bubble-popping-44916303
+
+Obi-Fluid Free package youtube link: https://www.youtube.com/watch?v=9oJtl9Lq4eI
+Obi-Fluid Free package shortcut: https://ouo.io/1rubtz
+Obi-Fluid examples: https://chowdera.com/2021/03/20210331000031855k.html
+
+Unity Liquid pour effect: https://www.youtube.com/watch?v=hyiyjUEReYg
+Unity Liquid shader with wobble effect: https://www.youtube.com/watch?v=tI3USKIbnh0
+Potion Liquid Wobble Shader Graph - Easy Unity Tutorial: https://www.youtube.com/watch?v=eIZgPAZx56s
+Liquid Wobble with script download: https://www.patreon.com/posts/quick-game-art-18245226
+https://unitylist.com/p/ff5/Liquid-Simulation
+
+First Person Scripts
+====================
+https://youtu.be/PmIPqGqp8UY
+
+Chemistry Simulations
+=====================               
+Chemsitry drawings editor: https://chemix.org/
+Phet simulations: https://phet.colorado.edu/sims/html/capacitor-lab-basics/1.6.21/capacitor-lab-basics_all.html
+
+Programming:
+============
+Patterns: https://gameprogrammingpatterns.com/contents.html
+State Pattern: https://onewheelstudio.com/blog/2020/6/16/the-state-pattern
+Tips n tricks: https://blog.unity.com/technology/become-a-better-unity-developer-with-these-tips-from-the-community
+
+Assets, Assets, Assets!!!
+=========================
+https://quaternius.com/index.html
+https://www.patreon.com/GabrielAguiarProd
+https://minionsart.github.io/tutorials/#articles
+https://opengameart.org/art-search-advanced?keys=&field_art_type_tid%5B0%5D=10&sort_by=count&sort_order=DESC
+https://assetstore.unity.com/packages/3d/props/tools/free-laboratory-pack-123782
+https://unitylist.com/
+https://blendswap.com/blends/category/1
+Chemistry Molecules: https://blendswap.com/blend/27276
+                     https://blendswap.com/blend/27277
+                     https://blendswap.com/blend/27401
+                     https://blendswap.com/blend/27485
+                     
+
+PHET Simulations:
+GAS Properties Model: https://github.com/phetsims/gas-properties/blob/master/doc/model.md
+
