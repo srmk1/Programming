@@ -1,0 +1,8 @@
+Create virtual env: 
+python3 -m venv .
+
+Set virtual env:
+source bin/activate
+
+Install dependencies:
+pip install -r requirements.txt
