@@ -3,3 +3,4 @@ https://www.figma.com/files/recent?fuid=1118137439271805793
 
 Log analysis:
 https://www.zebrium.com/blog/speeding-up-root-cause-analysis-with-new-relic-zebrium
+Python log parser: https://github.com/logpai/logparser
