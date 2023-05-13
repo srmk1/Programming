@@ -1,3 +1,20 @@
+#V20 Statergy
+# - Applicable on V40, V40Next and V200
+# - Use 1D candel stick chart
+# - Invest no more than 3% of total portfolio in one trade
+# - No stoploss
+# - Statergy has 4 steps (use 1 day chart) for V40, V40Next:
+#    -> A bunch of continuous green candels without any red candel between
+#    -> Movement from lowest low to highest high should be more than 20%
+#    -> In future if the price touches lowest low price then BUY
+#    -> When the price touches highest high price then SELL"
+#- Statergy has 4 steps (use 1 day chart) for V200:
+#    -> A bunch of continuous green candels without any red candel between
+#    -> All the green candels should be below 200 Moving avarage 
+#    -> Movement from lowest low to highest high should be more than 20%
+#    -> In future if the price touches lowest low price then BUY
+#    -> When the price touches highest high price then SELL"
+
 import yfinance as yf
 
 # Define a dictionary of lists of stock ticker symbols
