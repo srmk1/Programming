@@ -1,7 +1,9 @@
 from smtplib import SMTP_SSL, SMTP_SSL_PORT
 
+# Generate app password using below link
+# https://myaccount.google.com/apppasswords
 SMTP_HOST = 'smtp.gmail.com'
-SMTP_USER = 'srmkcloudapps@gmail.com'
+SMTP_USER = 'GMAIL_HERE@gmail.com'
 SMTP_PASS = 'PWD_HERE'
 
 # Craft the email by hand
