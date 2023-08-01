@@ -1,28 +1,23 @@
-import imaplib
-from email.message import Message
-from time import time
+from smtplib import SMTP_SSL, SMTP_SSL_PORT
 
-ORG_EMAIL   = "@gmail.com"
-FROM_EMAIL  = "GMAIL_ID_HERE" + ORG_EMAIL
-FROM_PWD    = "PWD_HERE"
-SMTP_SERVER = "imap.gmail.com"
-SMTP_PORT   = 993
+SMTP_HOST = 'smtp.gmail.com'
+SMTP_USER = 'srmkcloudapps@gmail.com'
+SMTP_PASS = 'luudhvgmfajiehkf'
 
-def login_to_gmail(user_name, password):
-    try:
-        mail = imaplib.IMAP4_SSL(SMTP_SERVER)
-        mail.login(FROM_EMAIL,FROM_PWD)
-        return mail
-    except Exception:
-        print(str(Exception))
+# Craft the email by hand
+from_email = 'srmkcloudapps@gmail.com'  # or simply the email address
+to_emails = ['srikanth.mk@gmail.com']
+body = "Hello, world!"
+headers = f"From: {from_email}\r\n"
+headers += f"To: {', '.join(to_emails)}\r\n"
+headers += f"Subject: Hello\r\n"
+email_message = headers + "\r\n" + body  # Blank line needed between headers and body
 
-def send_message(mail):
-    new_message = Message()
-    new_message["From"] = "srmkcloudapps@gmail.com"
-    new_message["Subject"] = "My new mail."
-    new_message.set_payload("This is my message.")
-    mail.append('INBOX', '', imaplib.Time2Internaldate(time()), str(new_message).encode('utf-8'))
+# Connect, authenticate, and send mail
+smtp_server = SMTP_SSL(SMTP_HOST, port=SMTP_SSL_PORT)
+smtp_server.set_debuglevel(1)  # Show SMTP server interactions
+smtp_server.login(SMTP_USER, SMTP_PASS)
+smtp_server.sendmail(from_email, to_emails, email_message)
 
-
-my_gmail = login_to_gmail(FROM_EMAIL,FROM_PWD)
-send_message(my_gmail)
+# Disconnect
+smtp_server.quit()
