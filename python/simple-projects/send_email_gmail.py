@@ -2,7 +2,7 @@ from smtplib import SMTP_SSL, SMTP_SSL_PORT
 
 SMTP_HOST = 'smtp.gmail.com'
 SMTP_USER = 'srmkcloudapps@gmail.com'
-SMTP_PASS = 'luudhvgmfajiehkf'
+SMTP_PASS = 'PWD_HERE'
 
 # Craft the email by hand
 from_email = 'srmkcloudapps@gmail.com'  # or simply the email address
