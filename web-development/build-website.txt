@@ -29,3 +29,7 @@ References:
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var
 https://reactjs.org/docs/hello-world.html
 ======================================================================================
+Install bootstrap:
+npm install bootstrap
+
+
