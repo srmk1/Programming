@@ -1,0 +1,31 @@
+=================================================================================
+Installation:
+Install node and npm:
+- https://nodejs.org/en/download/
+- Download and install node
+- it will install both node and npm
+
+Print version of node and npm:
+node -v
+npm -v
+
+To make visual studio code work from CLI:
+- Open Visual Studio Code
+- Cmd + Shift + P - "Install Code command in PATH"
+
+React commands:
+npx create-react-app hacker-stories
+cd hacker-stories
+code .
+
+To run:
+npm run start (ctrl+c to exit)
+npm run test
+
+To Deploy:
+npm run build
+
+References:
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var
+https://reactjs.org/docs/hello-world.html
+======================================================================================
